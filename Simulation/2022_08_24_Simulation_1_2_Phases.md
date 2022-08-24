@@ -91,9 +91,15 @@ clus_ins <- aggregate(x = df2$fwcli,
                       FUN = "mean")
 names(clus_ins) <- c("phase", "sampleid", "fraccli")
 
+clus_ins_sd <- aggregate(x = df2$fwcli,
+                      by = list(df2$phase, df2$sampleid),
+                      FUN = "sd")
+names(clus_ins_sd) <- c("phase", "sampleid", "sd")
+
 
 g <- ggplot(clus_ins, aes(x=phase, y=fraccli, fill = phase)) + 
   geom_bar(stat = "identity") +
+  geom_errorbar( aes(x=phase, ymin=fraccli-clus_ins_sd$sd, ymax=fraccli+clus_ins_sd$sd), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("Fraction of individuals with a cluster insertion")+
   xlab("Phase")+
   scale_fill_manual(values = c("yellow", "red"))+
@@ -114,9 +120,14 @@ clus_ins_2 <- aggregate(x = df2$avcli,
                       FUN = "mean")
 names(clus_ins_2) <- c("phase", "sampleid", "avcli")
 
+clus_ins_sd_2 <- aggregate(x = df2$avcli,
+                         by = list(df2$phase, df2$sampleid),
+                         FUN = "sd")
+names(clus_ins_sd_2) <- c("phase", "sampleid", "sd")
 
 g2 <- ggplot(clus_ins_2, aes(x=phase, y=avcli, fill = phase)) + 
   geom_bar(stat = "identity") +
+  geom_errorbar( aes(x=phase, ymin=avcli-clus_ins_sd_2$sd, ymax=avcli+clus_ins_sd_2$sd), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("Average cluster insertions per individual")+
   xlab("Phase")+
   scale_fill_manual(values = c("yellow", "red"))+
