@@ -103,6 +103,29 @@ plot(g)
 
 ![](2022_08_24_Simulation_1_2_Phases_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
+``` r
+clus_ins_2 <- aggregate(x = df2$avcli,
+                      by = list(df2$phase, df2$sampleid),
+                      FUN = "mean")
+names(clus_ins_2) <- c("phase", "sampleid", "avcli")
+
+
+g2 <- ggplot(clus_ins_2, aes(x=phase, y=avcli, fill = phase)) + 
+  geom_bar(stat = "identity") +
+  ylab("Average cluster insertions per individual")+
+  xlab("Phase")+
+  scale_fill_manual(values = c("yellow", "red"))+
+  facet_wrap(~sampleid, labeller = labeller(sampleid = 
+                                              c("p0" = "Paramutable loci = 0% (Trap model)",
+                                                "p1" = "Paramutable loci = 1%",
+                                                "p10" = "Paramutable loci = 10%",
+                                                "p100" = "Paramutable loci = 100%")))
+
+plot(g2)
+```
+
+![](2022_08_24_Simulation_1_2_Phases_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
 ## Conclusions
 
 Paramutations reduce the number of cluster insertions at the beginning
