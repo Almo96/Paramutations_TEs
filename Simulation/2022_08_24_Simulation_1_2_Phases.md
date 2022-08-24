@@ -63,13 +63,18 @@ df1 <- subset(df, phase %in% c("shot", "inac"))
 
 df2 <- data.frame()
 
+repcheck = 1
 x = 1
 y = 1
 while (x<nrow(df1)) {
+  if (repcheck != df1[x, 1]){
+    y = 1
+  }
   if (y == 1){
     if(df1[x, 12]  == "shot"){
       df2<-rbind(df2,df1[x,])
       y = 2
+      repcheck = df1[x, 1]
     }
   }
   if (y == 2){
@@ -79,7 +84,7 @@ while (x<nrow(df1)) {
     }
   }
   x = x+1
-  }
+}
 
 clus_ins <- aggregate(x = df2$fwcli,
                       by = list(df2$phase, df2$sampleid),
