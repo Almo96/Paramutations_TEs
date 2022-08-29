@@ -1,6 +1,6 @@
 Raw/
-.rmd
-.R
+*.rmd
+*.R
 Pictures_paper/
 
 # History files
