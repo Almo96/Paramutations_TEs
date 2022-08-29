@@ -18,6 +18,14 @@ We used 100 replicates for each simulation.
 
 version: invadego0.2.1
 
+-   seed p0: 1660125902621584000
+
+-   seed p1: 1660125902621656000
+
+-   seed p10: 1660125902621702000
+
+-   seed p100: 1660125902621592000
+
 ### Commands for the simulation:
 
 ``` bash
