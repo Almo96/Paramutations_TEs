@@ -98,7 +98,7 @@ df2<-subset(clus_ins, gen == 0 | gen == 100 | gen == 1000 | gen == 2500 | gen ==
 
 g2 <- ggplot(df2, aes(x=as.character(gen), y=percentcli)) + 
       geom_bar(stat = "identity", aes(fill=gen)) +
-      ylab("Percentage of individuals with a cluster insertion")+
+      ylab("percentage of individuals with a cluster insertion")+
       xlab("generation")+
       theme(legend.position = "none")+
       facet_wrap(~sampleid, labeller = labeller(sampleid = 
