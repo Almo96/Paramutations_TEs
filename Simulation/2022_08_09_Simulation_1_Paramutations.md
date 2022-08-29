@@ -53,7 +53,7 @@ Visualization:
 ``` r
 p<-c("grey","#1a9850","#ffd700","#d73027")
 
-setwd("/Users/ascarpa/Paramutations_TEs/Simulation")
+setwd("/Users/ascarpa/Paramutations_TEs/Simulation/Raw")
 
 df<-read.table("2022_08_09_Simulation_1_Paramutations", fill = TRUE, sep = "\t")
 names(df)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed",
@@ -105,7 +105,7 @@ plot(g2)
 ![](2022_08_09_Simulation_1_Paramutations_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ``` r
-setwd("/Users/ascarpa/Paramutations_TEs/Simulation/100_simulations")
+setwd("/Users/ascarpa/Paramutations_TEs/Simulation/Raw")
 df3<-read.table("2022_08_19_100_simulations", fill = TRUE, sep = "\t")
 names(df3)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed",
              "spacer_2", "phase", "fwpirna", "spacer_3", "fwcli", "avcli", "fixcli", "spacer_4", "fwpar_yespi",
