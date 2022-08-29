@@ -6,7 +6,7 @@ Almo
 ## Introduction
 
 With this simulation we wanted to understand the impact of the
-paramutable loci in the transposable elements invasion
+paramutable loci in the transposable elements invasion phases.
 
 ### Initial conditions:
 
@@ -22,7 +22,7 @@ version: invadego0.2.1
 ### Commands for the simulation:
 
 ``` bash
-folder="/Users/ascarpa/Paramutations_TEs/Simulation"
+folder="/Users/ascarpa/Paramutations_TEs/Simulation/Raw"
 tool="/Users/ascarpa/invade-invadego/invadego022"
 
 $tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --steps 20 --sampleid p0 > $folder/2022_08_09_simulation_1_1 &
@@ -50,6 +50,7 @@ library(dplyr)
 Visualization:
 
 ``` r
+setwd("/Users/ascarpa/Paramutations_TEs/Simulation/Raw")
 df<-read.table("2022_08_09_Simulation_1_Paramutations", fill = TRUE, sep = "\t")
 names(df)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed",
              "spacer_2", "phase", "fwpirna", "spacer_3", "fwcli", "avcli", "fixcli", "spacer_4", "fwpar_yespi",
