@@ -1,0 +1,55 @@
+---
+title: "2022_08_09_Simulation_1_Paramutations"
+author: Almorò Scarpa
+output: github_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+
+### Initial conditions:
+
+A population of 1000, 5 chromosomes of size 10 Mb, 5 piRNA clusters of size 300 Kb and an initial number of TEs in the population equal to 100.
+
+We used 300 replicates for each simulation.
+
+## Materials & Methods
+version: invadego0.2.1
+
+### Commands for the simulation:
+
+```{bash, eval=FALSE}
+folder="/Users/ascarpa/Paramutations_TEs/Simulation"
+tool="/Users/ascarpa/invade-invadego/invadego022"
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1,3,5 --trigger 1000:1 --steps 20 --sampleid p30_0.1 > $folder/2022_08_09_simulation_2_1
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1,3,5 --trigger 100:1 --steps 20 --sampleid p30_1 > $folder/2022_08_09_simulation_2_2
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1,3,5 --trigger 10:1 --steps 20 --sampleid p30_10 > $folder/2022_08_09_simulation_2_3
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1,3,5 --trigger 1:0 --steps 20 --sampleid p30_100 > $folder/2022_08_09_simulation_2_4
+
+cat 2022_08_09_simulation_2_1 2022_08_09_simulation_2_2 2022_08_09_simulation_2_3 2022_08_09_simulation_2_4 |grep -v "^Invade"|grep -v "^#" > 2022_08_09_Simulation_2_Trigger
+```
+
+
+### Visualization in R
+
+Setting the environment
+``` {r, message = FALSE}
+
+```
+
+Visualization: comparing the simulations with the prediction
+```{r, warning=FALSE}
+
+```
+
+
+## Conclusions
