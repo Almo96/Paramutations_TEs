@@ -24,7 +24,7 @@ version: invadego0.2.1
 
 -   seed p10: 1660125902621702000
 
--   seed p100: 1660125902621592000
+-   seed p100: 1660125902621592000s
 
 ### Commands for the simulation:
 
@@ -135,7 +135,7 @@ par(mar=c(5, 4, 4, 6) + 0.1)
 plot(df3_2$Group1, df3_2$avtes, pch=16, axes=FALSE, ylim=c(0,200), xlab="", ylab="", 
      type="b",col="black")
 axis(2, ylim=c(0,200),col="black",las=1)
-mtext("Tes insertions per diploid individual",side=2,line=2.5)
+mtext("TEs insertions per diploid individual",side=2,line=2.5)
 box()
 par(new=TRUE)
 plot(df3_2$Group1, df3_2$avcli, pch=15,  xlab="", ylab="", ylim=c(0,6), 
