@@ -155,7 +155,7 @@ e <- df2 %>%
 g2_2 <- ggplot(e, aes(x=phase, y=mean_avcli, fill = phase)) + 
   geom_bar(stat = "identity") +
   geom_errorbar( aes(x=phase, ymin=mean_avcli-sd_avcli, ymax=mean_avcli+sd_avcli), width=0.2, colour="black", alpha=0.9, size=0.8)+
-  ylab("fraction of individuals with a cluster insertion")+
+  ylab("cluster insertions per diploid individual")+
   xlab("phase")+
   scale_fill_manual(values = c("yellow", "red"))+
   facet_wrap(~sampleid, ncol=4)
