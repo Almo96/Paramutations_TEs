@@ -218,3 +218,5 @@ paramutable loci.
 ## Conclusions
 
 Paramutations dramatically diminish the influence of piRNA clusters.
+
+The increase of piRNA clusters reduce the number of paramutations.
