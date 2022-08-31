@@ -85,6 +85,7 @@ g4_05<-ggplot(df4_05_2, aes(x=sampleid))+
     sec.axis = sec_axis(~./coeff_05, name="cluster insertions per diploid individual")
   )+
   theme(legend.position="none",
+        plot.title = element_text(size=14, face="bold"),
         axis.title.y = element_text(color = "red", size=10),
         axis.title.y.right = element_text(color = "blue", size=10)
   )
@@ -107,6 +108,7 @@ g4_10<-ggplot(df4_10_2, aes(x=sampleid))+
     sec.axis = sec_axis(~./coeff_10, name="cluster insertions per diploid individual")
   )+
   theme(legend.position="none",
+        plot.title = element_text(size=14, face="bold"),
         axis.title.y = element_text(color = "red", size=10),
         axis.title.y.right = element_text(color = "blue", size=10)
   )
@@ -129,6 +131,7 @@ g4_20<-ggplot(df4_20_2, aes(x=sampleid))+
     sec.axis = sec_axis(~./coeff_20, name="cluster insertions per diploid individual")
   )+
   theme(legend.position="none",
+        plot.title = element_text(size=14, face="bold"),
         axis.title.y = element_text(color = "red", size=10),
         axis.title.y.right = element_text(color = "blue", size=10)
   )
