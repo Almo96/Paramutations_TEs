@@ -79,6 +79,7 @@ g4_05<-ggplot(df4_05_2, aes(x=sampleid))+
   geom_line(aes(y=mean_avcli*coeff_05), color="blue")+
   geom_point(aes(y=mean_avtes), color="red")+
   geom_line(aes(y=mean_avtes), color="red")+
+  ggtitle("5% piRNA clusters")+
   scale_y_continuous(
     name = "TEs insertions per diploid individual",
     sec.axis = sec_axis(~./coeff_05, name="cluster insertions per diploid individual")
@@ -100,6 +101,7 @@ g4_10<-ggplot(df4_10_2, aes(x=sampleid))+
   geom_line(aes(y=mean_avcli*coeff_10), color="blue")+
   geom_point(aes(y=mean_avtes), color="red")+
   geom_line(aes(y=mean_avtes), color="red")+
+  ggtitle("10% piRNA clusters")+
   scale_y_continuous(
     name = "TEs insertions per diploid individual",
     sec.axis = sec_axis(~./coeff_10, name="cluster insertions per diploid individual")
@@ -121,6 +123,7 @@ g4_20<-ggplot(df4_20_2, aes(x=sampleid))+
   geom_line(aes(y=mean_avcli*coeff_20), color="blue")+
   geom_point(aes(y=mean_avtes), color="red")+
   geom_line(aes(y=mean_avtes), color="red")+
+  ggtitle("20% piRNA clusters")+
   scale_y_continuous(
     name = "TEs insertions per diploid individual",
     sec.axis = sec_axis(~./coeff_20, name="cluster insertions per diploid individual")
