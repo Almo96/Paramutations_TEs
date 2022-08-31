@@ -99,12 +99,7 @@ df2<-select (df2,-c(28))
 df_cli<-df2 %>% 
   group_by(sampleid, phase) %>%
   summarize(av_fwcli = mean(fwcli), sd_fwcli = sd(fwcli), av_cli = mean(avcli), sd_cli = sd(avcli))
-```
 
-    ## `summarise()` has grouped output by 'sampleid'. You can override using the
-    ## `.groups` argument.
-
-``` r
 g <- ggplot(df_cli, aes(x=phase, y=av_fwcli, fill = phase)) + 
   geom_bar(stat = "identity") +
   geom_errorbar( aes(x=phase, ymin=av_fwcli-sd_fwcli, ymax=av_fwcli+sd_fwcli), width=0.2, colour="black", alpha=0.9, size=0.8)+
