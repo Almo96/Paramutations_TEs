@@ -52,7 +52,6 @@ Setting the environment
 library(tidyverse)
 library(ggplot2)
 library(patchwork)
-library(dplyr)
 ```
 
 Visualization:
