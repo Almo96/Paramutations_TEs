@@ -58,6 +58,7 @@ Visualization:
 
 ``` r
 setwd("/Users/ascarpa/Paramutations_TEs/Simulation/Raw")
+
 df<-read.table("2022_08_09_Simulation_1_Paramutations", fill = TRUE, sep = "\t")
 names(df)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed",
              "spacer_2", "phase", "fwpirna", "spacer_3", "fwcli", "avcli", "fixcli", "spacer_4", "fwpar_yespi",
@@ -94,20 +95,19 @@ while (x<nrow(df1)) {
   x = x+1
 }
 
-clus_ins <- aggregate(x = df2$fwcli,
-                      by = list(df2$phase, df2$sampleid),
-                      FUN = "mean")
-names(clus_ins) <- c("phase", "sampleid", "fraccli")
+df2<-select (df2,-c(28))
+df_cli<-df2 %>% 
+  group_by(sampleid, phase) %>%
+  summarize(av_fwcli = mean(fwcli), sd_fwcli = sd(fwcli), av_cli = mean(avcli), sd_cli = sd(avcli))
+```
 
-clus_ins_sd <- aggregate(x = df2$fwcli,
-                      by = list(df2$phase, df2$sampleid),
-                      FUN = "sd")
-names(clus_ins_sd) <- c("phase", "sampleid", "sd")
+    ## `summarise()` has grouped output by 'sampleid'. You can override using the
+    ## `.groups` argument.
 
-
-g <- ggplot(clus_ins, aes(x=phase, y=fraccli, fill = phase)) + 
+``` r
+g <- ggplot(df_cli, aes(x=phase, y=av_fwcli, fill = phase)) + 
   geom_bar(stat = "identity") +
-  geom_errorbar( aes(x=phase, ymin=fraccli-clus_ins_sd$sd, ymax=fraccli+clus_ins_sd$sd), width=0.2, colour="black", alpha=0.9, size=0.8)+
+  geom_errorbar( aes(x=phase, ymin=av_fwcli-sd_fwcli, ymax=av_fwcli+sd_fwcli), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("Fraction of individuals with a cluster insertion")+
   xlab("Phase")+
   scale_fill_manual(values = c("yellow", "red"))+
@@ -123,20 +123,10 @@ plot(g)
 ![](2022_08_24_Simulation_1_2_Phases_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 ``` r
-clus_ins_2 <- aggregate(x = df2$avcli,
-                      by = list(df2$phase, df2$sampleid),
-                      FUN = "mean")
-names(clus_ins_2) <- c("phase", "sampleid", "avcli")
-
-clus_ins_sd_2 <- aggregate(x = df2$avcli,
-                         by = list(df2$phase, df2$sampleid),
-                         FUN = "sd")
-names(clus_ins_sd_2) <- c("phase", "sampleid", "sd")
-
-g2 <- ggplot(clus_ins_2, aes(x=phase, y=avcli, fill = phase)) + 
+g_2 <- ggplot(df_cli, aes(x=phase, y=av_cli, fill = phase)) + 
   geom_bar(stat = "identity") +
-  geom_errorbar( aes(x=phase, ymin=avcli-clus_ins_sd_2$sd, ymax=avcli+clus_ins_sd_2$sd), width=0.2, colour="black", alpha=0.9, size=0.8)+
-  ylab("Average cluster insertions per individual")+
+  geom_errorbar( aes(x=phase, ymin=av_cli-sd_cli, ymax=av_cli+sd_cli), width=0.2, colour="black", alpha=0.9, size=0.8)+
+  ylab("Fraction of individuals with a cluster insertion")+
   xlab("Phase")+
   scale_fill_manual(values = c("yellow", "red"))+
   facet_wrap(~sampleid, labeller = labeller(sampleid = 
@@ -145,12 +135,12 @@ g2 <- ggplot(clus_ins_2, aes(x=phase, y=avcli, fill = phase)) +
                                                 "p10" = "Paramutable loci = 10%",
                                                 "p100" = "Paramutable loci = 100%")))
 
-plot(g2)
+plot(g_2)
 ```
 
-![](2022_08_24_Simulation_1_2_Phases_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](2022_08_24_Simulation_1_2_Phases_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
 
 ## Conclusions
 
 Paramutations reduce the number of cluster insertions at the beginning
-of each phase
+of the shotgun and inactive phases.
