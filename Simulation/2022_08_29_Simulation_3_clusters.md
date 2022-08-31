@@ -215,6 +215,60 @@ plot(g3_2)
 When the length of piRNA clusters increases there are less insertion in
 paramutable loci.
 
+``` r
+e_3 <- df2 %>% 
+  group_by(sampleid, phase) %>% 
+  summarize(mean_avpar = mean(avpar), sd_avpar = sd(avpar))
+
+
+e$clusters<-c("1% piRNA clusters", "1% piRNA clusters", "3% piRNA clusters", "3% piRNA clusters",  
+              "10% piRNA clusters", "10% piRNA clusters", "50% piRNA clusters", "50% piRNA clusters",
+              "1% piRNA clusters", "1% piRNA clusters", "3% piRNA clusters", "3% piRNA clusters",  
+              "10% piRNA clusters", "10% piRNA clusters", "50% piRNA clusters", "50% piRNA clusters")
+
+e$tag<-c("shot", "inac", "shot", "inac", "shot", "inac", "shot", "inac", "shot_para", "inac_para", "shot_para", "inac_para", "shot_para", "inac_para", "shot_para", "inac_para")
+
+g2_3 <- ggplot(e, aes(x=tag, y=mean_avcli, fill = phase))+ 
+  geom_bar(stat = "identity")+
+  geom_errorbar( aes(x=tag, ymin=mean_avcli-sd_avcli, ymax=mean_avcli+sd_avcli), width=0.2, colour="black", alpha=0.9, size=0.8)+
+  ylab("cluster insertions per diploid individual")+
+  xlab("phase")+
+  theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  facet_wrap(~clusters, ncol=4)
+
+plot(g2_3)
+```
+
+![](2022_08_29_Simulation_3_clusters_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+``` r
+e_3$clusters<-c("1% piRNA clusters", "1% piRNA clusters", "3% piRNA clusters", "3% piRNA clusters",  
+              "10% piRNA clusters", "10% piRNA clusters", "50% piRNA clusters", "50% piRNA clusters",
+              "1% piRNA clusters", "1% piRNA clusters", "3% piRNA clusters", "3% piRNA clusters",  
+              "10% piRNA clusters", "10% piRNA clusters", "50% piRNA clusters", "50% piRNA clusters")
+
+e_3$tag<-c("shot", "inac", "shot", "inac", "shot", "inac", "shot", "inac", "shot_para", "inac_para", "shot_para", "inac_para", "shot_para", "inac_para", "shot_para", "inac_para")
+
+g3_3 <- ggplot(e_3, aes(x=tag, y=mean_avpar, fill = phase))+ 
+  geom_bar(stat = "identity")+
+  geom_errorbar( aes(x=tag, ymin=mean_avpar-sd_avpar, ymax=mean_avpar+sd_avpar), width=0.2, colour="black", alpha=0.9, size=0.8)+
+  ylab("paramutations per diploid individual")+
+  xlab("phase")+
+  theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  facet_wrap(~clusters, ncol=4)
+
+plot(g3_3)
+```
+
+![](2022_08_29_Simulation_3_clusters_files/figure-gfm/unnamed-chunk-6-2.png)<!-- -->
+
+The final couple of histograms are a combination of the previous this
+allows a better comparison of the two phases with and without
+paramutations at different shares of piRNA clusters. In the second plot,
+for clarity, also the ones without paramutable loci are shown, obviously
+in this case there is no variation in the number of paramutations that
+remain at 0 since there is no possibility of insertions.
+
 ## Conclusions
 
 Paramutations dramatically diminish the influence of piRNA clusters.
