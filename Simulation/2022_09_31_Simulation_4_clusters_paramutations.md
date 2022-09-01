@@ -30,9 +30,9 @@ Visualization:
 
 ``` r
 setwd("/Users/ascarpa/Paramutations_TEs/Simulation/Raw")
-df4_05<-read.table("2022_09_31_Simulation_4_05", fill = TRUE, sep = "\t")
-df4_10<-read.table("2022_09_31_Simulation_4_10", fill = TRUE, sep = "\t")
-df4_20<-read.table("2022_09_31_Simulation_4_20", fill = TRUE, sep = "\t")
+df4_05<-read.table("2022_08_31_Simulation_4_05", fill = TRUE, sep = "\t")
+df4_10<-read.table("2022_08_31_Simulation_4_10", fill = TRUE, sep = "\t")
+df4_20<-read.table("2022_08_31_Simulation_4_20", fill = TRUE, sep = "\t")
 
 names_df<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed",
               "spacer_2", "phase", "fwpirna", "spacer_3", "fwcli", "avcli", "fixcli", "spacer_4", "fwpar_yespi",
