@@ -15,8 +15,6 @@ a population of 1000 individuals, different levels of piRNA clusters
 Every simulation had 100 replicates, the points in the graph are the
 average of these replicates.
 
-### Commands for the simulation:
-
 ### Visualization in R
 
 Setting the environment
@@ -93,7 +91,7 @@ g4_05<-ggplot(df4_05_2, aes(x=sampleid))+
 plot(g4_05)
 ```
 
-![](2022_09_31_Simulation_4_clusters_paramutations_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](2022_08_31_Simulation_4_clusters_paramutations_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 ``` r
 coeff_10=10
@@ -116,7 +114,7 @@ g4_10<-ggplot(df4_10_2, aes(x=sampleid))+
 plot(g4_10)
 ```
 
-![](2022_09_31_Simulation_4_clusters_paramutations_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
+![](2022_08_31_Simulation_4_clusters_paramutations_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
 
 ``` r
 coeff_20=6
@@ -139,7 +137,7 @@ g4_20<-ggplot(df4_20_2, aes(x=sampleid))+
 plot(g4_20)
 ```
 
-![](2022_09_31_Simulation_4_clusters_paramutations_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->
+![](2022_08_31_Simulation_4_clusters_paramutations_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->
 
 ## Conclusions
 
