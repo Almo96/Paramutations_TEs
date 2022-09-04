@@ -63,7 +63,7 @@ version: invadego 0.2.2
 
 ``` bash
 echo "R 0;0 999999;" > input_LD
-folder="/Users/ascarpa/Paramutations_TEs/Validation/"
+folder="/Users/ascarpa/Paramutations_TEs/Validation/Raw"
 tool="/Users/ascarpa/invade-invadego/invadego022"
 
 
@@ -123,7 +123,7 @@ This plot shows how linkage disequilibrium decays with different
 recombination rates.
 
 ``` r
-t_8_1<-read.table("validation_8_1_debug", fill = TRUE, sep = "\t")
+t_8_1<-read.table("Raw/validation_8_1_debug", fill = TRUE, sep = "\t")
 names(t_8_1)<-c("rep", "gen", "D")
 g_8_1<-ggplot()+
   geom_line(data = t_8_1, aes(x = gen, y = D, group = rep), color = "grey")+
@@ -133,7 +133,7 @@ g_8_1<-ggplot()+
   theme(plot.title = element_text(size=14, face="bold.italic"))+
   ylim(0, 0.25)
 
-t_8_2<-read.table("validation_8_2_debug", fill = TRUE, sep = "\t")
+t_8_2<-read.table("Raw/validation_8_2_debug", fill = TRUE, sep = "\t")
 names(t_8_2)<-c("rep", "gen", "D")
 g_8_2<-ggplot()+
   geom_line(data = t_8_2, aes(x = gen, y = D, group = rep), color = "grey")+
@@ -143,7 +143,7 @@ g_8_2<-ggplot()+
   theme(plot.title = element_text(size=14, face="bold.italic"))+
   ylim(-0.01, 0.25)
 
-t_8_3<-read.table("validation_8_3_debug", fill = TRUE, sep = "\t")
+t_8_3<-read.table("Raw/validation_8_3_debug", fill = TRUE, sep = "\t")
 names(t_8_3)<-c("rep", "gen", "D")
 g_8_3<-ggplot()+
   geom_line(data = t_8_3, aes(x = gen, y = D, group = rep), color = "grey")+
@@ -153,7 +153,7 @@ g_8_3<-ggplot()+
   theme(plot.title = element_text(size=14, face="bold.italic"))+
   ylim(-0.01, 0.25)
 
-t_8_4<-read.table("validation_8_4_debug", fill = TRUE, sep = "\t")
+t_8_4<-read.table("Raw/validation_8_4_debug", fill = TRUE, sep = "\t")
 names(t_8_4)<-c("rep", "gen", "D")
 g_8_4<-ggplot()+
   geom_line(data = t_8_4, aes(x = gen, y = D, group = rep), color = "grey")+

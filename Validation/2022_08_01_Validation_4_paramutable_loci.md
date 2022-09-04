@@ -33,7 +33,7 @@ population
 ### Commands for the simulation:
 
 ``` bash
-folder="/Users/ascarpa/Paramutations_TEs/Validation"
+folder="/Users/ascarpa/Paramutations_TEs/Validation/Raw"
 tool="/Users/ascarpa/invade-invadego/invadego021"
 
 $tool --N 1000 --gen 100 --genome mb:1 --cluster kb:0 --rr 4 --rep 100 --u 0.1 --basepop 10 --steps 1 --sampleid ps0> $folder/validation_4_1 &
@@ -74,7 +74,7 @@ library(dplyr)
 Visualization: comparing the simulations with the prediction
 
 ``` r
-validation<-read.table("2022_08_01_Validation_4_paramutable_loci", fill = TRUE, sep = "\t")
+validation<-read.table("Raw/2022_08_01_Validation_4_paramutable_loci", fill = TRUE, sep = "\t")
 names(validation)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed","spacer_2","phase","fwpirna","spacer_3","fwcli","avcli","fixcli","spacer_4","fwpar_yespi","fwpar_nopi",
                        "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
 

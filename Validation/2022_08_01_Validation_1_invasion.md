@@ -38,7 +38,7 @@ version: invadego0.2.1 seed: 1659093816078434000
 ### Commands for the simulation:
 
 ``` bash
-folder="/Users/ascarpa/Paramutations_TEs/Validation/"
+folder="/Users/ascarpa/Paramutations_TEs/Validation/Raw"
 tool="/Users/ascarpa/invade-invadego/invadego021"
 
 $tool --N 1000 --gen 100 --genome mb:1 --cluster kb:0 --rr 4 --rep 500 --u 0.1 --basepop 10 --silent --steps 1 > $folder/2022_08_01_Validation_1_invasion
@@ -62,7 +62,7 @@ Visualization: comparing the simulations with the prediction
 cn<-seq(0,99,1)
 res<-10*1.1^cn
 theo<-data.frame(x=1:100,y=res)
-validation<-read.table("2022_08_01_Validation_1_invasion")
+validation<-read.table("Raw/2022_08_01_Validation_1_invasion")
 names(validation)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed","spacer_2","phase","fwpirna","spacer_3","fwcli","avcli","fixcli","spacer_4","fwpar_yespi","fwpar_nopi",
                      "avpar","fixpar","spacer_5","piori")
 

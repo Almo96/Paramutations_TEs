@@ -58,7 +58,7 @@ version: invadego0.2.1
 ### Commands for the simulation:
 
 ``` bash
-folder="/Users/ascarpa/Downloads/invadego_simulations/Paramutagenic_chain_reaction/Validation"
+folder="/Users/ascarpa/Paramutations_TEs/Validation/Raw"
 tool="/Users/ascarpa/invade-invadego/invadego021"
 
 $tool --N 250 --gen 20000 --genome mb:10,10,10,10,10 --cluster mb:1,1,1,1,1 --rr 4,4,4,4,4 --rep 300 --u 0.0 --basepop 10000 --steps 10000 --sampleid pd250> $folder/validation_2_1 &       
@@ -81,7 +81,7 @@ library(patchwork)
 Visualization: comparing the simulations with the prediction
 
 ``` r
-validation<-read.table("2022_08_01_Validation_2_Drift", fill = TRUE, sep = "\t")
+validation<-read.table("Raw/2022_08_01_Validation_2_Drift", fill = TRUE, sep = "\t")
 names(validation)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed","spacer_2","phase","fwpirna","spacer_3","fwcli","avcli","fixcli","spacer_4","fwpar_yespi","fwpar_nopi","avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
 
 data_1 <- validation[which(validation$sampleid == "pd250"),names(validation) %in% c("rep","fixed")]

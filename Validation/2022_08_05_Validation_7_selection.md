@@ -49,7 +49,7 @@ version: invadego 0.2.2
 
 ``` bash
 echo "10000 R 0;999999;" > input_sel
-% folder="/Users/ascarpa/Paramutations_TEs/Validation/"
+% folder="/Users/ascarpa/Paramutations_TEs/Validation/Raw"
 tool="/Users/ascarpa/invade-invadego/invadego022"
 
 $tool --N 1000 --gen 100 --genome mb:1 --cluster kb:100 --rr 4 --rep 100 --u 0.1 --basepop 100 --steps 25 -x 0.1 --file-mhp $folder/validation_7_1_mhp> $folder/validation_7_1
@@ -95,7 +95,7 @@ library(patchwork)
 # Selection vs selection on non-cluster insertions
 
 ``` r
-t_1<-read.table("validation_7_1_mhp", fill = TRUE, sep = "\t")
+t_1<-read.table("Raw/validation_7_1_mhp", fill = TRUE, sep = "\t")
 names(t_1)<-c("rep","gen","chr","pos","locus","popfreq")
 t_1$rep<-as.factor(t_1$rep)
 t_1$gen<-as.factor(t_1$gen)
@@ -110,7 +110,7 @@ plot(g_1)
 ![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 ``` r
-t_1_2<-read.table("validation_7_1_mhp", fill = TRUE, sep = "\t")
+t_1_2<-read.table("Raw/validation_7_1_mhp", fill = TRUE, sep = "\t")
 names(t_1_2)<-c("rep","gen","chr","pos","locus","popfreq")
 t_1_2$gen<-as.factor(t_1_2$gen)
 t_1_2<-subset(t_1_2, gen==0)
@@ -121,7 +121,7 @@ g_1_2<-ggplot()+
   theme(legend.position="none", plot.title = element_text(size=14, face="bold.italic"))+
 ylab("relative frequencies")
 
-t_1_3<-read.table("validation_7_1_mhp", fill = TRUE, sep = "\t")
+t_1_3<-read.table("Raw/validation_7_1_mhp", fill = TRUE, sep = "\t")
 names(t_1_3)<-c("rep","gen","chr","pos","locus","popfreq")
 t_1_3$gen<-as.factor(t_1_3$gen)
 t_1_3<-subset(t_1_3, gen==50)
@@ -138,7 +138,7 @@ g_1_2+g_1_3
 ![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
 
 ``` r
-t_2<-read.table("validation_7_2_mhp", fill = TRUE, sep = "\t")
+t_2<-read.table("Raw/validation_7_2_mhp", fill = TRUE, sep = "\t")
 names(t_2)<-c("rep","gen","chr","pos","locus","popfreq")
 t_2$rep<-as.factor(t_2$rep)
 t_2$gen<-as.factor(t_2$gen)
@@ -153,7 +153,7 @@ plot(g_2)
 ![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-3-3.png)<!-- -->
 
 ``` r
-t_2_2<-read.table("validation_7_2_mhp", fill = TRUE, sep = "\t")
+t_2_2<-read.table("Raw/validation_7_2_mhp", fill = TRUE, sep = "\t")
 names(t_2_2)<-c("rep","gen","chr","pos","locus","popfreq")
 t_2_2$gen<-as.factor(t_2_2$gen)
 t_2_2<-subset(t_2_2, gen==0)
@@ -164,7 +164,7 @@ g_2_2<-ggplot()+
   theme(legend.position="none", plot.title = element_text(size=14, face="bold.italic"))+
   ylab("relative frequencies")
 
-t_2_3<-read.table("validation_7_2_mhp", fill = TRUE, sep = "\t")
+t_2_3<-read.table("Raw/validation_7_2_mhp", fill = TRUE, sep = "\t")
 names(t_2_3)<-c("rep","gen","chr","pos","locus","popfreq")
 t_2_3$gen<-as.factor(t_2_3$gen)
 t_2_3<-subset(t_2_3, gen==100)
@@ -189,7 +189,7 @@ to be lost, while in the second only non cluster TEs are lost, while
 cluster insertions are maintained.
 
 ``` r
-df_1<-read.table("2022_08_05_Validation_7_selection_1", fill = TRUE, sep = "\t")
+df_1<-read.table("Raw/2022_08_05_Validation_7_selection_1", fill = TRUE, sep = "\t")
 names(df_1)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed","spacer_2","phase","fwpirna","spacer_3","fwcli","avcli","fixcli","spacer_4","fwpar_yespi","fwpar_nopi",
               "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
 
@@ -210,7 +210,7 @@ plot(gt_1)
 ![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ``` r
-df_2<-read.table("2022_08_05_Validation_7_selection_2", fill = TRUE, sep = "\t")
+df_2<-read.table("Raw/2022_08_05_Validation_7_selection_2", fill = TRUE, sep = "\t")
 names(df_2)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed","spacer_2","phase","fwpirna","spacer_3","fwcli","avcli","fixcli","spacer_4","fwpar_yespi","fwpar_nopi",
             "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
 df_2$sampleid <- factor(df_2$sampleid, levels=c("psel8", "psel9", "psel10", "psel11","psel12"))
