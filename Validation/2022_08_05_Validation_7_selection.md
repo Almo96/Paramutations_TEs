@@ -210,6 +210,180 @@ plot(gt_1)
 ![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ``` r
+df1_s<-subset(df_1, sampleid=="psel3")
+df2_s<-subset(df_1, sampleid=="psel4")
+df3_s<-subset(df_1, sampleid=="psel5")
+df4_s<-subset(df_1, sampleid=="psel6")
+df5_s<-subset(df_1, sampleid=="psel7")
+
+p0=0.5
+p<-p0
+q<-1-p0
+t=1000
+traj<- matrix(NA, ncol=3, nrow=max(t)+1)
+traj[1,1]<-p
+traj[1,2]<-0
+s=0
+g=1
+wAA=1-(2*s)
+wAa=1-s
+waa=1
+while(g<=max(t)){
+  w<- (p^2)*wAA + (2*p*q*wAa) + (q^2)*waa
+  p<-( p*(p*wAA + q*wAa) ) / w
+  q<-1-p
+  traj[g+1,1]<-p
+  traj[g+1,2]<-g
+  g<-g+1
+}
+traj<- as.data.frame(traj)
+traj[,3]<- "black"
+colnames(traj)<- c("freq", "generations", "color")
+
+g_s_1<-ggplot()+ 
+  geom_line(df1_s, mapping=aes(x=gen, y=avtes, group=rep), color="red")+
+  geom_line(traj, mapping=aes(x=generations, y=(freq*2)), color="black")+
+  labs(x="generation", y="frequency of TEs in the population")
+plot(g_s_1)
+```
+
+![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
+
+``` r
+p0=0.5
+p<-p0
+q<-1-p0
+t=1000
+traj<- matrix(NA, ncol=3, nrow=max(t)+1)
+traj[1,1]<-p
+traj[1,2]<-0
+s=0.1
+g=1
+wAA=1-(2*s)
+wAa=1-s
+waa=1
+while(g<=max(t)){
+  w<- (p^2)*wAA + (2*p*q*wAa) + (q^2)*waa
+  p<-( p*(p*wAA + q*wAa) ) / w
+  q<-1-p
+  traj[g+1,1]<-p
+  traj[g+1,2]<-g
+  g<-g+1
+}
+traj<- as.data.frame(traj)
+traj[,3]<- "black"
+colnames(traj)<- c("freq", "generations", "color")
+g_s_2<-ggplot()+ 
+  geom_line(df2_s, mapping=aes(x=gen, y=avtes, group=rep), color="red")+
+  geom_line(traj, mapping=aes(x=generations, y=(freq*2)), color="black")+
+  labs(x="generation", y="frequency of TEs in the population")
+plot(g_s_2)
+```
+
+![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-4-3.png)<!-- -->
+
+``` r
+p0=0.5
+p<-p0
+q<-1-p0
+t=1000
+traj<- matrix(NA, ncol=3, nrow=max(t)+1)
+traj[1,1]<-p
+traj[1,2]<-0
+s=0.01
+g=1
+wAA=1-(2*s)
+wAa=1-s
+waa=1
+while(g<=max(t)){
+  w<- (p^2)*wAA + (2*p*q*wAa) + (q^2)*waa
+  p<-( p*(p*wAA + q*wAa) ) / w
+  q<-1-p
+  traj[g+1,1]<-p
+  traj[g+1,2]<-g
+  g<-g+1
+}
+traj<- as.data.frame(traj)
+traj[,3]<- "black"
+colnames(traj)<- c("freq", "generations", "color")
+g_s_3<-ggplot()+ 
+  geom_line(df3_s, mapping=aes(x=gen, y=avtes, group=rep), color="red")+
+  geom_line(traj, mapping=aes(x=generations, y=(freq*2)), color="black")+
+  labs(x="generation", y="frequency of TEs in the population")
+plot(g_s_3)
+```
+
+![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-4-4.png)<!-- -->
+
+``` r
+p0=0.5
+p<-p0
+q<-1-p0
+t=1000
+traj<- matrix(NA, ncol=3, nrow=max(t)+1)
+traj[1,1]<-p
+traj[1,2]<-0
+s=0.001
+g=1
+wAA=1-(2*s)
+wAa=1-s
+waa=1
+while(g<=max(t)){
+  w<- (p^2)*wAA + (2*p*q*wAa) + (q^2)*waa
+  p<-( p*(p*wAA + q*wAa) ) / w
+  q<-1-p
+  traj[g+1,1]<-p
+  traj[g+1,2]<-g
+  g<-g+1
+}
+traj<- as.data.frame(traj)
+traj[,3]<- "black"
+colnames(traj)<- c("freq", "generations", "color")
+g_s_4<-ggplot()+ 
+  geom_line(df4_s, mapping=aes(x=gen, y=avtes, group=rep), color="red")+
+  geom_line(traj, mapping=aes(x=generations, y=(freq*2)), color="black")+
+  labs(x="generation", y="frequency of TEs in the population")
+plot(g_s_4)
+```
+
+![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-4-5.png)<!-- -->
+
+``` r
+p0=0.5
+p<-p0
+q<-1-p0
+t=1000
+traj<- matrix(NA, ncol=3, nrow=max(t)+1)
+traj[1,1]<-p
+traj[1,2]<-0
+s=0.0001
+g=1
+wAA=1-(2*s)
+wAa=1-s
+waa=1
+while(g<=max(t)){
+  w<- (p^2)*wAA + (2*p*q*wAa) + (q^2)*waa
+  p<-( p*(p*wAA + q*wAa) ) / w
+  q<-1-p
+  traj[g+1,1]<-p
+  traj[g+1,2]<-g
+  g<-g+1
+}
+traj<- as.data.frame(traj)
+traj[,3]<- "black"
+colnames(traj)<- c("freq", "generations", "color")
+g_s_5<-ggplot()+ 
+  geom_line(df5_s, mapping=aes(x=gen, y=avtes, group=rep), color="red")+
+  geom_line(traj, mapping=aes(x=generations, y=(freq*2)), color="black")+
+  labs(x="generation", y="frequency of TEs in the population")
+plot(g_s_5)
+```
+
+![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-4-6.png)<!-- -->
+
+The simulations match the expected values (black line).
+
+``` r
 df_2<-read.table("Raw/2022_08_05_Validation_7_selection_2", fill = TRUE, sep = "\t")
 names(df_2)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed","spacer_2","phase","fwpirna","spacer_3","fwcli","avcli","fixcli","spacer_4","fwpar_yespi","fwpar_nopi",
             "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
@@ -228,7 +402,7 @@ gt_2<-ggplot()+
 plot(gt_2)
 ```
 
-![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
+![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 ``` r
 gt_2_2<-ggplot()+
@@ -244,7 +418,7 @@ gt_2_2<-ggplot()+
 plot(gt_2_2)
 ```
 
-![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-4-3.png)<!-- -->
+![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
 
 As we expected in the first set of graphs we can see how an higher
 selection coefficient decrease the number of generations needed to lose
