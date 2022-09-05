@@ -233,6 +233,7 @@ g2_3 <- ggplot(e, aes(x=tag, y=mean_avcli, fill = phase))+
   geom_errorbar( aes(x=tag, ymin=mean_avcli-sd_avcli, ymax=mean_avcli+sd_avcli), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("cluster insertions per diploid individual")+
   xlab("phase")+
+  scale_fill_manual(values = c("yellow", "red"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~clusters, ncol=4)
 
@@ -254,6 +255,7 @@ g3_3 <- ggplot(e_3, aes(x=tag, y=mean_avpar, fill = phase))+
   geom_errorbar( aes(x=tag, ymin=mean_avpar-sd_avpar, ymax=mean_avpar+sd_avpar), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("paramutations per diploid individual")+
   xlab("phase")+
+  scale_fill_manual(values = c("yellow", "red"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~clusters, ncol=4)
 
