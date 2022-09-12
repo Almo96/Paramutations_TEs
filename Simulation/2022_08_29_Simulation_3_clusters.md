@@ -227,6 +227,9 @@ e$clusters<-c("1% piRNA clusters", "1% piRNA clusters", "3% piRNA clusters", "3%
               "10% piRNA clusters", "10% piRNA clusters", "50% piRNA clusters", "50% piRNA clusters")
 
 e$tag<-c("shot", "inac", "shot", "inac", "shot", "inac", "shot", "inac", "shot_para", "inac_para", "shot_para", "inac_para", "shot_para", "inac_para", "shot_para", "inac_para")
+e$tag <- factor(e$tag,levels = c("shot", "shot_para", "inac", "inac_para"))
+e$clusters <- factor(e$clusters,levels = c("1% piRNA clusters", 
+                                               "3% piRNA clusters", "10% piRNA clusters", "50% piRNA clusters"))
 
 g2_3 <- ggplot(e, aes(x=tag, y=mean_avcli, fill = phase))+ 
   geom_bar(stat = "identity")+
@@ -249,6 +252,9 @@ e_3$clusters<-c("1% piRNA clusters", "1% piRNA clusters", "3% piRNA clusters", "
               "10% piRNA clusters", "10% piRNA clusters", "50% piRNA clusters", "50% piRNA clusters")
 
 e_3$tag<-c("shot", "inac", "shot", "inac", "shot", "inac", "shot", "inac", "shot_para", "inac_para", "shot_para", "inac_para", "shot_para", "inac_para", "shot_para", "inac_para")
+e_3$tag <- factor(e_3$tag,levels = c("shot", "shot_para", "inac", "inac_para"))
+e_3$clusters <- factor(e_3$clusters,levels = c("1% piRNA clusters", 
+"3% piRNA clusters", "10% piRNA clusters", "50% piRNA clusters"))
 
 g3_3 <- ggplot(e_3, aes(x=tag, y=mean_avpar, fill = phase))+ 
   geom_bar(stat = "identity")+
