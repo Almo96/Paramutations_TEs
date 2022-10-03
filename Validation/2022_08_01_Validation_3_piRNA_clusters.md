@@ -66,7 +66,7 @@ data_new <- validation
 data_new$sampleid <- factor(data_new$sampleid,
                          levels = c("pc0", "pc50", "pc100"))
 
-gl<-ggplot()+geom_line(data=data_new,aes(x=gen,group=rep,y=avtes*1000),alpha=0.4)+scale_y_log10()+theme(legend.position="none")+ylab("TE copies in population")+xlab("generation")+facet_grid(.~sampleid)
+gl<-ggplot()+geom_line(data=data_new,aes(x=gen,group=rep,y=avtes*1000),alpha=0.4)+scale_y_log10()+theme(legend.position="none")+ylab("log10 TE copies in population")+xlab("generation")+facet_grid(.~sampleid)
 plot(gl)
 ```
 
