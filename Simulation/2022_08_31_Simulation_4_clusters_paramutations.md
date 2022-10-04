@@ -28,6 +28,7 @@ Visualization:
 
 ``` r
 setwd("/Users/ascarpa/Paramutations_TEs/Simulation/Raw")
+
 df4_05<-read.table("2022_08_31_Simulation_4_05", fill = TRUE, sep = "\t")
 df4_10<-read.table("2022_08_31_Simulation_4_10", fill = TRUE, sep = "\t")
 df4_20<-read.table("2022_08_31_Simulation_4_20", fill = TRUE, sep = "\t")
@@ -82,6 +83,7 @@ g4_05<-ggplot(df4_05_2, aes(x=sampleid))+
     name = "TEs insertions per diploid individual",
     sec.axis = sec_axis(~./coeff_05, name="cluster insertions per diploid individual")
   )+
+  xlab("percent of paramutable loci")+
   theme(legend.position="none",
         plot.title = element_text(size=14, face="bold"),
         axis.title.y = element_text(color = "red", size=10),
@@ -105,6 +107,7 @@ g4_10<-ggplot(df4_10_2, aes(x=sampleid))+
     name = "TEs insertions per diploid individual",
     sec.axis = sec_axis(~./coeff_10, name="cluster insertions per diploid individual")
   )+
+  xlab("percent of paramutable loci")+
   theme(legend.position="none",
         plot.title = element_text(size=14, face="bold"),
         axis.title.y = element_text(color = "red", size=10),
@@ -117,7 +120,7 @@ plot(g4_10)
 ![](2022_08_31_Simulation_4_clusters_paramutations_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
 
 ``` r
-coeff_20=6
+coeff_20=4.9
 g4_20<-ggplot(df4_20_2, aes(x=sampleid))+
   geom_point(aes(y=mean_avcli*coeff_20), color="blue")+
   geom_line(aes(y=mean_avcli*coeff_20), color="blue")+
@@ -128,6 +131,7 @@ g4_20<-ggplot(df4_20_2, aes(x=sampleid))+
     name = "TEs insertions per diploid individual",
     sec.axis = sec_axis(~./coeff_20, name="cluster insertions per diploid individual")
   )+
+  xlab("percent of paramutable loci")+
   theme(legend.position="none",
         plot.title = element_text(size=14, face="bold"),
         axis.title.y = element_text(color = "red", size=10),
