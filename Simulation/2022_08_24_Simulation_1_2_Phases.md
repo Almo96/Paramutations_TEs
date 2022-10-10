@@ -106,7 +106,8 @@ g <- ggplot(df_cli, aes(x=phase, y=av_fwcli, fill = phase)) +
   ylab("Fraction of individuals with a cluster insertion")+
   xlab("Phase")+
   scale_fill_manual(values = c("yellow", "red"))+
-  facet_wrap(~sampleid, labeller = labeller(sampleid = 
+  theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
                                               c("p0" = "Paramutable loci = 0% (Trap model)",
                                                 "p1" = "Paramutable loci = 1%",
                                                 "p10" = "Paramutable loci = 10%",
@@ -121,10 +122,11 @@ plot(g)
 g_2 <- ggplot(df_cli, aes(x=phase, y=av_cli, fill = phase)) + 
   geom_bar(stat = "identity") +
   geom_errorbar( aes(x=phase, ymin=av_cli-sd_cli, ymax=av_cli+sd_cli), width=0.2, colour="black", alpha=0.9, size=0.8)+
-  ylab("Fraction of individuals with a cluster insertion")+
+  ylab("Number of cluster insertions per individual")+
   xlab("Phase")+
   scale_fill_manual(values = c("yellow", "red"))+
-  facet_wrap(~sampleid, labeller = labeller(sampleid = 
+  theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
                                               c("p0" = "Paramutable loci = 0% (Trap model)",
                                                 "p1" = "Paramutable loci = 1%",
                                                 "p10" = "Paramutable loci = 10%",
@@ -137,5 +139,4 @@ plot(g_2)
 
 ## Conclusions
 
-Paramutations reduce the number of cluster insertions at the beginning
-of the shotgun and inactive phases.
+Paramutations reduce the number of cluster insertions.
