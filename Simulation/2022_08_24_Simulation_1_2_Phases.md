@@ -69,9 +69,9 @@ df$sampleid <- factor(df$sampleid, levels=c("p0", "p1", "p10","p100"))
 
 
 df1 <- subset(df, phase %in% c("shot", "inac"))
-
 df2 <- data.frame()
 
+#new dataframe with only the first shotgun & the first inactive phase of each replicate
 repcheck = 1
 x = 1
 y = 1
@@ -95,10 +95,11 @@ while (x<nrow(df1)) {
   x = x+1
 }
 
+#Summary statistics
 df2<-select (df2,-c(28))
 df_cli<-df2 %>% 
   group_by(sampleid, phase) %>%
-  summarize(av_fwcli = mean(fwcli), sd_fwcli = sd(fwcli), av_cli = mean(avcli), sd_cli = sd(avcli))
+  summarize(av_fwcli = mean(fwcli), sd_fwcli = sd(fwcli), av_cli = mean(avcli), sd_cli = sd(avcli), cv_cli_percent = sd(avcli)/mean(avcli), av_tes = mean(avtes), sd_tes = sd(avtes), cv_tes_percent = sd(avtes)/mean(avtes))
 
 g <- ggplot(df_cli, aes(x=phase, y=av_fwcli, fill = phase)) + 
   geom_bar(stat = "identity") +
@@ -127,7 +128,7 @@ g_2 <- ggplot(df_cli, aes(x=phase, y=av_cli, fill = phase)) +
   scale_fill_manual(values = c("yellow", "red"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
-                                              c("p0" = "Paramutable loci = 0% (Trap model)",
+                                              c("p0" = "Paramutable loci = 0%",
                                                 "p1" = "Paramutable loci = 1%",
                                                 "p10" = "Paramutable loci = 10%",
                                                 "p100" = "Paramutable loci = 100%")))
@@ -137,6 +138,53 @@ plot(g_2)
 
 ![](2022_08_24_Simulation_1_2_Phases_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
 
+``` r
+g_2_2 <- ggplot(df_cli, aes(x=sampleid, y=cv_cli_percent))+
+  geom_point(aes(colour = phase))+
+  xlab("Percent of paramutable loci")+
+  ylab("Coefficient of variation cluster insertions per individual")+
+  scale_y_continuous(labels = scales::percent)+
+  scale_x_discrete(labels = c("0% (Trap model)", "1%", "10%", "100%"))
+
+
+plot(g_2_2)
+```
+
+![](2022_08_24_Simulation_1_2_Phases_files/figure-gfm/unnamed-chunk-3-3.png)<!-- -->
+
+``` r
+g_3 <- ggplot(df_cli, aes(x=phase, y=av_tes, fill = phase)) + 
+  geom_bar(stat = "identity") +
+  geom_errorbar( aes(x=phase, ymin=av_tes-sd_tes, ymax=av_tes+sd_tes), width=0.2, colour="black", alpha=0.9, size=0.8)+
+  ylab("Number of TEs insertions per individual")+
+  xlab("Phase")+
+  scale_fill_manual(values = c("yellow", "red"))+
+  theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
+                                                      c("p0" = "Paramutable loci = 0%",
+                                                        "p1" = "Paramutable loci = 1%",
+                                                        "p10" = "Paramutable loci = 10%",
+                                                        "p100" = "Paramutable loci = 100%")))
+
+plot(g_3)
+```
+
+![](2022_08_24_Simulation_1_2_Phases_files/figure-gfm/unnamed-chunk-3-4.png)<!-- -->
+
+``` r
+g_3_2 <- ggplot(df_cli, aes(x=sampleid, y=cv_tes_percent))+
+  geom_point(aes(colour = phase))+
+  xlab("Percent of paramutable loci")+
+  ylab("Coefficient of variation TEs insertions per individual")+
+  scale_y_continuous(labels = scales::percent, limits = c(0, 0.4))+
+  scale_x_discrete(labels = c("0% (Trap model)", "1%", "10%", "100%"))
+
+plot(g_3_2)
+```
+
+![](2022_08_24_Simulation_1_2_Phases_files/figure-gfm/unnamed-chunk-3-5.png)<!-- -->
+
 ## Conclusions
 
-Paramutations reduce the number of cluster insertions.
+Paramutations reduce the number of cluster insertions. Paramutations
+increase the coefficient of variation for cluster insertions.
