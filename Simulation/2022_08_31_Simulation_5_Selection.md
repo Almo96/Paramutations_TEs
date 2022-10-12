@@ -328,10 +328,5 @@ plot(g_noxclu_5)
 
 ## Conclusions
 
-I think the case in which selection does not act on clusters should be
-generalized to paramutations. If cluster and in general piRNA producing
-exist it is to prevent the TE invasions, therefore selection should not
-act on them when they start to produce piRNAs since this is their
-purpose. It make sense to mantain both the option in the models, but I
-think a third one where neither clusters or paramutable loci are
-affected by selection should be added.
+Depending on the type of selection we have different results for cluster
+insertions and paramutations.
