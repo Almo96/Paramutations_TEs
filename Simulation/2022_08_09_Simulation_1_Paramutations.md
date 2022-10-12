@@ -136,17 +136,18 @@ df3_2 <- df3_2[order(df3_2$sampleid),]
 
 
 coeff_3=32.5
-g3 <- ggplot(df3_2, aes(x=sampleid))+
+g3 <- ggplot(df3_2, aes(x=sampleid/100))+
   geom_point(aes(y=av_cli*coeff_3), color="blue")+
   geom_line(aes(y=av_cli*coeff_3), color="blue")+
   geom_point(aes(y=av_tes), color="red")+
   geom_line(aes(y=av_tes), color="red")+
+  scale_x_continuous(labels = scales::percent)+
   ggtitle("3% piRNA clusters")+
   scale_y_continuous(
     name = "TEs insertions per diploid individual",
     sec.axis = sec_axis(~./coeff_3, name="cluster insertions per diploid individual")
   )+
-  xlab("Percent of paramutable loci")+
+  xlab("Paramutable loci")+
   theme(legend.position="none",
         plot.title = element_text(size=14, face="bold"),
         axis.title.y = element_text(color = "red", size=10),
@@ -159,13 +160,14 @@ plot(g3)
 ![](2022_08_09_Simulation_1_Paramutations_files/figure-gfm/unnamed-chunk-3-3.png)<!-- -->
 
 ``` r
-g_3_2 <- ggplot(df3_2, aes(x=sampleid, y=cv_tes_percent))+
+g_3_2 <- ggplot(df3_2, aes(x=sampleid/100, y=cv_tes_percent))+
   geom_point()+
   geom_smooth(method='lm', formula= y~x, se = FALSE)+
   stat_regline_equation(label.y = 0.18, aes(label = ..eq.label..))+
   stat_regline_equation(label.y = 0.16, aes(label = ..rr.label..))+
-  xlab("Percent of paramutable loci")+
+  xlab("Paramutable loci")+
   ylab("Coefficient of variation TEs insertions per individual")+
+  scale_x_continuous(labels = scales::percent)+
   scale_y_continuous(labels = scales::percent, limits = c(0, 0.4))+
   ggtitle("Effects of paramutations on the cv of TE insertions per individual")+
   theme(legend.position="none",
@@ -177,13 +179,14 @@ plot(g_3_2)
 ![](2022_08_09_Simulation_1_Paramutations_files/figure-gfm/unnamed-chunk-3-4.png)<!-- -->
 
 ``` r
-g_3_3 <- ggplot(df3_2, aes(x=sampleid, y=cv_cli_percent))+
+g_3_3 <- ggplot(df3_2, aes(x=sampleid/100, y=cv_cli_percent))+
   geom_point()+
   geom_smooth(method='lm', formula= y~x, se = FALSE)+
   stat_regline_equation(label.y = 2.8, aes(label = ..eq.label..))+
   stat_regline_equation(label.y = 2.6, aes(label = ..rr.label..))+
-  xlab("Percent of paramutable loci")+
+  xlab("Paramutable loci")+
   ylab("Coefficient of variation TEs insertions per individual")+
+  scale_x_continuous(labels = scales::percent)+
   scale_y_continuous(labels = scales::percent)+
   ggtitle("Effects of paramutations on the cv of cluster insertions")+
   theme(legend.position="none",
