@@ -53,7 +53,7 @@ library(ggplot2)
 library(patchwork)
 library(plotrix)
 library(RColorBrewer)
-theme_set(theme_bw())
+library(ggpubr)
 ```
 
 Visualization:
@@ -74,7 +74,8 @@ df$sampleid <- factor(df$sampleid, levels=c("p0", "p1", "p10","p100"))
 
 g<-ggplot()+
   geom_line(data=df,aes(x=gen,y=avtes,group=rep,color=phase),alpha=1,size=0.7)+
-  ylab("insertions per diploid individual")+xlab("generation")+
+  xlab("generation")+
+  ylab("TEs insertions per diploid individual")+
   theme(legend.position="none")+
   scale_colour_manual(values=p)+
   ylim(0,500)+
@@ -98,7 +99,7 @@ df2<-subset(clus_ins, gen == 0 | gen == 100 | gen == 1000 | gen == 2500 | gen ==
 
 g2 <- ggplot(df2, aes(x=as.character(gen), y=percentcli)) + 
       geom_bar(stat = "identity", aes(fill=gen)) +
-      ylab("percentage of individuals with a cluster insertion")+
+      ylab("Percentage of individuals with a cluster insertion")+
       xlab("generation")+
       theme(legend.position = "none")+
       facet_wrap(~sampleid, labeller = labeller(sampleid = 
@@ -110,45 +111,98 @@ g2 <- ggplot(df2, aes(x=as.character(gen), y=percentcli)) +
 plot(g2)
 ```
 
-![](2022_08_09_Simulation_1_Paramutations_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](2022_08_09_Simulation_1_Paramutations_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
 
 ``` r
 setwd("/Users/ascarpa/Paramutations_TEs/Simulation/Raw")
 df3<-read.table("2022_08_19_100_simulations", fill = TRUE, sep = "\t")
 names(df3)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed",
              "spacer_2", "phase", "fwpirna", "spacer_3", "fwcli", "avcli", "fixcli", "spacer_4", "fwpar_yespi",
-             "fwpar_nopi", "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
+             "fwpar_nopi", "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid", "extra")
 
 
 df3 = subset(df3, gen == 5000 )
+df3 <- df3 %>% 
+  select(-c("extra"))
+
+df3_2 <- df3 %>% 
+  group_by(sampleid) %>% 
+  summarize(av_cli = mean(avcli), sd_cli = sd(avcli), cv_cli_percent = sd(avcli)/mean(avcli), 
+            av_tes = mean(avtes), sd_tes = sd(avtes), cv_tes_percent = sd(avtes)/mean(avtes))
+
+percent_para<-c(0,10,100,15,20,25,30,35,40,45,5,50,55,60,65,70,75,80,85,90,95)
+df3_2$sampleid<-percent_para
+df3_2 <- df3_2[order(df3_2$sampleid),]
 
 
-df3_2<-aggregate(df3, by = list(df3$sampleid), FUN = "mean")
-names(df3_2)<-c("Group1","rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed",
-             "spacer_2", "phase", "fwpirna", "spacer_3", "fwcli", "avcli", "fixcli", "spacer_4", "fwpar_yespi",
-             "fwpar_nopi", "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
+coeff_3=32.5
+g3 <- ggplot(df3_2, aes(x=sampleid))+
+  geom_point(aes(y=av_cli*coeff_3), color="blue")+
+  geom_line(aes(y=av_cli*coeff_3), color="blue")+
+  geom_point(aes(y=av_tes), color="red")+
+  geom_line(aes(y=av_tes), color="red")+
+  ggtitle("3% piRNA clusters")+
+  scale_y_continuous(
+    name = "TEs insertions per diploid individual",
+    sec.axis = sec_axis(~./coeff_3, name="cluster insertions per diploid individual")
+  )+
+  xlab("Percent of paramutable loci")+
+  theme(legend.position="none",
+        plot.title = element_text(size=14, face="bold"),
+        axis.title.y = element_text(color = "red", size=10),
+        axis.title.y.right = element_text(color = "blue", size=10)
+  )
 
-df3_2$Group1<-c(0,10,100,15,20,25,30,35,40,45,5,50,55,60,65,70,75,80,85,90,95)
-df3_2 <-df3_2[order(df3_2$Group1),]
-
-par(mar=c(5, 4, 4, 6) + 0.1)
-plot(df3_2$Group1, df3_2$avtes, pch=16, axes=FALSE, ylim=c(0,200), xlab="", ylab="", 
-     type="b",col="black")
-axis(2, ylim=c(0,200),col="black",las=1)
-mtext("TEs insertions per diploid individual",side=2,line=2.5)
-box()
-par(new=TRUE)
-plot(df3_2$Group1, df3_2$avcli, pch=15,  xlab="", ylab="", ylim=c(0,6), 
-     axes=FALSE, type="b", col="red")
-mtext("average cluster insertions",side=4,col="red",line=4) 
-axis(4, ylim=c(0,6), col="red",col.axis="red",las=1)
-axis(1,pretty(range(df3_2$Group1),10))
-mtext("percent paramutable loci",side=1,col="black",line=2.5)  
-legend("topright",legend=c("average TEs insertions","average cluster insertions"),
-       text.col=c("black","red"),pch=c(16,15),col=c("black","red"))
+plot(g3)
 ```
 
-![](2022_08_09_Simulation_1_Paramutations_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](2022_08_09_Simulation_1_Paramutations_files/figure-gfm/unnamed-chunk-3-3.png)<!-- -->
+
+``` r
+g_3_2 <- ggplot(df3_2, aes(x=sampleid, y=cv_tes_percent))+
+  geom_point()+
+  geom_smooth(method='lm', formula= y~x, se = FALSE)+
+  stat_regline_equation(label.y = 0.18, aes(label = ..eq.label..))+
+  stat_regline_equation(label.y = 0.16, aes(label = ..rr.label..))+
+  xlab("Percent of paramutable loci")+
+  ylab("Coefficient of variation TEs insertions per individual")+
+  scale_y_continuous(labels = scales::percent, limits = c(0, 0.4))+
+  ggtitle("Effects of paramutations on the cv of TE insertions per individual")+
+  theme(legend.position="none",
+        plot.title = element_text(size=14, face="bold"))
+
+plot(g_3_2)
+```
+
+![](2022_08_09_Simulation_1_Paramutations_files/figure-gfm/unnamed-chunk-3-4.png)<!-- -->
+
+``` r
+g_3_3 <- ggplot(df3_2, aes(x=sampleid, y=cv_cli_percent))+
+  geom_point()+
+  geom_smooth(method='lm', formula= y~x, se = FALSE)+
+  stat_regline_equation(label.y = 2.8, aes(label = ..eq.label..))+
+  stat_regline_equation(label.y = 2.6, aes(label = ..rr.label..))+
+  xlab("Percent of paramutable loci")+
+  ylab("Coefficient of variation TEs insertions per individual")+
+  scale_y_continuous(labels = scales::percent)+
+  ggtitle("Effects of paramutations on the cv of cluster insertions")+
+  theme(legend.position="none",
+        plot.title = element_text(size=14, face="bold"))
+
+plot(g_3_3)
+```
+
+![](2022_08_09_Simulation_1_Paramutations_files/figure-gfm/unnamed-chunk-3-5.png)<!-- -->
+
+The high
+![R^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;R%5E2 "R^2")
+obtained from the linear regression of the cv of cluster insertions on
+the paramutable loci size shows a relation between the two. This make
+sense in our model since the increase of paramutable loci increase the
+number of scenarios in which cluster insertions and paramutations
+contribute to stop the TEs invasion. This is not the case for TEs, they
+dicrease with the increase of paramutable loci, but their coefficient of
+variation is not affected.
 
 ## Conclusions
 
