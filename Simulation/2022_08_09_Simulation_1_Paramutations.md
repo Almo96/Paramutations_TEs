@@ -185,7 +185,7 @@ g_3_3 <- ggplot(df3_2, aes(x=sampleid/100, y=cv_cli_percent))+
   stat_regline_equation(label.y = 2.8, aes(label = ..eq.label..))+
   stat_regline_equation(label.y = 2.6, aes(label = ..rr.label..))+
   xlab("Paramutable loci")+
-  ylab("Coefficient of variation TEs insertions per individual")+
+  ylab("Coefficient of variation cluster insertions per individual")+
   scale_x_continuous(labels = scales::percent)+
   scale_y_continuous(labels = scales::percent)+
   ggtitle("Effects of paramutations on the cv of cluster insertions")+
