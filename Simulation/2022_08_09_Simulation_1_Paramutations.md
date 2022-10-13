@@ -77,6 +77,7 @@ g<-ggplot()+
   xlab("generation")+
   ylab("TEs insertions per diploid individual")+
   theme(legend.position="none")+
+  theme_bw()+
   scale_colour_manual(values=p)+
   ylim(0,500)+
   facet_wrap(~sampleid, labeller = labeller(sampleid = 
@@ -102,6 +103,7 @@ g2 <- ggplot(df2, aes(x=as.character(gen), y=percentcli)) +
       ylab("Percentage of individuals with a cluster insertion")+
       xlab("generation")+
       theme(legend.position = "none")+
+      theme_bw()+
       facet_wrap(~sampleid, labeller = labeller(sampleid = 
                                               c("p0" = "Paramutable loci = 0% (Trap model)",
                                                 "p1" = "Paramutable loci = 1%",
@@ -152,7 +154,8 @@ g3 <- ggplot(df3_2, aes(x=sampleid/100))+
         plot.title = element_text(size=14, face="bold"),
         axis.title.y = element_text(color = "red", size=10),
         axis.title.y.right = element_text(color = "blue", size=10)
-  )
+  )+
+  theme_bw()
 
 plot(g3)
 ```
@@ -171,7 +174,8 @@ g_3_2 <- ggplot(df3_2, aes(x=sampleid/100, y=cv_tes_percent))+
   scale_y_continuous(labels = scales::percent, limits = c(0, 0.4))+
   ggtitle("Effects of paramutations on the cv of TE insertions per individual")+
   theme(legend.position="none",
-        plot.title = element_text(size=14, face="bold"))
+        plot.title = element_text(size=14, face="bold"))+
+  theme_bw()
 
 plot(g_3_2)
 ```
@@ -190,7 +194,8 @@ g_3_3 <- ggplot(df3_2, aes(x=sampleid/100, y=cv_cli_percent))+
   scale_y_continuous(labels = scales::percent)+
   ggtitle("Effects of paramutations on the cv of cluster insertions")+
   theme(legend.position="none",
-        plot.title = element_text(size=14, face="bold"))
+        plot.title = element_text(size=14, face="bold"))+
+  theme_bw()
 
 plot(g_3_3)
 ```

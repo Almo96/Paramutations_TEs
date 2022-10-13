@@ -52,6 +52,7 @@ Setting the environment
 library(tidyverse)
 library(ggplot2)
 library(patchwork)
+theme_set(theme_bw())
 ```
 
 Visualization:
@@ -106,6 +107,7 @@ g <- ggplot(df_cli, aes(x=phase, y=av_fwcli, fill = phase)) +
   geom_errorbar( aes(x=phase, ymin=av_fwcli-sd_fwcli, ymax=av_fwcli+sd_fwcli), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("Fraction of individuals with a cluster insertion")+
   xlab("Phase")+
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
   scale_fill_manual(values = c("yellow", "red"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
@@ -125,6 +127,7 @@ g_2 <- ggplot(df_cli, aes(x=phase, y=av_cli, fill = phase)) +
   geom_errorbar( aes(x=phase, ymin=av_cli-sd_cli, ymax=av_cli+sd_cli), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("Number of cluster insertions per individual")+
   xlab("Phase")+
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
   scale_fill_manual(values = c("yellow", "red"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
@@ -146,7 +149,6 @@ g_2_2 <- ggplot(df_cli, aes(x=sampleid, y=cv_cli_percent))+
   scale_y_continuous(labels = scales::percent)+
   scale_x_discrete(labels = c("0% (Trap model)", "1%", "10%", "100%"))
 
-
 plot(g_2_2)
 ```
 
@@ -158,6 +160,7 @@ g_3 <- ggplot(df_cli, aes(x=phase, y=av_tes, fill = phase)) +
   geom_errorbar( aes(x=phase, ymin=av_tes-sd_tes, ymax=av_tes+sd_tes), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("Number of TEs insertions per individual")+
   xlab("Phase")+
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
   scale_fill_manual(values = c("yellow", "red"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
@@ -176,7 +179,7 @@ g_3_2 <- ggplot(df_cli, aes(x=sampleid, y=cv_tes_percent))+
   geom_point(aes(colour = phase))+
   xlab("Percent of paramutable loci")+
   ylab("Coefficient of variation TEs insertions per individual")+
-  scale_y_continuous(labels = scales::percent, limits = c(0, 0.4))+
+  scale_y_continuous(labels = scales::percent, limits = c(0, 0.4), expand = c(0, 0))+
   scale_x_discrete(labels = c("0% (Trap model)", "1%", "10%", "100%"))
 
 plot(g_3_2)

@@ -22,6 +22,7 @@ Setting the environment
 ``` r
 library(tidyverse)
 library(ggplot2)
+theme_set(theme_bw())
 ```
 
 Visualization:

@@ -73,7 +73,8 @@ df$sampleid <- factor(df$sampleid, levels=c("p30_0.1", "p30_1", "p30_10","p30_10
 
 g<-ggplot()+
   geom_line(data=df,aes(x=gen,y=avtes,group=rep,color=phase),alpha=1,size=0.7)+
-  ylab("insertions per diploid individual")+xlab("generations")+
+  xlab("generations")+
+  ylab("insertions per diploid individual")+
   theme(legend.position="none")+
   scale_colour_manual(values=p)+
   ylim(0,500)+

@@ -71,14 +71,17 @@ library(tidyverse)
 library(ggplot2)
 library(patchwork)
 library(dplyr)
+theme_set(theme_bw())
 ```
 
 Visualization:
 
 ``` r
+setwd("/Users/ascarpa/Paramutations_TEs/Simulation/Raw")
+
 p<-c("grey","#1a9850","#ffd700","#d73027")
 
-df<-read.table("Raw/2022_08_29_Simulation_3_Clusters", fill = TRUE, sep = "\t")
+df<-read.table("2022_08_29_Simulation_3_Clusters", fill = TRUE, sep = "\t")
 names(df)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed",
              "spacer_2", "phase", "fwpirna", "spacer_3", "fwcli", "avcli", "fixcli", "spacer_4", "fwpar_yespi",
              "fwpar_nopi", "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid", "extra")
@@ -93,6 +96,7 @@ g<-ggplot()+
   geom_line(data=df,aes(x=gen,y=avtes,group=rep,color=phase),alpha=1,size=0.7)+
   ylab("TEs insertions per diploid individual")+xlab("generation")+
   theme(legend.position="none")+
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
   scale_colour_manual(values=p)+
   facet_wrap(~sampleid, ncol=4)
 
@@ -112,6 +116,7 @@ g2<-ggplot()+
   geom_line(data=df,aes(x=gen,y=avcli,group=rep,color=phase),alpha=1,size=0.7)+
   ylab("cluster insertions per diploid individual")+xlab("generation")+
   theme(legend.position="none")+
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
   scale_colour_manual(values=p)+
   facet_wrap(~sampleid, ncol=4)
 
@@ -157,6 +162,7 @@ g2_2 <- ggplot(e, aes(x=phase, y=mean_avcli, fill = phase)) +
   geom_errorbar( aes(x=phase, ymin=mean_avcli-sd_avcli, ymax=mean_avcli+sd_avcli), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("cluster insertions per diploid individual")+
   xlab("phase")+
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
   scale_fill_manual(values = c("yellow", "red"))+
   facet_wrap(~sampleid, ncol=4)
 
@@ -183,6 +189,7 @@ g3<-ggplot()+
   geom_line(data=dfonlypara,aes(x=gen,y=avpar,group=rep,color=phase),alpha=1,size=0.7)+
   ylab("paramutable site insertions per diploid individual")+xlab("generation")+
   theme(legend.position="none")+
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
   scale_colour_manual(values=p)+
   facet_wrap(~sampleid, ncol=4)
 
@@ -202,8 +209,9 @@ e_2 <-subset(e_2, phase!="trig" & phase!="rapi")
 g3_2 <- ggplot(e_2, aes(x=phase, y=mean_avpar, fill = phase)) + 
   geom_bar(stat = "identity") +
   geom_errorbar( aes(x=phase, ymin=mean_avpar-sd_avpar, ymax=mean_avpar+sd_avpar), width=0.2, colour="black", alpha=0.9, size=0.8)+
-  ylab("paramutable insertions per diploid individual")+
+  ylab("paramutations per diploid individual")+
   xlab("phase")+
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
   scale_fill_manual(values = c("yellow", "red"))+
   facet_wrap(~sampleid, ncol=4)
 
@@ -236,6 +244,7 @@ g2_3 <- ggplot(e, aes(x=tag, y=mean_avcli, fill = phase))+
   geom_errorbar( aes(x=tag, ymin=mean_avcli-sd_avcli, ymax=mean_avcli+sd_avcli), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("cluster insertions per diploid individual")+
   xlab("phase")+
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
   scale_fill_manual(values = c("yellow", "red"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~clusters, ncol=4)
@@ -261,6 +270,7 @@ g3_3 <- ggplot(e_3, aes(x=tag, y=mean_avpar, fill = phase))+
   geom_errorbar( aes(x=tag, ymin=mean_avpar-sd_avpar, ymax=mean_avpar+sd_avpar), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("paramutations per diploid individual")+
   xlab("phase")+
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
   scale_fill_manual(values = c("yellow", "red"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~clusters, ncol=4)
