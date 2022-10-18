@@ -98,16 +98,35 @@ while (x<nrow(df1)) {
 
 #Summary statistics
 df2<-select (df2,-c(28))
-df_cli<-df2 %>% 
-  group_by(sampleid, phase) %>%
-  summarize(av_fwcli = mean(fwcli), sd_fwcli = sd(fwcli), av_cli = mean(avcli), sd_cli = sd(avcli), cv_cli_percent = sd(avcli)/mean(avcli), av_tes = mean(avtes), sd_tes = sd(avtes), cv_tes_percent = sd(avtes)/mean(avtes))
 
-g <- ggplot(df_cli, aes(x=phase, y=av_fwcli, fill = phase)) + 
+df_count <- df2 %>%
+  count(sampleid, phase)
+
+df_summary <- df2 %>% 
+  group_by(sampleid, phase) %>%
+  summarize(av_fwcli = mean(fwcli), sd_fwcli = sd(fwcli),
+            av_cli = mean(avcli), sd_cli = sd(avcli), cv_cli_percent = sd(avcli)/mean(avcli),
+            av_tes = mean(avtes), sd_tes = sd(avtes), cv_tes_percent = sd(avtes)/mean(avtes),
+            av_par = mean(avpar), sd_par = sd(avpar),
+            av_fwpar_yespi = mean(fwpar_yespi), sd_fwpar_yespi = sd(fwpar_yespi))
+
+df_summary <- cbind(df_count$n, df_summary)
+colnames(df_summary)[1] ="n"
+
+#CI 95%: z* sd/sqrt(population)
+df_summary$ci_fwcli <- qt(0.975,df=df_summary$n-1)*(df_summary$sd_fwcli/sqrt(df_summary$n))
+df_summary$ci_cli <- qt(0.975,df=df_summary$n-1)*(df_summary$sd_cli/sqrt(df_summary$n))
+df_summary$ci_tes <- qt(0.975,df=df_summary$n-1)*(df_summary$sd_tes/sqrt(df_summary$n))
+df_summary$ci_par <- qt(0.975,df=df_summary$n-1)*(df_summary$sd_par/sqrt(df_summary$n))
+df_summary$ci_fwpar_yespi <- qt(0.975,df=df_summary$n-1)*(df_summary$sd_fwpar_yespi/sqrt(df_summary$n))
+
+
+g <- ggplot(df_summary, aes(x=phase, y=av_fwcli, fill = phase)) + 
   geom_bar(stat = "identity") +
-  geom_errorbar( aes(x=phase, ymin=av_fwcli-sd_fwcli, ymax=av_fwcli+sd_fwcli), width=0.2, colour="black", alpha=0.9, size=0.8)+
+  geom_errorbar( aes(x=phase, ymin=av_fwcli-ci_fwcli, ymax=av_fwcli+ci_fwcli), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("Fraction of individuals with a cluster insertion")+
   xlab("Phase")+
-  scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
+  scale_y_continuous(labels = scales::percent, expand = c(0, 0))+
   scale_fill_manual(values = c("yellow", "red"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
@@ -122,12 +141,12 @@ plot(g)
 ![](2022_08_24_Simulation_1_2_Phases_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 ``` r
-g_2 <- ggplot(df_cli, aes(x=phase, y=av_cli, fill = phase)) + 
+g_2 <- ggplot(df_summary, aes(x=phase, y=av_cli, fill = phase)) + 
   geom_bar(stat = "identity") +
-  geom_errorbar( aes(x=phase, ymin=av_cli-sd_cli, ymax=av_cli+sd_cli), width=0.2, colour="black", alpha=0.9, size=0.8)+
+  geom_errorbar( aes(x=phase, ymin=av_cli-ci_cli, ymax=av_cli+ci_cli), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("Number of cluster insertions per individual")+
   xlab("Phase")+
-  scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
+  scale_y_continuous(expand = c(0, 0))+
   scale_fill_manual(values = c("yellow", "red"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
@@ -142,7 +161,7 @@ plot(g_2)
 ![](2022_08_24_Simulation_1_2_Phases_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
 
 ``` r
-g_2_2 <- ggplot(df_cli, aes(x=sampleid, y=cv_cli_percent))+
+g_2_2 <- ggplot(df_summary, aes(x=sampleid, y=cv_cli_percent))+
   geom_point(aes(colour = phase))+
   xlab("Percent of paramutable loci")+
   ylab("Coefficient of variation cluster insertions per individual")+
@@ -155,12 +174,12 @@ plot(g_2_2)
 ![](2022_08_24_Simulation_1_2_Phases_files/figure-gfm/unnamed-chunk-3-3.png)<!-- -->
 
 ``` r
-g_3 <- ggplot(df_cli, aes(x=phase, y=av_tes, fill = phase)) + 
+g_3 <- ggplot(df_summary, aes(x=phase, y=av_tes, fill = phase)) + 
   geom_bar(stat = "identity") +
-  geom_errorbar( aes(x=phase, ymin=av_tes-sd_tes, ymax=av_tes+sd_tes), width=0.2, colour="black", alpha=0.9, size=0.8)+
+  geom_errorbar( aes(x=phase, ymin=av_tes-ci_tes, ymax=av_tes+ci_tes), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("Number of TEs insertions per individual")+
   xlab("Phase")+
-  scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
+  scale_y_continuous(expand = expansion(mult = c(0, 0.01)))+
   scale_fill_manual(values = c("yellow", "red"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
@@ -175,7 +194,7 @@ plot(g_3)
 ![](2022_08_24_Simulation_1_2_Phases_files/figure-gfm/unnamed-chunk-3-4.png)<!-- -->
 
 ``` r
-g_3_2 <- ggplot(df_cli, aes(x=sampleid, y=cv_tes_percent))+
+g_3_2 <- ggplot(df_summary, aes(x=sampleid, y=cv_tes_percent))+
   geom_point(aes(colour = phase))+
   xlab("Percent of paramutable loci")+
   ylab("Coefficient of variation TEs insertions per individual")+
@@ -186,6 +205,46 @@ plot(g_3_2)
 ```
 
 ![](2022_08_24_Simulation_1_2_Phases_files/figure-gfm/unnamed-chunk-3-5.png)<!-- -->
+
+``` r
+g_4 <- ggplot(df_summary, aes(x=phase, y=av_par, fill = phase)) + 
+  geom_bar(stat = "identity") +
+  geom_errorbar( aes(x=phase, ymin=av_par-ci_par, ymax=av_par+ci_par), width=0.2, colour="black", alpha=0.9, size=0.8)+
+  ylab("Number of TE insertions in paramutable loci")+
+  xlab("Phase")+
+  scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
+  scale_fill_manual(values = c("yellow", "red"))+
+  theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
+                                                      c("p0" = "Paramutable loci = 0%",
+                                                        "p1" = "Paramutable loci = 1%",
+                                                        "p10" = "Paramutable loci = 10%",
+                                                        "p100" = "Paramutable loci = 100%")))
+
+plot(g_4)
+```
+
+![](2022_08_24_Simulation_1_2_Phases_files/figure-gfm/unnamed-chunk-3-6.png)<!-- -->
+
+``` r
+g_5 <- ggplot(df_summary, aes(x=phase, y=av_fwpar_yespi, fill = phase)) + 
+  geom_bar(stat = "identity") +
+  geom_errorbar( aes(x=phase, ymin=av_fwpar_yespi-ci_fwpar_yespi, ymax=av_fwpar_yespi+ci_fwpar_yespi), width=0.2, colour="black", alpha=0.9, size=0.8)+
+  ylab("Fraction of individuals with an insertion in a paramutable site")+
+  xlab("Phase")+
+  scale_y_continuous(labels = scales::percent, expand = c(0, 0))+
+  scale_fill_manual(values = c("yellow", "red"))+
+  theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
+                                                      c("p0" = "Paramutable loci = 0% (Trap model)",
+                                                        "p1" = "Paramutable loci = 1%",
+                                                        "p10" = "Paramutable loci = 10%",
+                                                        "p100" = "Paramutable loci = 100%")))
+
+plot(g_5)
+```
+
+![](2022_08_24_Simulation_1_2_Phases_files/figure-gfm/unnamed-chunk-3-7.png)<!-- -->
 
 ## Conclusions
 
