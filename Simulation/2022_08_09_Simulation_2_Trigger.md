@@ -15,9 +15,9 @@ paramutable loci and an initial number of TEs in the population equal to
 
 We used 300 replicates for each simulation.
 
-## Materials & Methods
+## Materials & Methods:
 
-Test version: invadego0.2.1
+version: invadego0.2.1
 
 -   seed p30_0: 1660131023489346000
 
