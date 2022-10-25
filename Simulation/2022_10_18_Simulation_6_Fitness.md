@@ -211,12 +211,7 @@ plot(g_B_0.03_noxclu)
 df_summary <- df_0.03_noxclu %>% 
   group_by(sampleid, rep) %>%
   summarize(min_fitness = min(avw))
-```
 
-    ## `summarise()` has grouped output by 'sampleid'. You can override using the
-    ## `.groups` argument.
-
-``` r
 df_summary$sampleid[df_summary$sampleid == "p0_x0.03"] <- "0% (Trap model)"
 df_summary$sampleid[df_summary$sampleid == "p1_x0.03"] <- "1%"
 df_summary$sampleid[df_summary$sampleid == "p10_x0.03"] <- "10%"
