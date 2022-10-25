@@ -17,7 +17,7 @@ We used 300 replicates for each simulation.
 
 ## Materials & Methods
 
-version: invadego0.2.1
+Test version: invadego0.2.1
 
 -   seed p30_0: 1660131023489346000
 
