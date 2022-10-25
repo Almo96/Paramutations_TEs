@@ -63,7 +63,7 @@ g_A_0.02 <- ggplot(df_0.02,aes(x = gen, y = avtes))+
   xlab("generation")+
   ylab("TEs insertions per diploid individual")+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid =
-                                            c("p0_x0.02" = "Paramutable loci = 0% (Trap model)",
+                                            c("p0_x0.02" = "Paramutable loci = 0%",
                                               "p1_x0.02" = "Paramutable loci = 1%",
                                               "p10_x0.02" = "Paramutable loci = 10%",
                                               "p100_x0.02" = "Paramutable loci = 100%")))
@@ -78,7 +78,7 @@ g_B_0.02 <- ggplot(df_0.02,aes(x = gen, y = avw))+
   xlab("generation")+
   ylab("Fitness")+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid =
-                                            c("p0_x0.02" = "Paramutable loci = 0% (Trap model)",
+                                            c("p0_x0.02" = "Paramutable loci = 0%",
                                               "p1_x0.02" = "Paramutable loci = 1%",
                                               "p10_x0.02" = "Paramutable loci = 10%",
                                               "p100_x0.02" = "Paramutable loci = 100%")))
@@ -93,7 +93,7 @@ g_A_0.03 <- ggplot(df_0.03,aes(x = gen, y = avtes))+
   xlab("generation")+
   ylab("TEs insertions per diploid individual")+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid =
-                                              c("p0_x0.03" = "Paramutable loci = 0% (Trap model)",
+                                              c("p0_x0.03" = "Paramutable loci = 0%",
                                                 "p1_x0.03" = "Paramutable loci = 1%",
                                                 "p10_x0.03" = "Paramutable loci = 10%",
                                                 "p100_x0.03" = "Paramutable loci = 100%")))
@@ -108,7 +108,7 @@ g_B_0.03 <- ggplot(df_0.03,aes(x = gen, y = avw))+
   xlab("generation")+
   ylab("Fitness")+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid =
-                                              c("p0_x0.03" = "Paramutable loci = 0% (Trap model)",
+                                              c("p0_x0.03" = "Paramutable loci = 0%",
                                                 "p1_x0.03" = "Paramutable loci = 1%",
                                                 "p10_x0.03" = "Paramutable loci = 10%",
                                                 "p100_x0.03" = "Paramutable loci = 100%")))
@@ -123,7 +123,7 @@ g_A_0.05 <- ggplot(df_0.05,aes(x = gen, y = avtes))+
   xlab("generation")+
   ylab("TEs insertions per diploid individual")+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid =
-                                              c("p0_x0.05" = "Paramutable loci = 0% (Trap model)",
+                                              c("p0_x0.05" = "Paramutable loci = 0%",
                                                 "p1_x0.05" = "Paramutable loci = 1%",
                                                 "p10_x0.05" = "Paramutable loci = 10%",
                                                 "p100_x0.05" = "Paramutable loci = 100%")))
@@ -138,7 +138,7 @@ g_B_0.05 <- ggplot(df_0.05,aes(x = gen, y = avw))+
   xlab("generation")+
   ylab("Fitness")+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid =
-                                              c("p0_x0.05" = "Paramutable loci = 0% (Trap model)",
+                                              c("p0_x0.05" = "Paramutable loci = 0%",
                                                 "p1_x0.05" = "Paramutable loci = 1%",
                                                 "p10_x0.05" = "Paramutable loci = 10%",
                                                 "p100_x0.05" = "Paramutable loci = 100%")))
@@ -153,7 +153,7 @@ g_A_0.02_noxclu <- ggplot(df_0.02_noxclu,aes(x = gen, y = avtes))+
   xlab("generation")+
   ylab("TEs insertions per diploid individual")+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid =
-                                              c("p0_x0.02" = "Paramutable loci = 0% (Trap model)",
+                                              c("p0_x0.02" = "Paramutable loci = 0%",
                                                 "p1_x0.02" = "Paramutable loci = 1%",
                                                 "p10_x0.02" = "Paramutable loci = 10%",
                                                 "p100_x0.02" = "Paramutable loci = 100%")))
@@ -168,7 +168,7 @@ g_B_0.02_noxclu <- ggplot(df_0.02_noxclu,aes(x = gen, y = avw))+
   xlab("generation")+
   ylab("Fitness")+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid =
-                                              c("p0_x0.02" = "Paramutable loci = 0% (Trap model)",
+                                              c("p0_x0.02" = "Paramutable loci = 0%",
                                                 "p1_x0.02" = "Paramutable loci = 1%",
                                                 "p10_x0.02" = "Paramutable loci = 10%",
                                                 "p100_x0.02" = "Paramutable loci = 100%")))
@@ -183,7 +183,7 @@ g_A_0.03_noxclu <- ggplot(df_0.03_noxclu,aes(x = gen, y = avtes))+
   xlab("generation")+
   ylab("TEs insertions per diploid individual")+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
-                                              c("p0_x0.03" = "Paramutable loci = 0% (Trap model)",
+                                              c("p0_x0.03" = "Paramutable loci = 0%",
                                                 "p1_x0.03" = "Paramutable loci = 1%",
                                                 "p10_x0.03" = "Paramutable loci = 10%",
                                                 "p100_x0.03" = "Paramutable loci = 100%")))
@@ -198,7 +198,7 @@ g_B_0.03_noxclu <- ggplot(df_0.03_noxclu,aes(x = gen, y = avw))+
   xlab("generation")+
   ylab("Fitness")+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid =
-                                              c("p0_x0.03" = "Paramutable loci = 0% (Trap model)",
+                                              c("p0_x0.03" = "Paramutable loci = 0%",
                                                 "p1_x0.03" = "Paramutable loci = 1%",
                                                 "p10_x0.03" = "Paramutable loci = 10%",
                                                 "p100_x0.03" = "Paramutable loci = 100%")))
@@ -233,7 +233,7 @@ g_A_0.05_noxclu <- ggplot(df_0.05_noxclu,aes(x = gen, y = avtes))+
   xlab("generation")+
   ylab("Fitness")+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid =
-                                              c("p0_x0.05" = "Paramutable loci = 0% (Trap model)",
+                                              c("p0_x0.05" = "Paramutable loci = 0%",
                                                 "p1_x0.05" = "Paramutable loci = 1%",
                                                 "p10_x0.05" = "Paramutable loci = 10%",
                                                 "p100_x0.05" = "Paramutable loci = 100%")))
@@ -248,7 +248,7 @@ g_B_0.05_noxclu <- ggplot(df_0.05_noxclu,aes(x = gen, y = avw))+
   xlab("generation")+
   ylab("Fitness")+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid =
-                                              c("p0_x0.05" = "Paramutable loci = 0% (Trap model)",
+                                              c("p0_x0.05" = "Paramutable loci = 0%",
                                                 "p1_x0.05" = "Paramutable loci = 1%",
                                                 "p10_x0.05" = "Paramutable loci = 10%",
                                                 "p100_x0.05" = "Paramutable loci = 100%")))
