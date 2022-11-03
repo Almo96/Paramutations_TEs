@@ -114,7 +114,7 @@ reduced thanks to the paramutable loci.
 ``` r
 g2<-ggplot()+
   geom_line(data=df,aes(x=gen,y=avcli,group=rep,color=phase),alpha=1,size=0.7)+
-  ylab("cluster insertions per diploid individual")+xlab("generation")+
+  ylab("Cluster insertions per diploid individual")+xlab("generation")+
   theme(legend.position="none")+
   scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
   scale_colour_manual(values=p)+
@@ -155,16 +155,26 @@ while (x<nrow(df1)+1) {
 
 e <- df2 %>% 
   group_by(sampleid, phase) %>% 
-  summarize(mean_avcli = mean(avcli), sd_avcli = sd(avcli))
+  summarize(mean_avcli = mean(avcli), sd_avcli = sd(avcli),
+            mean_fwpar_yespi = mean(fwpar_yespi))
 
 g2_2 <- ggplot(e, aes(x=phase, y=mean_avcli, fill = phase)) + 
   geom_bar(stat = "identity") +
   geom_errorbar( aes(x=phase, ymin=mean_avcli-sd_avcli, ymax=mean_avcli+sd_avcli), width=0.2, colour="black", alpha=0.9, size=0.8)+
-  ylab("cluster insertions per diploid individual")+
-  xlab("phase")+
+  ylab("Cluster insertions per diploid individual")+
+  xlab("Phase")+
+  theme(legend.position="none")+
   scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
   scale_fill_manual(values = c("yellow", "red"))+
-  facet_wrap(~sampleid, ncol=4)
+  facet_wrap(~sampleid, ncol=4,labeller = labeller(sampleid = 
+                                                    c("p1" = "clusters=1%",
+                                                      "p3" = "clusters=3%",
+                                                      "p10" = "clusters=10%",
+                                                      "p50" = "clusters=50%",
+                                                      "p1_10" = "clusters=1% para=10%",
+                                                      "p3_10" = "clusters=1% para=10%",
+                                                      "p10_10" = "clusters=1% para=10%",
+                                                      "p50_10" = "clusters=1% para=10%")))
 
 plot(g2_2)
 ```
@@ -187,7 +197,7 @@ dfonlypara <- df %>%
 
 g3<-ggplot()+
   geom_line(data=dfonlypara,aes(x=gen,y=avpar,group=rep,color=phase),alpha=1,size=0.7)+
-  ylab("paramutable site insertions per diploid individual")+xlab("generation")+
+  ylab("Paramutable site insertions per diploid individual")+xlab("generation")+
   theme(legend.position="none")+
   scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
   scale_colour_manual(values=p)+
@@ -209,11 +219,16 @@ e_2 <-subset(e_2, phase!="trig" & phase!="rapi")
 g3_2 <- ggplot(e_2, aes(x=phase, y=mean_avpar, fill = phase)) + 
   geom_bar(stat = "identity") +
   geom_errorbar( aes(x=phase, ymin=mean_avpar-sd_avpar, ymax=mean_avpar+sd_avpar), width=0.2, colour="black", alpha=0.9, size=0.8)+
-  ylab("paramutations per diploid individual")+
-  xlab("phase")+
+  ylab("Number of insertions in paramutable loci per diploid individual")+
+  xlab("Phase")+
+  theme(legend.position="none")+
   scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
   scale_fill_manual(values = c("yellow", "red"))+
-  facet_wrap(~sampleid, ncol=4)
+  facet_wrap(~sampleid, ncol=4,labeller = labeller(sampleid =
+                                                     c("p1_10" = "clusters=1% para=10%",
+                                                       "p3_10" = "clusters=1% para=10%",
+                                                       "p10_10" = "clusters=1% para=10%",
+                                                       "p50_10" = "clusters=1% para=10%")))
 
 plot(g3_2)
 ```
@@ -242,8 +257,8 @@ e$clusters <- factor(e$clusters,levels = c("1% piRNA clusters",
 g2_3 <- ggplot(e, aes(x=tag, y=mean_avcli, fill = phase))+ 
   geom_bar(stat = "identity")+
   geom_errorbar( aes(x=tag, ymin=mean_avcli-sd_avcli, ymax=mean_avcli+sd_avcli), width=0.2, colour="black", alpha=0.9, size=0.8)+
-  ylab("cluster insertions per diploid individual")+
-  xlab("phase")+
+  ylab("Cluster insertions per diploid individual")+
+  xlab("Phase")+
   scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
   scale_fill_manual(values = c("yellow", "red"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
@@ -268,8 +283,8 @@ e_3$clusters <- factor(e_3$clusters,levels = c("1% piRNA clusters",
 g3_3 <- ggplot(e_3, aes(x=tag, y=mean_avpar, fill = phase))+ 
   geom_bar(stat = "identity")+
   geom_errorbar( aes(x=tag, ymin=mean_avpar-sd_avpar, ymax=mean_avpar+sd_avpar), width=0.2, colour="black", alpha=0.9, size=0.8)+
-  ylab("paramutations per diploid individual")+
-  xlab("phase")+
+  ylab("Number of insertions in paramutable loci per diploid individual")+
+  xlab("Phase")+
   scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
   scale_fill_manual(values = c("yellow", "red"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
@@ -289,6 +304,9 @@ remain at 0 since there is no possibility of insertions.
 
 ## Conclusions
 
-Paramutations dramatically diminish the influence of piRNA clusters.
-
-The increase of piRNA clusters reduce the number of paramutations.
+Paramutations increase dramatically diminish the number of insertions in
+piRNA clusters.here is a sort of competition between paramutations and
+piRNA clusters, when a certain level of piRNAs is reached the invasion
+is stopped., wether they originate mostly from clusters or paramutated
+loci turned into piRNA producing loci.he increase of piRNA clusters size
+reduce the number of paramutations and vice versa.
