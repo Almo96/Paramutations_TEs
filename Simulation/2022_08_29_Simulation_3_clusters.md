@@ -172,9 +172,9 @@ g2_2 <- ggplot(e, aes(x=phase, y=mean_avcli, fill = phase)) +
                                                       "p10" = "clusters=10%",
                                                       "p50" = "clusters=50%",
                                                       "p1_10" = "clusters=1% para=10%",
-                                                      "p3_10" = "clusters=1% para=10%",
-                                                      "p10_10" = "clusters=1% para=10%",
-                                                      "p50_10" = "clusters=1% para=10%")))
+                                                      "p3_10" = "clusters=3% para=10%",
+                                                      "p10_10" = "clusters=10% para=10%",
+                                                      "p50_10" = "clusters=50% para=10%")))
 
 plot(g2_2)
 ```
@@ -226,9 +226,9 @@ g3_2 <- ggplot(e_2, aes(x=phase, y=mean_avpar, fill = phase)) +
   scale_fill_manual(values = c("yellow", "red"))+
   facet_wrap(~sampleid, ncol=4,labeller = labeller(sampleid =
                                                      c("p1_10" = "clusters=1% para=10%",
-                                                       "p3_10" = "clusters=1% para=10%",
-                                                       "p10_10" = "clusters=1% para=10%",
-                                                       "p50_10" = "clusters=1% para=10%")))
+                                                       "p3_10" = "clusters=3% para=10%",
+                                                       "p10_10" = "clusters=10% para=10%",
+                                                       "p50_10" = "clusters=50% para=10%")))
 
 plot(g3_2)
 ```

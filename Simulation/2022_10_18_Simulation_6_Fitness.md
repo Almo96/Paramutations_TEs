@@ -1,4 +1,4 @@
-2022_10_18_Simulation_5\_Fitness
+2022_10_18_Simulation_6\_Fitness
 ================
 Almo
 2022-10-18
@@ -194,14 +194,15 @@ plot(g_A_0.03_noxclu)
 
 ``` r
 g_B_0.03_noxclu <- ggplot(df_0.03_noxclu,aes(x = gen, y = avw))+
-  geom_line(alpha=0.1)+
+  geom_line(alpha=0.12)+
+  xlim(0,2500)+
   xlab("generation")+
   ylab("Fitness")+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid =
-                                              c("p0_x0.03" = "Paramutable loci = 0%",
-                                                "p1_x0.03" = "Paramutable loci = 1%",
-                                                "p10_x0.03" = "Paramutable loci = 10%",
-                                                "p100_x0.03" = "Paramutable loci = 100%")))
+                                                      c("p0_x0.03" = "Paramutable loci = 0%",
+                                                        "p1_x0.03" = "Paramutable loci = 1%",
+                                                        "p10_x0.03" = "Paramutable loci = 10%",
+                                                        "p100_x0.03" = "Paramutable loci = 100%")))
 plot(g_B_0.03_noxclu)
 ```
 
@@ -217,7 +218,7 @@ df_summary$sampleid[df_summary$sampleid == "p1_x0.03"] <- "1%"
 df_summary$sampleid[df_summary$sampleid == "p10_x0.03"] <- "10%"
 df_summary$sampleid[df_summary$sampleid == "p100_x0.03"] <- "100%"
 
-boxplot(df_summary$min_fitness ~ df_summary$sampleid, xlab="Paramutable loci", ylab = "Minimum fitness")
+boxplot(1-(df_summary$min_fitness) ~ df_summary$sampleid, xlab="Paramutable loci", ylab = "Fitness cost")
 ```
 
 ![](2022_10_18_Simulation_6_Fitness_files/figure-gfm/unnamed-chunk-3-11.png)<!-- -->

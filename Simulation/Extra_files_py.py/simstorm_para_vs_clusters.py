@@ -5,9 +5,8 @@ import time
 def current_milli_time():
     return round(time.time() * 1000)
 
-#--max-ins 10000
 def get_basis(invade):
-    return " {0} -no-x-cluins --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --x 0.01 --rr 4,4,4,4,4 --rep 1 --u 0.1 --basepop 100 --steps 5000 --silent".format(invade)
+    return " {0} -no-x-cluins --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --x 0.01 --rr 4,4,4,4,4 --rep 1 --u 0.2 --basepop 100 --steps 5000 --silent".format(invade)
 
 def get_filter():
     return """|grep -v "^Invade"|grep -v "^#" """
@@ -22,7 +21,7 @@ def get_rand_para():
     return f"1000:{a}"
 
 def get_rand_clusters():
-    r=random.randint(1,250)
+    r=random.randint(1,100)
     return f"{r},{r},{r},{r},{r}"
 
 
