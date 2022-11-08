@@ -1,10 +1,12 @@
 import argparse
 import random
 import time
+import math
 
 def current_milli_time():
     return round(time.time() * 1000)
 
+#--max-ins 10000
 def get_basis(invade):
     return " {0} -no-x-cluins --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --x 0.01 --rr 4,4,4,4,4 --rep 1 --u 0.2 --basepop 100 --steps 5000 --silent".format(invade)
 
@@ -12,16 +14,16 @@ def get_filter():
     return """|grep -v "^Invade"|grep -v "^#" """
 
 def get_rand_para():
-    r=random.randint(1,999)
+    r=random.randint(1,500)
     a=""
     for x in range(0,r):
         a+=f"{x},"
     a=a[:-1]
     a = a + " "
-    return f"1000:{a}"
+    return f"500:{a}"
 
 def get_rand_clusters():
-    r=random.randint(1,100)
+    r=math.floor(10**random.uniform(3.69899,5.69899))
     return f"{r},{r},{r},{r},{r}"
 
 
@@ -36,7 +38,7 @@ def run_cluster_negsel(invade,count,output):
         u=get_rand_para()
         tr=current_milli_time()+i
         #command=basis+" --x {0} --paramutation {1} --replicate-offset {2} --file-tally tally{2}.txt --file-sfs sfs{2}.txt --file-mhp mhp{2}.txt --seed {3} ".format(x,u,i,tr)
-        command=basis+" --cluster kb:{0} --paramutation {1} --replicate-offset {2} --seed {3} ".format(x,u,i,tr)
+        command=basis+" --cluster bp:{0} --paramutation {1} --replicate-offset {2} --seed {3} ".format(x,u,i,tr)
         #ri=random.random()
         arr = u.split(',')
         lastWord_para = arr[- 1]
@@ -59,8 +61,7 @@ Prerequisites
 Authors
 -------
     Robert Kofler
-    Filip Wierzbicki
-    Almorò Scarpa
+    Filip Wierzbicki 
 """)
 
 

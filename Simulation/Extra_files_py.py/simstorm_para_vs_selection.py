@@ -5,6 +5,7 @@ import time
 def current_milli_time():
     return round(time.time() * 1000)
 
+#--max-ins 10000
 def get_basis(invade):
     return " {0} -no-x-cluins --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:100,100,100,100,100 --rr 4,4,4,4,4 --rep 1 --u 0.2 --basepop 100 --steps 5000 --silent".format(invade)
 
@@ -12,20 +13,13 @@ def get_filter():
     return """|grep -v "^Invade"|grep -v "^#" """
 
 def get_rand_para():
-    r=random.randint(1,999)
+    r=random.randint(1,499)
     a=""
     for x in range(0,r):
         a+=f"{x},"
     a=a[:-1]
     a = a + " "
-    return f"1000:{a}"
-
-def get_rand_x():
-    # from 0.0001 to 0.5 uniformly log distributed
-    return 10**random.uniform(-0.301029995664,-4)
-
-    # from 0.005 to 0.5 uniformly log distributed
-    #return random.uniform(0.5,0.005)
+    return f"500:{a}"
 
 def get_rand_x():
     # from 0.0001 to 0.5 uniformly log distributed
@@ -67,8 +61,7 @@ Prerequisites
 Authors
 -------
     Robert Kofler
-    Filip Wierzbicki
-    Almorò Scarpa
+    Filip Wierzbicki 
 """)
 
 
