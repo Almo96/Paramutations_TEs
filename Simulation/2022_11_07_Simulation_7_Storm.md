@@ -100,9 +100,8 @@ df_2[df_2$popstat=="fail-0",]$col<-"grey"
 df_2$col<-as.factor(df_2$col)
 
 
-g_para_selection<-ggplot(df,aes(x=sampleid_para/1000,y=sampleid_x,color=col))+scale_color_manual(values=levels(df$col))+
+g_para_selection<-ggplot(df,aes(x=sampleid_para/10,y=sampleid_x,color=col))+scale_color_manual(values=levels(df$col))+
   geom_point(alpha=0.7,size=0.8)+scale_y_log10()+
-  scale_x_continuous(labels = scales::percent)+
   ylab("Negative selection coefficient")+
   xlab("Size of paramutable loci as [%]")+
   geom_hline(aes(yintercept=0.001), linetype = "dashed", size=1)+
@@ -114,10 +113,8 @@ plot(g_para_selection)
 ![](2022_11_07_Simulation_7_Storm_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ``` r
-g_para_cluster<-ggplot(df_2,aes(x=sampleid_para/1000,y=sampleid_clu/100000,color=col))+scale_color_manual(values=levels(df_2$col))+
+g_para_cluster<-ggplot(df_2,aes(x=sampleid_para/10,y=sampleid_clu/100000,color=col))+scale_color_manual(values=levels(df_2$col))+
   geom_point(alpha=0.7,size=0.8)+scale_y_log10()+
-  geom_curve(aes(x = 0, y = 1.6, xend = 0.5, yend = 0.30), data = df_2, angle = 90, curvature = 0.2, color="#4B5320", alpha=0.5)+
-  scale_x_continuous(labels = scales::percent)+
   ylab("Size of piRNA clusters as [%]")+
   xlab("Size of paramutable loci as [%]")+
   theme(legend.position = "none",panel.background = element_rect(fill="grey90"))
