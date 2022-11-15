@@ -89,8 +89,7 @@ names(df)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes
 df$phase <- factor(df$phase, levels=c("rapi", "trig", "shot", "inac"))
 df$sampleid <- factor(df$sampleid, levels=c("p1", "p3", "p10","p50", "p1_10", "p3_10", "p10_10","p50_10"))
 
-df <- df %>% 
-  select(-c("extra"))
+df <- df[-c(ncol(df))]
 
 g<-ggplot()+
   geom_line(data=df,aes(x=gen,y=avtes,group=rep,color=phase),alpha=1,size=0.7)+
@@ -189,9 +188,6 @@ be less cluster insertions
 
 ``` r
 dfonlypara <- df %>%
-  select(rep, gen, popstat, fmale, fwte, avw, avtes, avpopfreq, fixed, 
-         phase, fwpirna, fwcli, avcli, fixcli, fwpar_yespi,
-         fwpar_nopi, avpar,fixpar, piori, orifreq, sampleid) %>%
   filter(sampleid == "p1_10" | sampleid == "p3_10" | sampleid == "p10_10" | sampleid == "p50_10")
 
 
