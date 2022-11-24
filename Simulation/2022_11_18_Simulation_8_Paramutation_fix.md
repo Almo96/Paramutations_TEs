@@ -33,6 +33,12 @@ version: invadego0.23
 
 -   seed 8_6: 1669049996301417348
 
+-   seed 8_7: 1669211281819967942
+
+-   seed 8_8: 1669230616799732492
+
+-   seed 8_9: 1669246284970453259
+
 ### Commands for the simulation:
 
 ``` bash
@@ -53,6 +59,12 @@ $tool --N 1000 --basepop $folder/2022_11_18_input_08 --cluster kb:0 --u 0.1 -x 0
 $tool --N 1000 --basepop $folder/2022_11_18_input_08 --cluster kb:0 --u 0.1 -x 0.1 --gen 500 --genome mb:10 --steps 100 --rr 4 --paramutation 999999:1 --rep 100 --silent > $folder/2022_11_18_simulation_8_5
 
 $tool --N 1000 --basepop $folder/2022_11_18_input_08 --cluster kb:0 --u 0.1 -x 0.001 --gen 5000 --genome mb:10 --steps 5000 --rr 4 --paramutation 999999:1 --rep 1000 --silent > $folder/2022_11_18_simulation_8_6
+
+$tool --N 1000 --basepop $folder/2022_11_18_input_08 --cluster kb:0,0,0,0,0 --u 0.01 -x 0.01 --gen 5000 --genome mb:10,10,10,10,10 --steps 5000 --rr 4,4,4,4,4 --paramutation 60000000:1 --rep 1000 --silent > $folder/2022_11_18_simulation_8_7
+
+$tool --N 1000 --basepop $folder/2022_11_18_input_08 --cluster kb:0,0,0,0,0 --u 0.01 -x 0.1 --gen 5000 --genome mb:10,10,10,10,10 --steps 5000 --rr 4,4,4,4,4 --paramutation 60000000:1 --rep 1000 --silent > $folder/2022_11_18_simulation_8_8
+
+$tool --N 1000 --basepop $folder/2022_11_18_input_08 --cluster kb:0,0,0,0,0 --u 0.01 -x 0.2 --gen 5000 --genome mb:10,10,10,10,10 --steps 5000 --rr 4,4,4,4,4 --paramutation 60000000:1 --rep 1000 --silent > $folder/2022_11_18_simulation_8_9
 ```
 
 ### Visualization in R
@@ -273,6 +285,173 @@ plot(g_x5)
 ```
 
 ![](2022_11_18_Simulation_8_Paramutation_fix_files/figure-gfm/unnamed-chunk-3-8.png)<!-- -->
+
+``` r
+#--cluster kb:0,0,0,0,0 --u 0.01 -x 0.01
+df_x1_6 <- read.table("2022_11_18_simulation_8_7", fill = TRUE, sep = "\t")
+names(df_x1_6) <- names_vector
+df_x2_6 <- data.frame()
+df_x2_6 <- subset(df_x1_6, gen == 5000)
+
+df_x3_6 <- df_x2_6 %>%
+  dplyr::count(fwpar_yespi)
+
+df_x3_6$fwpar_yespi <- c("No piRNAs", "Fixed paramutation")
+
+
+g_x6 <-ggplot(df_x3_6, aes(x=fwpar_yespi, y=n, fill=factor(fwpar_yespi)))+
+  geom_col(color = "black") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(legend.position = "none")+
+  scale_y_continuous(limits = c(0,1000), expand = c(0, 0))+
+  ggtitle("5 chromosomes, 1 paramutable locus per haploid genome, no clusters --u 0.01 -x 0.01")
+
+plot(g_x6)
+```
+
+![](2022_11_18_Simulation_8_Paramutation_fix_files/figure-gfm/unnamed-chunk-3-9.png)<!-- -->
+
+``` r
+g_x6_2 <-ggplot(df_x3_6, aes(x="", y=n, fill=factor(fwpar_yespi)))+
+  geom_col(color = "black") +
+  coord_polar(theta = "y") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        panel.grid = element_blank())+
+  ggtitle("5 chromosomes, 1 paramutable locus per haploid genome, no clusters --u 0.01 -x 0.01")
+
+plot(g_x6_2)
+```
+
+![](2022_11_18_Simulation_8_Paramutation_fix_files/figure-gfm/unnamed-chunk-3-10.png)<!-- -->
+
+``` r
+#--cluster kb:0,0,0,0,0 --u 0.01 -x 0.1
+df_x1_7 <- read.table("2022_11_18_simulation_8_8", fill = TRUE, sep = "\t")
+names(df_x1_7) <- names_vector
+df_x2_7 <- data.frame()
+df_x2_7 <- subset(df_x1_7, gen == 5000)
+
+df_x3_7 <- df_x2_7 %>%
+  dplyr::count(fwpar_yespi)
+
+df_x3_7$fwpar_yespi <- c("No piRNAs", "Fixed paramutation")
+
+g_x7 <-ggplot(df_x3_7, aes(x=fwpar_yespi, y=n, fill=factor(fwpar_yespi)))+
+  geom_col(color = "black") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(legend.position = "none")+
+  scale_y_continuous(limits = c(0,1000), expand = c(0, 0))+
+  ggtitle("5 chromosomes, 1 paramutable locus per haploid genome, no clusters --u 0.01 -x 0.01")
+
+plot(g_x7)
+```
+
+![](2022_11_18_Simulation_8_Paramutation_fix_files/figure-gfm/unnamed-chunk-3-11.png)<!-- -->
+
+``` r
+g_x7_2 <-ggplot(df_x3_7, aes(x="", y=n, fill=factor(fwpar_yespi)))+
+  geom_col(color = "black") +
+  coord_polar(theta = "y") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        panel.grid = element_blank())+
+  ggtitle("5 chromosomes, 1 paramutable locus per haploid genome, no clusters --u 0.01 -x 0.1")
+
+plot(g_x7_2)
+```
+
+![](2022_11_18_Simulation_8_Paramutation_fix_files/figure-gfm/unnamed-chunk-3-12.png)<!-- -->
+
+``` r
+#--cluster kb:0,0,0,0,0 --u 0.01 -x 0.1
+df_x1_7 <- read.table("2022_11_18_simulation_8_8", fill = TRUE, sep = "\t")
+names(df_x1_7) <- names_vector
+df_x2_7 <- data.frame()
+df_x2_7 <- subset(df_x1_7, gen == 5000)
+
+df_x3_7 <- df_x2_7 %>%
+  dplyr::count(fwpar_yespi)
+
+df_x3_7$fwpar_yespi <- c("No piRNAs", "Fixed paramutation")
+
+g_x7 <-ggplot(df_x3_7, aes(x=fwpar_yespi, y=n, fill=factor(fwpar_yespi)))+
+  geom_col(color = "black") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(legend.position = "none")+
+  scale_y_continuous(limits = c(0,1000), expand = c(0, 0))+
+  ggtitle("5 chromosomes, 1 paramutable locus per haploid genome, no clusters --u 0.01 -x 0.01")
+
+plot(g_x7)
+```
+
+![](2022_11_18_Simulation_8_Paramutation_fix_files/figure-gfm/unnamed-chunk-3-13.png)<!-- -->
+
+``` r
+g_x7_2 <-ggplot(df_x3_7, aes(x="", y=n, fill=factor(fwpar_yespi)))+
+  geom_col(color = "black") +
+  coord_polar(theta = "y") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        panel.grid = element_blank())+
+  ggtitle("5 chromosomes, 1 paramutable locus per haploid genome, no clusters --u 0.01 -x 0.1")
+
+plot(g_x7_2)
+```
+
+![](2022_11_18_Simulation_8_Paramutation_fix_files/figure-gfm/unnamed-chunk-3-14.png)<!-- -->
+
+``` r
+#--cluster kb:0,0,0,0,0 --u 0.01 -x 0.2
+df_x1_8 <- read.table("2022_11_18_simulation_8_9", fill = TRUE, sep = "\t")
+names(df_x1_8) <- names_vector
+df_x2_8 <- data.frame()
+df_x2_8 <- subset(df_x1_8, gen == 5000)
+
+df_x3_8 <- df_x2_8 %>%
+  dplyr::count(fwpar_yespi)
+
+df_x3_8$fwpar_yespi <- c("No piRNAs", "Fixed paramutation")
+
+g_x8 <-ggplot(df_x3_8, aes(x=fwpar_yespi, y=n, fill=factor(fwpar_yespi)))+
+  geom_col(color = "black") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(legend.position = "none")+
+  scale_y_continuous(limits = c(0,1000), expand = c(0, 0))+
+  ggtitle("5 chromosomes, 1 paramutable locus per haploid genome, no clusters --u 0.01 -x 0.01")
+
+plot(g_x8)
+```
+
+![](2022_11_18_Simulation_8_Paramutation_fix_files/figure-gfm/unnamed-chunk-3-15.png)<!-- -->
+
+``` r
+g_x8_2 <-ggplot(df_x3_8, aes(x="", y=n, fill=factor(fwpar_yespi)))+
+  geom_col(color = "black") +
+  coord_polar(theta = "y") +
+  scale_fill_brewer(palette = "Set1") +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        panel.grid = element_blank())+
+  ggtitle("5 chromosomes, 1 paramutable locus per haploid genome, no clusters --u 0.01 -x 0.2")
+
+plot(g_x8_2)
+```
+
+![](2022_11_18_Simulation_8_Paramutation_fix_files/figure-gfm/unnamed-chunk-3-16.png)<!-- -->
+
+``` r
+g_x6+ggtitle("x = 0.01") + g_x7+ggtitle("x = 0.1") + g_x8+ggtitle("x = 0.2")
+```
+
+![](2022_11_18_Simulation_8_Paramutation_fix_files/figure-gfm/unnamed-chunk-3-17.png)<!-- -->
 
 ## Conclusions
 
