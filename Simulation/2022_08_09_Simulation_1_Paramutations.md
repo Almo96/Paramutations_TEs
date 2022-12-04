@@ -54,6 +54,7 @@ library(patchwork)
 library(plotrix)
 library(RColorBrewer)
 library(ggpubr)
+library(dplyr)
 ```
 
 Visualization:
@@ -128,8 +129,8 @@ df3 <- df3 %>%
   select(-c("extra"))
 
 df3_2 <- df3 %>% 
-  group_by(sampleid) %>% 
-  summarize(av_cli = mean(avcli), sd_cli = sd(avcli), cv_cli_percent = sd(avcli)/mean(avcli), 
+  dplyr::group_by(sampleid) %>% 
+  dplyr::summarize(av_cli = mean(avcli), sd_cli = sd(avcli), cv_cli_percent = sd(avcli)/mean(avcli), 
             av_tes = mean(avtes), sd_tes = sd(avtes), cv_tes_percent = sd(avtes)/mean(avtes))
 
 percent_para<-c(0,10,100,15,20,25,30,35,40,45,5,50,55,60,65,70,75,80,85,90,95)
@@ -201,6 +202,55 @@ plot(g_3_3)
 ```
 
 ![](2022_08_09_Simulation_1_Paramutations_files/figure-gfm/unnamed-chunk-3-5.png)<!-- -->
+
+``` r
+df3_order <- df3
+df3_order <- df3 %>%
+  mutate(sampleid = str_replace(sampleid,"para0", "0")) %>%
+  mutate(sampleid = str_replace(sampleid,"para5", "5")) %>%
+  mutate(sampleid = str_replace(sampleid,"para10", "10")) %>%
+  mutate(sampleid = str_replace(sampleid,"para15", "15")) %>%
+  mutate(sampleid = str_replace(sampleid,"para20", "20")) %>%
+  mutate(sampleid = str_replace(sampleid,"para25", "25")) %>%
+  mutate(sampleid = str_replace(sampleid,"para30", "30")) %>%
+  mutate(sampleid = str_replace(sampleid,"para35", "35")) %>%
+  mutate(sampleid = str_replace(sampleid,"para40", "40")) %>%
+  mutate(sampleid = str_replace(sampleid,"para45", "45")) %>%
+  mutate(sampleid = str_replace(sampleid,"para50", "50")) %>%
+  mutate(sampleid = str_replace(sampleid,"para55", "55")) %>%
+  mutate(sampleid = str_replace(sampleid,"para60", "60")) %>%
+  mutate(sampleid = str_replace(sampleid,"para65", "65")) %>%
+  mutate(sampleid = str_replace(sampleid,"para70", "70")) %>%
+  mutate(sampleid = str_replace(sampleid,"para75", "75")) %>%
+  mutate(sampleid = str_replace(sampleid,"para80", "80")) %>%
+  mutate(sampleid = str_replace(sampleid,"para85", "85")) %>%
+  mutate(sampleid = str_replace(sampleid,"para90", "90")) %>%
+  mutate(sampleid = str_replace(sampleid,"para95", "95")) %>%
+  mutate(sampleid = str_replace(sampleid,"para100", "100"))
+
+df3_order$sampleid<-as.integer(df3_order$sampleid)
+df3_order <- df3_order[order(df3_order$sampleid),]
+
+g_bar_av_TEs <- ggplot(df3_order, aes(x=as.factor(sampleid), y=avtes)) + 
+  geom_boxplot() +
+  xlab("Size of paramutable loci as [%]") +
+  ylab("TEs insertions per diploid individual")
+
+plot(g_bar_av_TEs)
+```
+
+![](2022_08_09_Simulation_1_Paramutations_files/figure-gfm/unnamed-chunk-3-6.png)<!-- -->
+
+``` r
+g_bar_clusters <- ggplot(df3_order, aes(x=as.factor(sampleid), y=avcli)) + 
+  geom_boxplot() +
+  xlab("Size of paramutable loci as [%]") +
+  ylab("cluster insertions per diploid individual")
+
+plot(g_bar_clusters)
+```
+
+![](2022_08_09_Simulation_1_Paramutations_files/figure-gfm/unnamed-chunk-3-7.png)<!-- -->
 
 The high
 ![R^2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;R%5E2 "R^2")
