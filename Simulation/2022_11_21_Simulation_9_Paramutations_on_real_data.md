@@ -42,7 +42,7 @@ Setting the environment
 ``` r
 library(tidyverse)
 library(ggplot2)
-library(patchwork)
+library(ggpubr)
 library(dplyr)
 library(plyr)
 theme_set(theme_bw())
@@ -55,7 +55,7 @@ p<-c("grey","#1a9850","#ffd700","#d73027")
 
 setwd("/Users/ascarpa/Paramutations_TEs/Simulation/Raw")
 
-df <- read.table("/Users/ascarpa/Paramutations_TEs/Simulation/Raw/2022_11_21_Simulation_9_Paramutations_on_real_data", fill = TRUE, sep = "\t")
+df <- read.table("2022_11_21_Simulation_9_Paramutations_on_real_data", fill = TRUE, sep = "\t")
 names(df) <- c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "min_w", "avtes", "avpopfreq",
               "fixed","spacer_2", "phase", "fwpirna", "spacer_3", "fwcli", "avcli", "fixcli", "spacer_4",
               "fwpar_yespi","fwpar_nopi", "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
@@ -113,7 +113,7 @@ g_2_trap <- ggplot()+
   ylim(0,250)+
   xlim(0,5000)+
   annotate("rect",ymin=min_df_2_t_haplo, ymax=max_df_2_t_haplo, xmin=0, xmax=5000, fill="darkgrey",alpha=.3)+
-  ggtitle("Trap model")
+  ggtitle("Trap model: 0% paramutable loci")
 
 plot(g_2_trap)
 ```
@@ -130,7 +130,7 @@ g_2_para <- ggplot()+
   ylim(0,250)+
   xlim(0,5000)+
   annotate("rect",ymin=min_df_2_10p_haplo, ymax=max_df_2_10p_haplo, xmin=0, xmax=5000, fill="darkgrey",alpha=.3)+
-  ggtitle("10% paramutable loci")
+  ggtitle("Extend trap model: 10% paramutable loci")
 
 plot(g_2_para)
 ```
@@ -144,6 +144,7 @@ names(t)<-c("chr","pos","support","family","popfreq","order")
 flam<-c("gypsy","ZAM","Idefix","gypsy5","gtwin","blood","gypsy6","412","HMS-Beagle2","Stalker",
         "mdg1","Stalker2","Quasimodo","springer","Stalker4","mdg3","gypsy2","gypsy4","Transpac","gypsy3","Tirant","gypsy10","Tabor")
 
+
 s<- ddply(.data=t, 
           .(family),
           summarize, 
@@ -151,7 +152,6 @@ s<- ddply(.data=t,
           sum=sum(popfreq)) 
 s$avpopfreq=s$sum/s$count
 so<-s[order(s$avpopfreq),]
-
 
 
 so$family<-factor(so$family,levels=s[order(s$avpopfreq),]$family)
@@ -170,6 +170,8 @@ g_tes_trap<-ggplot(data=te_germ, aes(x=family, y=sum,fill=avpopfreq)) +ylab("ins
   theme(legend.position="none",panel.grid.major.x=element_blank() , axis.text.x = element_text(angle = 90, size=5,hjust=1),axis.title.x=element_blank())+
   annotate("rect",ymin=min_df_2_t_haplo, ymax=max_df_2_t_haplo, xmin=1, xmax=nrow(te_germ), fill="darkgrey",alpha=.3)
   
+  
+
 plot(g_tes_trap)
 ```
 
@@ -181,18 +183,22 @@ g_tes_para<-ggplot(data=te_germ, aes(x=family, y=sum,fill=avpopfreq)) +ylab("ins
   theme(legend.position="none",panel.grid.major.x=element_blank() , axis.text.x = element_text(angle = 90, size=5,hjust=1),axis.title.x=element_blank())+
   annotate("rect",ymin=min_df_2_10p_haplo, ymax=max_df_2_10p_haplo, xmin=1, xmax=nrow(te_germ), fill="darkgrey",alpha=.3)
   
+
 plot(g_tes_para)
 ```
 
 ![](2022_11_21_Simulation_9_Paramutations_on_real_data_files/figure-gfm/unnamed-chunk-3-5.png)<!-- -->
 
 ``` r
-(g_2_trap + g_2_para) / (g_tes_trap + g_tes_para)
+ggarrange(g_2_trap, g_2_para, g_tes_trap, g_tes_para,
+          ncol = 2, nrow = 2, align = ("v"),
+          labels = c("A", "", "B", ""), heights = c(2,2), widths = c(2,2)
+)
 ```
 
 ![](2022_11_21_Simulation_9_Paramutations_on_real_data_files/figure-gfm/unnamed-chunk-3-6.png)<!-- -->
 
 ## Conclusions
 
-The extended trap model, due to the inclusion of paramutations better
+The extended trap model, due to the inclusion of paramutations, better
 fits the real data.

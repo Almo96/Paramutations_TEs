@@ -100,11 +100,11 @@ while (x<nrow(df1)) {
 df2<-select (df2,-c(28))
 
 df_count <- df2 %>%
-  count(sampleid, phase)
+  dplyr::count(sampleid, phase)
 
 df_summary <- df2 %>% 
-  group_by(sampleid, phase) %>%
-  summarize(av_fwcli = mean(fwcli), sd_fwcli = sd(fwcli),
+  dplyr::group_by(sampleid, phase) %>%
+  dplyr::summarize(av_fwcli = mean(fwcli), sd_fwcli = sd(fwcli),
             av_cli = mean(avcli), sd_cli = sd(avcli), cv_cli_percent = sd(avcli)/mean(avcli),
             av_tes = mean(avtes), sd_tes = sd(avtes), cv_tes_percent = sd(avtes)/mean(avtes),
             av_par = mean(avpar), sd_par = sd(avpar),
@@ -128,7 +128,7 @@ g <- ggplot(df_summary, aes(x=phase, y=av_fwcli, fill = phase)) +
   ylab("Fraction of individuals with a cluster insertion")+
   xlab("Phase")+
   scale_y_continuous(labels = scales::percent, expand = c(0, 0.01))+
-  scale_fill_manual(values = c("yellow", "red"))+
+  scale_fill_manual(values = c("#ffd700", "#d73027"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
                                               c("p0" = "Paramutable loci = 0% (Trap model)",
@@ -148,7 +148,7 @@ g_2 <- ggplot(df_summary, aes(x=phase, y=av_cli, fill = phase)) +
   ylab("Number of cluster insertions per individual")+
   xlab("Phase")+
   scale_y_continuous(expand = c(0, 0.3))+
-  scale_fill_manual(values = c("yellow", "red"))+
+  scale_fill_manual(values = c("#ffd700", "#d73027"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
                                               c("p0" = "Paramutable loci = 0%",
@@ -181,7 +181,7 @@ g_3 <- ggplot(df_summary, aes(x=phase, y=av_tes, fill = phase)) +
   ylab("Number of TE insertions per individual")+
   xlab("Phase")+
   scale_y_continuous(expand = expansion(mult = c(0, 0.01)))+
-  scale_fill_manual(values = c("yellow", "red"))+
+  scale_fill_manual(values = c("#ffd700", "#d73027"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
                                                       c("p0" = "Paramutable loci = 0%",
@@ -214,7 +214,7 @@ g_4 <- ggplot(df_summary, aes(x=phase, y=av_par, fill = phase)) +
   ylab("Number of TE insertions in paramutable loci")+
   xlab("Phase")+
   scale_y_continuous(expand = expansion(mult = c(0, 0.1)))+
-  scale_fill_manual(values = c("yellow", "red"))+
+  scale_fill_manual(values = c("#ffd700", "#d73027"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
                                                       c("p0" = "Paramutable loci = 0%",
@@ -231,10 +231,10 @@ plot(g_4)
 g_5 <- ggplot(df_summary, aes(x=phase, y=av_fwpar_yespi, fill = phase)) + 
   geom_bar(stat = "identity") +
   geom_errorbar( aes(x=phase, ymin=av_fwpar_yespi-sd_fwpar_yespi, ymax=av_fwpar_yespi+sd_fwpar_yespi), width=0.2, colour="black", alpha=0.9, size=0.8)+
-  ylab("Fraction of individuals with an insertion in a paramutable site")+
+  ylab("Fraction of individuals with an insertion in a paramutable locus")+
   xlab("Phase")+
   scale_y_continuous(labels = scales::percent, expand = c(0, 0.01))+
-  scale_fill_manual(values = c("yellow", "red"))+
+  scale_fill_manual(values = c("#ffd700", "#d73027"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
                                                       c("p0" = "Paramutable loci = 0% (Trap model)",
@@ -261,16 +261,17 @@ df_phases$length_previous_phase[8]=df_phases$length_previous_phase[8]-df_phases$
 names(df_phases) <- c("sampleid","phase", "length_phase", "sd_gen_phases")
 
 
+
 g_6 <- ggplot(df_phases, aes(x=phase, y=length_phase, fill = phase)) + 
   geom_bar(stat = "identity") +
   geom_errorbar( aes(x=phase, ymin=length_phase-sd_gen_phases, ymax=length_phase+sd_gen_phases), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("Length phase in generations")+
   xlab("Phase")+
-  scale_y_continuous(trans = "log2")+
-  scale_fill_manual(values = c("green", "yellow"))+
+  scale_y_continuous()+
+  scale_fill_manual(values = c("#1a9850", "#ffd700"))+
   theme(legend.position="none", axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   facet_wrap(~sampleid, ncol=4, labeller = labeller(sampleid = 
-                                                      c("p0" = "Paramutable loci = 0% (Trap model)",
+                                                      c("p0" = "Paramutable loci = 0%",
                                                         "p1" = "Paramutable loci = 1%",
                                                         "p10" = "Paramutable loci = 10%",
                                                         "p100" = "Paramutable loci = 100%")))
