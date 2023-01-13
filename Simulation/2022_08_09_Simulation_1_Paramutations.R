@@ -24,8 +24,12 @@ g<-ggplot()+
   geom_line(data=df,aes(x=gen,y=avtes,group=rep,color=phase),alpha=1,size=0.7)+
   xlab("generation")+
   ylab("TEs insertions per diploid individual")+
-  theme(legend.position="none")+
-  theme_bw()+
+  theme( axis.text = element_text( size = 24 ),
+               axis.text.x = element_text( size = 24 ),
+               axis.title = element_text( size = 24, face = "bold" ),
+               legend.position="none",
+               # The new stuff
+               strip.text = element_text(size = 24))+
   scale_colour_manual(values=p)+
   ylim(0,500)+
   facet_wrap(~sampleid, labeller = labeller(sampleid = 
