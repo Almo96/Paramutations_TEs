@@ -254,3 +254,6 @@ plot(g_B_0.05_noxclu)
 ![](2022_10_18_Simulation_6_Fitness_files/figure-gfm/unnamed-chunk-3-13.png)<!-- -->
 
 ## Conclusions
+
+An increase in paramutations reduces the fitness cost of the TEs during
+an invasion.
