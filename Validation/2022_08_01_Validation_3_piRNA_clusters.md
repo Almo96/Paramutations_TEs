@@ -20,7 +20,7 @@ Almorò Scarpa
 
 ![t=100](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;t%3D100 "t=100")
 
-A chromosome of size 1Mb and no piRNA clusters. 500 replicates.
+A chromosome of size 1Mb and variable piRNA clusters sizes.
 
 ## Materials & Methods
 
