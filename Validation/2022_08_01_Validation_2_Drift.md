@@ -35,8 +35,7 @@ To test if our simulations reproduce this fundamental property we
 randomly distributed 10000 neutral TE insertions that do NOT transpose
 in a population. Each TE insertion had a starting frequency of 1/2N. We
 followed these loci for 20000 generations and recorded the number of
-fixed insertions at the end. 100 replicates were used for each
-population size.
+fixed insertions at the end.
 
 ### Initial conditions:
 
@@ -88,21 +87,21 @@ data_1 <- validation[which(validation$sampleid == "pd250"),names(validation) %in
 gl_1<-ggplot(data_1,aes(x=fixed))+
       geom_histogram(binwidth = 1)+
       ylim(0,65)+
-      ggtitle("Population 250")+
+      ggtitle("N = 250")+
       geom_vline(xintercept=20, lwd=1,lty=2, colour="blue")
 
 data_2 <- validation[which(validation$sampleid == "pd500"),names(validation) %in% c("rep","fixed")]
 gl_2<-ggplot(data_2,aes(x=fixed))+
       geom_histogram(binwidth = 1)+
       ylim(0,65)+
-      ggtitle("Population 500")+
+      ggtitle("N = 500")+
       geom_vline(xintercept=10, lwd=1,lty=2, colour="blue")
 
 data_3 <- validation[which(validation$sampleid == "pd1000"),names(validation) %in% c("rep","fixed")]
 gl_3<-ggplot(data_3,aes(x=fixed))+
       geom_histogram(binwidth = 1)+
       ylim(0,65)+
-      ggtitle("Population 1000")+
+      ggtitle("N = 1000")+
       geom_vline(xintercept=5, lwd=1,lty=2, colour="blue")
 
 gl_1+gl_2+gl_3
