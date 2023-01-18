@@ -132,6 +132,7 @@ g_8_1<-ggplot()+
   ggtitle("c = 0")+
   ylim(0, 0.25)
 
+
 t_8_2<-read.table("Raw/validation_8_2_debug", fill = TRUE, sep = "\t")
 names(t_8_2)<-c("rep", "gen", "D")
 g_8_2<-ggplot()+
@@ -141,6 +142,7 @@ g_8_2<-ggplot()+
   ggtitle("c = 0.01")+
   ylim(-0.01, 0.25)
 
+
 t_8_3<-read.table("Raw/validation_8_3_debug", fill = TRUE, sep = "\t")
 names(t_8_3)<-c("rep", "gen", "D")
 g_8_3<-ggplot()+
@@ -149,6 +151,7 @@ g_8_3<-ggplot()+
   xlab("generation")+ylab("LD")+
   ggtitle("c = 0.05")+
   ylim(-0.01, 0.25)
+
 
 t_8_4<-read.table("Raw/validation_8_4_debug", fill = TRUE, sep = "\t")
 names(t_8_4)<-c("rep", "gen", "D")
