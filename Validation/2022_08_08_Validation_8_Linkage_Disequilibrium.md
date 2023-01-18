@@ -165,7 +165,7 @@ g_8_4<-ggplot()+
 
 ![](2022_08_08_Validation_8_Linkage_Disequilibrium_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
-In the 4 graphs above the theoretical value is described by the coloured
+In the 4 graphs above the theoretical value is described by the colored
 line, while the grey lines represent the 100 simulated populations for
 each of the 4 values of c.
 
