@@ -20,9 +20,14 @@ Almorò Scarpa
 -   Scenario 5: TEs distribution + piRNAs cluster + selection on
     non-cluster insertions seed: 1659622431727389000
 
+-   Scenario 6: Supplementary figure seed: 1674125006392965000 seed:
+    1674123317289734000 seed: 1674123317290780000 seed:
+    1674123317291772000
+
 ## Materials & Methods
 
-version: invadego 0.2.2
+version: invadego 0.2.2 for scenario 1 to 5 version: invadego 0.2.3 for
+scenario 6
 
 ### Commands for the simulation:
 
@@ -49,6 +54,7 @@ Setting the environment
 library(ggplot2)
 library(plyr)
 library(patchwork)
+library(ggpubr)
 ```
 
 # Scenario 1: TEs distribution
@@ -278,6 +284,92 @@ single piRNA cluster of 100 kb, the difference is that in this case a
 selection coefficient of 0.1 over non-cluster insertions was introduced.
 As expected over time the non-cluster insertion disappeard from the
 population leaving only cluster insertions.
+
+# Scenario 6: Supplementary figure
+
+``` r
+p<-c("#F8766D", "#619CFF", "#00BA38")
+p_2<-c("#F8766D", "#00BA38", "#619CFF")
+
+t_1_v2<-read.table("Raw/validation_v2_6_1_mhp", fill = TRUE, sep = "\t")
+names(t_1_v2)<-c("rep","gen","chr","pos","locus","popfreq")
+t_1_v2$locus <- factor(t_1_v2$locus, levels=c("noe", "clu", "par"))
+t_1_v2$rep<-as.factor(t_1_v2$rep)
+t_1_v2$gen<-as.factor(t_1_v2$gen)
+t_1_v2<-subset(t_1_v2,rep==1)
+t_1_v2<-subset(t_1_v2, gen==0 | gen==25 | gen==50 | gen==75 | gen==100)
+g_1_v2<-ggplot(data=t_1_v2,aes(x=pos, fill=locus))+geom_histogram(binwidth=10000)+facet_grid(gen~chr, scales="free_x", space = "free_x")+
+  scale_x_continuous(breaks=c(0,500000,1000000,1500000),labels=c("0","0.5m","1m","1.5m"))+
+  ggtitle("without host defence")+scale_color_manual(values = p)+
+  theme(legend.position="none")+
+  xlab("position")+ylab(" insertion sites [#/10kb]")
+plot(g_1_v2)
+```
+
+![](2022_08_04_Validation_6_TEs_distribution_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+``` r
+t_2_v2<-read.table("Raw/validation_v2_6_2_mhp", fill = TRUE, sep = "\t")
+names(t_2_v2)<-c("rep","gen","chr","pos","locus","popfreq")
+t_2_v2$locus <- factor(t_2_v2$locus, levels=c("noe", "clu", "par"))
+t_2_v2$rep<-as.factor(t_2_v2$rep)
+t_2_v2$gen<-as.factor(t_2_v2$gen)
+t_2_v2<-subset(t_2_v2,rep==1)
+t_2_v2<-subset(t_2_v2, gen==0 | gen==25 | gen==50 | gen==75 | gen==100)
+g_2_v2<-ggplot(data=t_2_v2,aes(x=pos, fill=locus))+geom_histogram(binwidth=10000)+facet_grid(gen~chr, scales="free_x", space = "free_x")+
+  scale_x_continuous(breaks=c(0,500000,1000000,1500000),labels=c("0","0.5m","1m","1.5m"))+
+  ggtitle("piRNA clusters")+scale_fill_manual(values = p)+
+  theme(legend.position="none")+
+  xlab("position")+ylab(" insertion sites [#/10kb]")
+plot(g_2_v2)
+```
+
+![](2022_08_04_Validation_6_TEs_distribution_files/figure-gfm/unnamed-chunk-8-2.png)<!-- -->
+
+``` r
+t_3_v2<-read.table("Raw/validation_v2_6_3_mhp", fill = TRUE, sep = "\t")
+names(t_3_v2)<-c("rep","gen","chr","pos","locus","popfreq")
+t_3_v2$locus <- factor(t_3_v2$locus, levels=c("noe", "par", "clu"))
+t_3_v2$rep<-as.factor(t_3_v2$rep)
+t_3_v2$gen<-as.factor(t_3_v2$gen)
+t_3_v2<-subset(t_3_v2,rep==1)
+t_3_v2<-subset(t_3_v2, gen==0 | gen==25 | gen==50 | gen==75 | gen==100)
+g_3_v2<-ggplot(data=t_3_v2,aes(x=pos, fill=locus))+geom_histogram(binwidth=10000)+facet_grid(gen~chr, scales="free_x", space = "free_x")+
+  scale_x_continuous(breaks=c(0,500000,1000000,1500000),labels=c("0","0.5m","1m","1.5m"))+
+  ggtitle("piRNA clusters + paramutable loci")+scale_fill_manual(values = p_2)+
+  theme(legend.position="none")+
+  xlab("position")+ylab(" insertion sites [#/10kb]")
+plot(g_3_v2)
+```
+
+![](2022_08_04_Validation_6_TEs_distribution_files/figure-gfm/unnamed-chunk-8-3.png)<!-- -->
+
+``` r
+t_4_v2<-read.table("Raw/validation_v2_6_4_mhp", fill = TRUE, sep = "\t")
+names(t_4_v2)<-c("rep","gen","chr","pos","locus","popfreq")
+t_4_v2$locus <- factor(t_4_v2$locus, levels=c("noe", "par", "clu"))
+t_4_v2$rep<-as.factor(t_4_v2$rep)
+t_4_v2$gen<-as.factor(t_4_v2$gen)
+t_4_v2<-subset(t_4_v2,rep==1)
+t_4_v2<-subset(t_4_v2, gen==0 | gen==25 | gen==50 | gen==75 | gen==100)
+g_4_v2<-ggplot(data=t_4_v2,aes(x=pos, fill=locus))+geom_histogram(binwidth=10000)+facet_grid(gen~chr, scales="free_x", space = "free_x")+
+  scale_x_continuous(breaks=c(0,500000,1000000,1500000),labels=c("0","0.5m","1m","1.5m"))+
+  ggtitle("piRNA clusters + selection")+scale_fill_manual(values = p)+
+  theme(legend.position="none")+
+  xlab("position")+ylab(" insertion sites [#/10kb]")
+plot(g_4_v2)
+```
+
+![](2022_08_04_Validation_6_TEs_distribution_files/figure-gfm/unnamed-chunk-8-4.png)<!-- -->
+
+``` r
+ggarrange(g_1_v2, g_2_v2, g_3_v2, g_4_v2,
+          ncol = 2, nrow = 2, align = ("v"),
+          labels = c("A", "B", "C", "D"), heights = c(2,2), widths = c(2,2)
+)
+```
+
+![](2022_08_04_Validation_6_TEs_distribution_files/figure-gfm/unnamed-chunk-8-5.png)<!-- -->
 
 ## Conclusions
 

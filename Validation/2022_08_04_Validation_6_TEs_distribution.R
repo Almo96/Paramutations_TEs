@@ -1,7 +1,7 @@
 library(ggplot2)
 library(plyr)
 library(patchwork)
-
+library(ggpubr)
 setwd("/Users/ascarpa/Paramutations_TEs/Validation/Raw")
 
 
@@ -150,3 +150,68 @@ g_5_3<-ggplot()+
   ylab("relative frequencies")
 
 g_5_2+g_5_3
+
+
+p<-c("#F8766D", "#619CFF", "#00BA38")
+p_2<-c("#F8766D", "#00BA38", "#619CFF")
+
+t_1_v2<-read.table("validation_v2_6_1_mhp", fill = TRUE, sep = "\t")
+names(t_1_v2)<-c("rep","gen","chr","pos","locus","popfreq")
+t_1_v2$locus <- factor(t_1_v2$locus, levels=c("noe", "clu", "par"))
+t_1_v2$rep<-as.factor(t_1_v2$rep)
+t_1_v2$gen<-as.factor(t_1_v2$gen)
+t_1_v2<-subset(t_1_v2,rep==1)
+t_1_v2<-subset(t_1_v2, gen==0 | gen==25 | gen==50 | gen==75 | gen==100)
+g_1_v2<-ggplot(data=t_1_v2,aes(x=pos, fill=locus))+geom_histogram(binwidth=10000)+facet_grid(gen~chr, scales="free_x", space = "free_x")+
+  scale_x_continuous(breaks=c(0,500000,1000000,1500000),labels=c("0","0.5m","1m","1.5m"))+
+  ggtitle("without host defence")+scale_color_manual(values = p)+
+  theme(legend.position="none")+
+  xlab("position")+ylab(" insertion sites [#/10kb]")
+plot(g_1_v2)
+
+t_2_v2<-read.table("validation_v2_6_2_mhp", fill = TRUE, sep = "\t")
+names(t_2_v2)<-c("rep","gen","chr","pos","locus","popfreq")
+t_2_v2$locus <- factor(t_2_v2$locus, levels=c("noe", "clu", "par"))
+t_2_v2$rep<-as.factor(t_2_v2$rep)
+t_2_v2$gen<-as.factor(t_2_v2$gen)
+t_2_v2<-subset(t_2_v2,rep==1)
+t_2_v2<-subset(t_2_v2, gen==0 | gen==25 | gen==50 | gen==75 | gen==100)
+g_2_v2<-ggplot(data=t_2_v2,aes(x=pos, fill=locus))+geom_histogram(binwidth=10000)+facet_grid(gen~chr, scales="free_x", space = "free_x")+
+  scale_x_continuous(breaks=c(0,500000,1000000,1500000),labels=c("0","0.5m","1m","1.5m"))+
+  ggtitle("piRNA clusters")+scale_fill_manual(values = p)+
+  theme(legend.position="none")+
+  xlab("position")+ylab(" insertion sites [#/10kb]")
+plot(g_2_v2)
+
+t_3_v2<-read.table("validation_v2_6_3_mhp", fill = TRUE, sep = "\t")
+names(t_3_v2)<-c("rep","gen","chr","pos","locus","popfreq")
+t_3_v2$locus <- factor(t_3_v2$locus, levels=c("noe", "par", "clu"))
+t_3_v2$rep<-as.factor(t_3_v2$rep)
+t_3_v2$gen<-as.factor(t_3_v2$gen)
+t_3_v2<-subset(t_3_v2,rep==1)
+t_3_v2<-subset(t_3_v2, gen==0 | gen==25 | gen==50 | gen==75 | gen==100)
+g_3_v2<-ggplot(data=t_3_v2,aes(x=pos, fill=locus))+geom_histogram(binwidth=10000)+facet_grid(gen~chr, scales="free_x", space = "free_x")+
+  scale_x_continuous(breaks=c(0,500000,1000000,1500000),labels=c("0","0.5m","1m","1.5m"))+
+  ggtitle("piRNA clusters + paramutable loci")+scale_fill_manual(values = p_2)+
+  theme(legend.position="none")+
+  xlab("position")+ylab(" insertion sites [#/10kb]")
+plot(g_3_v2)
+
+t_4_v2<-read.table("validation_v2_6_4_mhp", fill = TRUE, sep = "\t")
+names(t_4_v2)<-c("rep","gen","chr","pos","locus","popfreq")
+t_4_v2$locus <- factor(t_4_v2$locus, levels=c("noe", "par", "clu"))
+t_4_v2$rep<-as.factor(t_4_v2$rep)
+t_4_v2$gen<-as.factor(t_4_v2$gen)
+t_4_v2<-subset(t_4_v2,rep==1)
+t_4_v2<-subset(t_4_v2, gen==0 | gen==25 | gen==50 | gen==75 | gen==100)
+g_4_v2<-ggplot(data=t_4_v2,aes(x=pos, fill=locus))+geom_histogram(binwidth=10000)+facet_grid(gen~chr, scales="free_x", space = "free_x")+
+  scale_x_continuous(breaks=c(0,500000,1000000,1500000),labels=c("0","0.5m","1m","1.5m"))+
+  ggtitle("piRNA clusters + selection")+scale_fill_manual(values = p)+
+  theme(legend.position="none")+
+  xlab("position")+ylab(" insertion sites [#/10kb]")
+plot(g_4_v2)
+
+ggarrange(g_1_v2, g_2_v2, g_3_v2, g_4_v2,
+          ncol = 2, nrow = 2, align = ("v"),
+          labels = c("A", "B", "C", "D"), heights = c(2,2), widths = c(2,2)
+)
