@@ -20,9 +20,11 @@ Almorò Scarpa
 -   Scenario 5: TEs distribution + piRNAs cluster + selection on
     non-cluster insertions seed: 1659622431727389000
 
--   Scenario 6: Supplementary figure seed: 1674125006392965000 seed:
-    1674123317289734000 seed: 1674123317290780000 seed:
-    1674123317291772000
+-   Scenario 6: Supplementary figure  
+    seed: 1674125006392965000  
+    seed: 1674123317289734000  
+    seed: 1674123317290780000  
+    seed: 1674123317291772000
 
 ## Materials & Methods
 
@@ -44,6 +46,17 @@ $tool --N 1000 --gen 100 --genome mb:1 --rr 4 --rep 100 --u 0.1 --basepop 100 --
 $tool --N 1000 --gen 100 --genome mb:1 --cluster kb:100 --rr 4 --rep 100 --u 0.1 --basepop 100 --paramutation 3:0 --trigger 3:1 --steps 25 --file-mhp $folder/validation_6_4_mhp> $folder/validation_6_4
 
 $tool --N 1000 --gen 100 --genome mb:1 --cluster kb:100 --rr 4 --rep 100 --u 0.1 --basepop 100 --steps 25 -x 0.1 -no-x-cluins --file-mhp $folder/validation_6_5_mhp> $folder/validation_6_5
+
+folder="/Users/ascarpa/Paramutations_TEs/Validation/Raw"
+tool="/Users/ascarpa/invade-invadego/invadego023"
+
+$tool --N 1000 --gen 100 --genome kb:500,1000 --rr 4,4 --u 0.1 --basepop 100 --steps 25 --file-mhp $folder/validation_v2_6_1_mhp> $folder/validation_v2_6_1 &
+
+$tool --N 1000 --gen 100 --genome kb:500,1000 --cluster kb:50,100 --rr 4,4 --rep 100 --u 0.1 --basepop 100 --steps 25 --file-mhp $folder/validation_v2_6_2_mhp> $folder/validation_v2_6_2 &
+
+$tool --N 1000 --gen 100 --genome kb:500,1000 --cluster kb:50,100 --rr 4,4 --rep 100 --u 0.1 --basepop 100 --steps 25 --paramutation 10:1 --file-mhp $folder/validation_v2_6_3_mhp> $folder/validation_v2_6_3 &
+
+$tool --N 1000 --gen 100 --genome kb:500,1000 --cluster kb:50,100 --rr 4,4 --rep 100 --u 0.1 --basepop 100 --steps 25 -x 0.1 -no-x-cluins --file-mhp $folder/validation_v2_6_4_mhp> $folder/validation_v2_6_4
 ```
 
 ### Visualization in R

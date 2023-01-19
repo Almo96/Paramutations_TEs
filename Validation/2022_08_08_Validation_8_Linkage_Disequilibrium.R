@@ -28,7 +28,7 @@ gl<-ggplot(df, aes( x = gen))+
   geom_label(aes(x = 12, y = 0.07,label = "c = 0.1"))+
   geom_label(aes(x = 4, y = 0.02,label = "c = 0.5"))+
   xlim(0,50)+
-  ylab("D Linkage disequilibrium")+xlab("generation")
+  ylab("D")+xlab("generation")
 plot(gl)
 
 
@@ -38,7 +38,7 @@ g_8_1<-ggplot()+
   geom_line(data = t_8_1, aes(x = gen, y = D, group = rep), color = "grey")+
   geom_line(data = df, aes(x = gen, y = Dnc_0.00), color = "blue")+
   xlab("generation")+ylab("Linkage disequilibrium (D)")+
-  ggtitle("D for c = 0")+
+  ggtitle("c = 0")+
   theme(plot.title = element_text(size=14, face="bold.italic"))+
   ylim(0, 0.25)
 
@@ -48,7 +48,7 @@ g_8_2<-ggplot()+
   geom_line(data = t_8_2, aes(x = gen, y = D, group = rep), color = "grey")+
   geom_line(data = df, aes(x = gen, y = Dnc_0.01), color = "green")+
   xlab("generation")+ylab("Linkage disequilibrium (D)")+
-  ggtitle("D for c = 0.01")+
+  ggtitle("c = 0.01")+
   theme(plot.title = element_text(size=14, face="bold.italic"))+
   ylim(-0.01, 0.25)
 
@@ -58,7 +58,7 @@ g_8_3<-ggplot()+
   geom_line(data = t_8_3, aes(x = gen, y = D, group = rep), color = "grey")+
   geom_line(data = df, aes(x = gen, y = Dnc_0.05), color = "yellow")+
   xlab("generation")+ylab("Linkage disequilibrium (D)")+
-  ggtitle("D for c = 0.05")+
+  ggtitle("c = 0.05")+
   theme(plot.title = element_text(size=14, face="bold.italic"))+
   ylim(-0.01, 0.25)
 
@@ -68,7 +68,7 @@ g_8_4<-ggplot()+
   geom_line(data = t_8_4, aes(x = gen, y = D, group = rep), color = "grey")+
   geom_line(data = df, aes(x = gen, y = Dnc_0.1), color = "orange")+
   xlab("generation")+ylab("Linkage disequilibrium (D)")+
-  ggtitle("D for c = 0.1")+
+  ggtitle("c = 0.1")+
   theme(plot.title = element_text(size=14, face="bold.italic"))+
   ylim(-0.01, 0.25)
 
