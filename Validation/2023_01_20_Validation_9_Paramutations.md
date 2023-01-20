@@ -59,6 +59,7 @@ Setting the environment
 ``` r
 library(ggplot2)
 library(plyr)
+theme_set(theme_bw())
 ```
 
 Visualization: comparing the simulations with the prediction
