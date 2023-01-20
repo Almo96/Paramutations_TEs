@@ -90,7 +90,6 @@ df_total$sampleid <- factor(df_total$sampleid,
                             levels = c("p0", "p50", "p100"))
 
 g<-ggplot()+geom_line(data=df_total,aes(x=gen,group=rep,y=avtes*1000),alpha=0.4)+
-  theme(legend.position="none")+
   ylab("TEs insertions per diploid individual")+
   xlab("generation")+
   theme()+
@@ -103,5 +102,5 @@ plot(g)
 
 ### Visualization in R
 
-All the scenario matched the theoretical expectations: paramutable loci
-are correctly implemented.
+All the scenarioss matched the theoretical expectations: paramutable
+loci are correctly implemented.
