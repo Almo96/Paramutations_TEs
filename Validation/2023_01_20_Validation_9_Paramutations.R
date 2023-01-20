@@ -1,15 +1,42 @@
 library(ggplot2)
 library(plyr)
+theme_set(theme_bw())
+
 
 setwd("/Users/ascarpa/Paramutations_TEs/Validation/Raw")
 
-validation<-read.table("2022_08_01_Validation_5_trigger_loci", fill = TRUE, sep = "\t")
-names(validation)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed","spacer_2","phase","fwpirna","spacer_3","fwcli","avcli","fixcli","spacer_4","fwpar_yespi","fwpar_nopi",
-                     "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
+df_1<-read.table("validation_9_1", fill = TRUE, sep = "\t")
+df_2<-read.table("validation_9_2", fill = TRUE, sep = "\t")
+df_3<-read.table("validation_9_3", fill = TRUE, sep = "\t")
 
-data_new <- validation
-data_new$sampleid <- factor(data_new$sampleid,
-                            levels = c("pt1", "pt2", "pt3", "pt4", "pt5", "pt6", "pt7", "pt8", "pt9"))
 
-gl<-ggplot()+geom_line(data=data_new,aes(x=gen,group=rep,y=avtes*1000),alpha=0.4)+scale_y_log10()+theme(legend.position="none")+ylab("TE copies in population")+xlab("generation")+facet_wrap(~sampleid, ncol=3)
-plot(gl)
+naming<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "min_w", "avtes", "avpopfreq",
+             "fixed","spacer_2", "phase", "fwpirna", "spacer_3", "fwcli", "avcli", "fixcli", "spacer_4",
+             "fwpar_yespi","fwpar_nopi", "avpar","fixpar","spacer_5","piori","orifreq","spacer 6")
+
+names(df_1)<-naming
+names(df_2)<-naming
+names(df_3)<-naming
+
+df_1$sampleid <- "p0"
+df_2$sampleid <- "p50"
+df_3$sampleid <- "p100"
+
+df_total <- rbind(df_1, df_2, df_3)
+
+df_total$sampleid <- factor(df_total$sampleid,
+                            levels = c("p0", "p50", "p100"))
+
+g<-ggplot()+geom_line(data=df_total,aes(x=gen,group=rep,y=avtes*1000),alpha=0.4)+
+  theme(legend.position="none")+
+  ylab("TEs insertions per diploid individual")+
+  xlab("generation")+
+  theme(plot.title = element_text(size=24),
+        axis.text.x = element_text(size=20),
+        axis.text.y = element_text(size=20),
+        axis.title.x = element_text(size=24),
+        axis.title.y = element_text(size=24),
+        strip.text = element_text(size = 24))+
+  facet_wrap(~sampleid, ncol=3)
+
+plot(g)
