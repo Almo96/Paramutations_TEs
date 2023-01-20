@@ -99,27 +99,7 @@ g<-ggplot()+geom_line(data=df_total,aes(x=gen,group=rep,y=avtes*1000),alpha=0.4)
         axis.title.y = element_text(size=14),
         strip.text = element_text(size = 14))+
   facet_wrap(~sampleid, ncol=3)
-  facet_wrap(~sampleid, ncol=3)
-```
 
-    ## <ggproto object: Class FacetWrap, Facet, gg>
-    ##     compute_layout: function
-    ##     draw_back: function
-    ##     draw_front: function
-    ##     draw_labels: function
-    ##     draw_panels: function
-    ##     finish_data: function
-    ##     init_scales: function
-    ##     map_data: function
-    ##     params: list
-    ##     setup_data: function
-    ##     setup_params: function
-    ##     shrink: TRUE
-    ##     train_scales: function
-    ##     vars: function
-    ##     super:  <ggproto object: Class FacetWrap, Facet, gg>
-
-``` r
 plot(g)
 ```
 
