@@ -19,36 +19,26 @@ To do so we tested different scenarios:
 
 x is the selection coefficient.
 
--   x = 0, seed: 1659974780289607000
+-   x = 0, seed: 1674142770163408000
 
--   x = 0.1, seed: 1659976729436433000
+-   x = 0.1, seed: 1674144830844846000
 
--   x = 0.01, seed: 1659976873807557000
+-   x = 0.01, seed: 1674144976997220000
 
--   x = 0.001, seed: 1659977962027368000
+-   x = 0.001, seed: 1674146131872065000
 
--   x = 0.0001, seed: 1659979870159207000
-
-### Effect of a fixed selection coefficient x = 0.01 on different population sizes
-
--   N = 10, seed: 1660120246965342000
-
--   N = 100, seed: 1660120247347350000
-
--   N = 1000, seed: 1660120250808495000
-
--   N = 10000, seed: 1660120309255585000
-
--   N = 100000, seed: 1660121647914582000
+-   x = 0.0001, seed: 1674148120275471000
 
 ## Materials & Methods
 
-version: invadego 0.2.2
+version: invadego 0.2.3
 
 ### Commands for the simulation:
 
 ``` bash
-echo "10000 R 0;999999;" > input_sel
+echo "5000 R 0;0;
+2500 R 0;0;0
+2500 R 0;;" > input_sel
 % folder="/Users/ascarpa/Paramutations_TEs/Validation/Raw"
 tool="/Users/ascarpa/invade-invadego/invadego022"
 
@@ -66,19 +56,7 @@ $tool --N 10000 --u 0 -x 0.001 --basepop $folder/input_sel --gen 1000 --genome m
 
 $tool --N 10000 --u 0 -x 0.0001 --basepop $folder/input_sel --gen 1000 --genome mb:1 --steps 10 --rr 0 --rep 100 --sampleid psel7 > $folder/validation_7_7
 
-$tool --N 10 --u 0 -x 0.01 --basepop 10 --gen 1000 --genome mb:1 --steps 10 --rr 0 --rep 100 --sampleid psel8 > $folder/validation_7_8
-
-$tool --N 100 --u 0 -x 0.01 --basepop 100 --gen 1000 --genome mb:1 --steps 10 --rr 0 --rep 100 --sampleid psel9 > $folder/validation_7_9
-
-$tool --N 1000 --u 0 -x 0.01 --basepop 1000 --gen 1000 --genome mb:1 --steps 10 --rr 0 --rep 100 --sampleid psel10 > $folder/validation_7_10
-
-$tool --N 10000 --u 0 -x 0.01 --basepop 10000 --gen 1000 --genome mb:1 --steps 10 --rr 0 --rep 100 --sampleid psel11 > $folder/validation_7_11
-
-$tool --N 100000 --u 0 -x 0.01 --basepop 100000 --gen 1000 --genome mb:1 --steps 10 --rr 0 --rep 100 --sampleid psel12 > $folder/validation_7_12
-
-cat validation_7_3 validation_7_4 validation_7_5 validation_7_6 validation_7_7 |grep -v "^Invade"|grep -v "^#" > 2022_08_05_Validation_7_selection_1
-
-cat validation_7_8 validation_7_9 validation_7_10 validation_7_11 validation_7_12 |grep -v "^Invade"|grep -v "^#" > 2022_08_05_Validation_7_selection_2
+cat validation_7_3 validation_7_4 validation_7_5 validation_7_6 validation_7_7 |grep -v "^Invade"|grep -v "^#" > 2022_08_05_Validation_7_Selection
 ```
 
 ### Visualization in R
@@ -88,8 +66,9 @@ Setting the environment
 ``` r
 library(ggplot2)
 library(RColorBrewer)
-library(dplyr)
+library(plyr)
 library(patchwork)
+library(ggpubr)
 ```
 
 # Selection vs selection on non-cluster insertions
@@ -189,32 +168,28 @@ to be lost, while in the second only non cluster TEs are lost, while
 cluster insertions are maintained.
 
 ``` r
-df_1<-read.table("Raw/2022_08_05_Validation_7_selection_1", fill = TRUE, sep = "\t")
-names(df_1)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed","spacer_2","phase","fwpirna","spacer_3","fwcli","avcli","fixcli","spacer_4","fwpar_yespi","fwpar_nopi",
-              "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
+df_sel<-read.table("Raw/2022_08_05_Validation_7_Selection", fill = TRUE, sep = "\t")
+names(df_sel)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "min_w", "avtes", "avpopfreq",
+                 "fixed","spacer_2", "phase", "fwpirna", "spacer_3", "fwcli", "avcli", "fixcli", "spacer_4",
+                 "fwpar_yespi","fwpar_nopi", "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
 
-gt_1<-ggplot()+
-  theme(legend.position="none")+
-  geom_line(data=df_1,aes(x=gen, y=avtes , group=rep,color=phase),alpha=1,size=0.7)+
+g_sel<-ggplot(df_sel, aes(x=gen, y=avpopfreq , group=rep))+
+  geom_line(alpha=1,size=0.7)+
   ylab("TE population frequency") + xlab("generation")+
-  scale_y_log10()+
+  facet_wrap(~sampleid, ncol=3)+
   facet_wrap(~sampleid, labeller = labeller(sampleid = 
-                                       c("psel3" = "x = 0",
-                                         "psel4" = "x = 0.1",
-                                         "psel5" = "x = 0.01",
-                                         "psel6" = "x = 0.001",
-                                         "psel7" = "x = 0.0001")))
-plot(gt_1)
+                                              c("psel3" = "x = 0",
+                                                "psel4" = "x = 0.1",
+                                                "psel5" = "x = 0.01",
+                                                "psel6" = "x = 0.001",
+                                                "psel7" = "x = 0.0001")))
+plot(g_sel)
 ```
 
 ![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ``` r
-df1_s<-subset(df_1, sampleid=="psel3")
-df2_s<-subset(df_1, sampleid=="psel4")
-df3_s<-subset(df_1, sampleid=="psel5")
-df4_s<-subset(df_1, sampleid=="psel6")
-df5_s<-subset(df_1, sampleid=="psel7")
+df3_s<-subset(df_sel, sampleid=="psel3")
 
 p0=0.5
 p<-p0
@@ -240,16 +215,20 @@ traj<- as.data.frame(traj)
 traj[,3]<- "black"
 colnames(traj)<- c("freq", "generations", "color")
 
-g_s_1<-ggplot()+ 
-  geom_line(df1_s, mapping=aes(x=gen, y=avtes, group=rep), color="red")+
-  geom_line(traj, mapping=aes(x=generations, y=(freq*2)), color="black")+
+g_s_3<-ggplot()+ 
+  geom_line(df3_s, mapping=aes(x=gen, y=avpopfreq, group=rep), alpha =0.5)+
+  geom_line(traj, mapping=aes(x=generations, y=(freq)), color="blue", size = 1)+
+  ggtitle("x = 0")+
   labs(x="generation", y="frequency of TEs in the population")
-plot(g_s_1)
+
+plot(g_s_3)
 ```
 
 ![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
 
 ``` r
+df4_s<-subset(df_sel, sampleid=="psel4")
+
 p0=0.5
 p<-p0
 q<-1-p0
@@ -273,16 +252,20 @@ while(g<=max(t)){
 traj<- as.data.frame(traj)
 traj[,3]<- "black"
 colnames(traj)<- c("freq", "generations", "color")
-g_s_2<-ggplot()+ 
-  geom_line(df2_s, mapping=aes(x=gen, y=avtes, group=rep), color="red")+
-  geom_line(traj, mapping=aes(x=generations, y=(freq*2)), color="black")+
+g_s_4<-ggplot()+ 
+  geom_line(df4_s, mapping=aes(x=gen, y=avpopfreq, group=rep),alpha =0.5)+
+  geom_line(traj, mapping=aes(x=generations, y=(freq)), color="blue", size = 0.5)+
+  ggtitle("x = 0.1")+
   labs(x="generation", y="frequency of TEs in the population")
-plot(g_s_2)
+
+plot(g_s_4)
 ```
 
 ![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-4-3.png)<!-- -->
 
 ``` r
+df5_s<-subset(df_sel, sampleid=="psel5")
+
 p0=0.5
 p<-p0
 q<-1-p0
@@ -306,16 +289,21 @@ while(g<=max(t)){
 traj<- as.data.frame(traj)
 traj[,3]<- "black"
 colnames(traj)<- c("freq", "generations", "color")
-g_s_3<-ggplot()+ 
-  geom_line(df3_s, mapping=aes(x=gen, y=avtes, group=rep), color="red")+
-  geom_line(traj, mapping=aes(x=generations, y=(freq*2)), color="black")+
+
+g_s_5<-ggplot()+ 
+  geom_line(df5_s, mapping=aes(x=gen, y=avpopfreq, group=rep), alpha =0.5)+
+  geom_line(traj, mapping=aes(x=generations, y=(freq)), color="blue", size = 1)+
+  ggtitle("x = 0.01")+
   labs(x="generation", y="frequency of TEs in the population")
-plot(g_s_3)
+
+plot(g_s_5)
 ```
 
 ![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-4-4.png)<!-- -->
 
 ``` r
+df6_s<-subset(df_sel, sampleid=="psel6")
+
 p0=0.5
 p<-p0
 q<-1-p0
@@ -339,16 +327,20 @@ while(g<=max(t)){
 traj<- as.data.frame(traj)
 traj[,3]<- "black"
 colnames(traj)<- c("freq", "generations", "color")
-g_s_4<-ggplot()+ 
-  geom_line(df4_s, mapping=aes(x=gen, y=avtes, group=rep), color="red")+
-  geom_line(traj, mapping=aes(x=generations, y=(freq*2)), color="black")+
+g_s_6<-ggplot()+ 
+  geom_line(df6_s, mapping=aes(x=gen, y=avpopfreq, group=rep), alpha =0.5)+
+  geom_line(traj, mapping=aes(x=generations, y=(freq)), color="blue", size = 1)+
+  ggtitle("x = 0.001")+
   labs(x="generation", y="frequency of TEs in the population")
-plot(g_s_4)
+
+plot(g_s_6)
 ```
 
 ![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-4-5.png)<!-- -->
 
 ``` r
+df7_s<-subset(df_sel, sampleid=="psel7")
+
 p0=0.5
 p<-p0
 q<-1-p0
@@ -372,58 +364,32 @@ while(g<=max(t)){
 traj<- as.data.frame(traj)
 traj[,3]<- "black"
 colnames(traj)<- c("freq", "generations", "color")
-g_s_5<-ggplot()+ 
-  geom_line(df5_s, mapping=aes(x=gen, y=avtes, group=rep), color="red")+
-  geom_line(traj, mapping=aes(x=generations, y=(freq*2)), color="black")+
+g_s_7<-ggplot()+ 
+  geom_line(df7_s, mapping=aes(x=gen, y=avpopfreq, group=rep), alpha =0.5)+
+  geom_line(traj, mapping=aes(x=generations, y=(freq)), color="blue", size = 1)+
+  ggtitle("x = 0.0001")+
   labs(x="generation", y="frequency of TEs in the population")
-plot(g_s_5)
+
+plot(g_s_7)
 ```
 
 ![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-4-6.png)<!-- -->
 
-The simulations match the expected values (black line).
-
 ``` r
-df_2<-read.table("Raw/2022_08_05_Validation_7_selection_2", fill = TRUE, sep = "\t")
-names(df_2)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed","spacer_2","phase","fwpirna","spacer_3","fwcli","avcli","fixcli","spacer_4","fwpar_yespi","fwpar_nopi",
-            "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
-df_2$sampleid <- factor(df_2$sampleid, levels=c("psel8", "psel9", "psel10", "psel11","psel12"))
-
-gt_2<-ggplot()+
-  theme(legend.position="none")+
-  geom_line(data=df_2, aes(x=gen, y=avtes , group=rep,color=phase),alpha=1,size=0.7)+
-  ylab("TE population frequency") + xlab("generation")+
-  facet_wrap(~sampleid, labeller = labeller(sampleid = 
-                                              c("psel8" = "N = 10",
-                                                "psel9" = "N = 100",
-                                                "psel10" = "N = 1000",
-                                                "psel11" = "N = 10000",
-                                                "psel12" = "N = 100000")))
-plot(gt_2)
+ggarrange(g_s_3, g_s_7, g_s_6, g_s_5, g_s_4,
+          ncol = 3, nrow = 2, align = ("v"),
+          labels = c("A", "B", "C", "D", "E"), heights = c(2,2), widths = c(2,2)
+)
 ```
 
-![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-4-7.png)<!-- -->
 
-``` r
-gt_2_2<-ggplot()+
-  theme(legend.position="none")+
-  geom_line(data=df_2, aes(x=gen, y=fixed , group=rep,color=phase),alpha=1,size=0.7)+
-  ylab("Fixed TEs") + xlab("generation")+
-  facet_wrap(~sampleid, labeller = labeller(sampleid = 
-                                              c("psel8" = "N = 10",
-                                                "psel9" = "N = 100",
-                                                "psel10" = "N = 1000",
-                                                "psel11" = "N = 10000",
-                                                "psel12" = "N = 100000")))
-plot(gt_2_2)
-```
-
-![](2022_08_05_Validation_7_selection_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
+The simulations match the expected values (blue line).
 
 As we expected in the first set of graphs we can see how an higher
 selection coefficient decrease the number of generations needed to lose
-all the TEs in the population. But if selection is too small as in the
-last case TEs can persist in the population.
+all the TEs in the population. But if the selection coefficient is too
+small (A and B) drift will prevail.
 
 Selection is linked to population size and to be effective it has to
 meet the requirements from the following equation:
@@ -431,13 +397,7 @@ meet the requirements from the following equation:
 ![ N \\cdot x \> 1 ](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%20N%20%5Ccdot%20x%20%3E%201%20 " N \cdot x > 1 ")
 
 Thus in small populations the predominant force is not selection but
-drift, this is shown by the second and third sets of graphs where
-selection was maintained at 0.01, while the population size changed. The
-frequency of the TEs was equal in all the population since the initial
-TEs insertion were equal to N. In populations with N = 10 and N = 100
-the TEs are able to become fixed in the population (as shown in the last
-set of graphs), therefore selection can’t purge them even though they
-decrease the fitness.
+drift.
 
 ## Conclusions
 

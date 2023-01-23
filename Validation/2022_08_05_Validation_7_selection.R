@@ -2,9 +2,11 @@ library(ggplot2)
 library(RColorBrewer)
 library(plyr)
 library(patchwork)
+library(ggpubr)
+theme_set(theme_bw())
+
 
 setwd("/Users/ascarpa/Paramutations_TEs/Validation/Raw")
-
 
 t_1<-read.table("validation_7_1_mhp", fill = TRUE, sep = "\t")
 names(t_1)<-c("rep","gen","chr","pos","locus","popfreq")
@@ -78,28 +80,32 @@ g_2_3<-ggplot()+
 g_2_2+g_2_3
 
 
-df_1<-read.table("2022_08_05_Validation_7_selection_1", fill = TRUE, sep = "\t")
-names(df_1)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed","spacer_2","phase","fwpirna","spacer_3","fwcli","avcli","fixcli","spacer_4","fwpar_yespi","fwpar_nopi",
-              "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
+df_sel<-read.table("2022_08_05_Validation_7_Selection", fill = TRUE, sep = "\t")
+names(df_sel)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "min_w", "avtes", "avpopfreq",
+                 "fixed","spacer_2", "phase", "fwpirna", "spacer_3", "fwcli", "avcli", "fixcli", "spacer_4",
+                 "fwpar_yespi","fwpar_nopi", "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
 
-gt_1<-ggplot()+
-  theme(legend.position="none")+
-  geom_line(data=df_1,aes(x=gen, y=avtes , group=rep,color=phase),alpha=1,size=0.7)+
+g_sel<-ggplot(df_sel, aes(x=gen, y=avpopfreq , group=rep))+
+  geom_line(alpha=1,size=0.7)+
   ylab("TE population frequency") + xlab("generation")+
-  scale_y_log10()+
+  theme(plot.title = element_text(size=24),
+        axis.text.x = element_text(size=20),
+        axis.text.y = element_text(size=20),
+        axis.title.x = element_text(size=24),
+        axis.title.y = element_text(size=24),
+        strip.text = element_text(size = 24))+
+  facet_wrap(~sampleid, ncol=3)+
   facet_wrap(~sampleid, labeller = labeller(sampleid = 
-                                       c("psel3" = "x = 0",
-                                         "psel4" = "x = 0.1",
-                                         "psel5" = "x = 0.01",
-                                         "psel6" = "x = 0.001",
-                                         "psel7" = "x = 0.0001")))
-plot(gt_1)
+                                              c("psel3" = "x = 0",
+                                                "psel4" = "x = 0.1",
+                                                "psel5" = "x = 0.01",
+                                                "psel6" = "x = 0.001",
+                                                "psel7" = "x = 0.0001")))
+plot(g_sel)
 
-df1_s<-subset(df_1, sampleid=="psel3")
-df2_s<-subset(df_1, sampleid=="psel4")
-df3_s<-subset(df_1, sampleid=="psel5")
-df4_s<-subset(df_1, sampleid=="psel6")
-df5_s<-subset(df_1, sampleid=="psel7")
+
+
+df3_s<-subset(df_sel, sampleid=="psel3")
 
 p0=0.5
 p<-p0
@@ -125,11 +131,22 @@ traj<- as.data.frame(traj)
 traj[,3]<- "black"
 colnames(traj)<- c("freq", "generations", "color")
 
-g_s_1<-ggplot()+ 
-  geom_line(df1_s, mapping=aes(x=gen, y=avtes, group=rep), color="red")+
-  geom_line(traj, mapping=aes(x=generations, y=(freq*2)), color="black")+
-  labs(x="generation", y="frequency of TEs in the population")
-plot(g_s_1)
+g_s_3<-ggplot()+ 
+  geom_line(df3_s, mapping=aes(x=gen, y=avpopfreq, group=rep), alpha =0.5)+
+  geom_line(traj, mapping=aes(x=generations, y=(freq)), color="blue", size = 1)+
+  ggtitle("x = 0")+
+  labs(x="generation", y="frequency of TEs in the population")+
+  theme(plot.title = element_text(size=24),
+        axis.text.x = element_text(size=20),
+        axis.text.y = element_text(size=20),
+        axis.title.x = element_text(size=24),
+        axis.title.y = element_text(size=24),
+        strip.text = element_text(size = 24))
+
+plot(g_s_3)
+
+
+df4_s<-subset(df_sel, sampleid=="psel4")
 
 p0=0.5
 p<-p0
@@ -154,11 +171,23 @@ while(g<=max(t)){
 traj<- as.data.frame(traj)
 traj[,3]<- "black"
 colnames(traj)<- c("freq", "generations", "color")
-g_s_2<-ggplot()+ 
-  geom_line(df2_s, mapping=aes(x=gen, y=avtes, group=rep), color="red")+
-  geom_line(traj, mapping=aes(x=generations, y=(freq*2)), color="black")+
-  labs(x="generation", y="frequency of TEs in the population")
-plot(g_s_2)
+g_s_4<-ggplot()+ 
+  geom_line(df4_s, mapping=aes(x=gen, y=avpopfreq, group=rep),alpha =0.5)+
+  geom_line(traj, mapping=aes(x=generations, y=(freq)), color="blue", size = 0.5)+
+  ggtitle("x = 0.1")+
+  labs(x="generation", y="frequency of TEs in the population")+
+  theme(plot.title = element_text(size=24),
+        axis.text.x = element_text(size=20),
+        axis.text.y = element_text(size=20),
+        axis.title.x = element_text(size=24),
+        axis.title.y = element_text(size=24),
+        strip.text = element_text(size = 24))
+
+plot(g_s_4)
+
+
+
+df5_s<-subset(df_sel, sampleid=="psel5")
 
 p0=0.5
 p<-p0
@@ -183,11 +212,23 @@ while(g<=max(t)){
 traj<- as.data.frame(traj)
 traj[,3]<- "black"
 colnames(traj)<- c("freq", "generations", "color")
-g_s_3<-ggplot()+ 
-  geom_line(df3_s, mapping=aes(x=gen, y=avtes, group=rep), color="red")+
-  geom_line(traj, mapping=aes(x=generations, y=(freq*2)), color="black")+
-  labs(x="generation", y="frequency of TEs in the population")
-plot(g_s_3)
+
+g_s_5<-ggplot()+ 
+  geom_line(df5_s, mapping=aes(x=gen, y=avpopfreq, group=rep), alpha =0.5)+
+  geom_line(traj, mapping=aes(x=generations, y=(freq)), color="blue", size = 1)+
+  ggtitle("x = 0.01")+
+  labs(x="generation", y="frequency of TEs in the population")+
+  theme(plot.title = element_text(size=24),
+        axis.text.x = element_text(size=20),
+        axis.text.y = element_text(size=20),
+        axis.title.x = element_text(size=24),
+        axis.title.y = element_text(size=24),
+        strip.text = element_text(size = 24))
+
+plot(g_s_5)
+
+
+df6_s<-subset(df_sel, sampleid=="psel6")
 
 p0=0.5
 p<-p0
@@ -212,11 +253,23 @@ while(g<=max(t)){
 traj<- as.data.frame(traj)
 traj[,3]<- "black"
 colnames(traj)<- c("freq", "generations", "color")
-g_s_4<-ggplot()+ 
-  geom_line(df4_s, mapping=aes(x=gen, y=avtes, group=rep), color="red")+
-  geom_line(traj, mapping=aes(x=generations, y=(freq*2)), color="black")+
-  labs(x="generation", y="frequency of TEs in the population")
-plot(g_s_4)
+g_s_6<-ggplot()+ 
+  geom_line(df6_s, mapping=aes(x=gen, y=avpopfreq, group=rep), alpha =0.5)+
+  geom_line(traj, mapping=aes(x=generations, y=(freq)), color="blue", size = 1)+
+  ggtitle("x = 0.001")+
+  labs(x="generation", y="frequency of TEs in the population")+
+  theme(plot.title = element_text(size=24),
+        axis.text.x = element_text(size=20),
+        axis.text.y = element_text(size=20),
+        axis.title.x = element_text(size=24),
+        axis.title.y = element_text(size=24),
+        strip.text = element_text(size = 24))
+
+plot(g_s_6)
+
+
+
+df7_s<-subset(df_sel, sampleid=="psel7")
 
 p0=0.5
 p<-p0
@@ -241,38 +294,22 @@ while(g<=max(t)){
 traj<- as.data.frame(traj)
 traj[,3]<- "black"
 colnames(traj)<- c("freq", "generations", "color")
-g_s_5<-ggplot()+ 
-  geom_line(df5_s, mapping=aes(x=gen, y=avtes, group=rep), color="red")+
-  geom_line(traj, mapping=aes(x=generations, y=(freq*2)), color="black")+
-  labs(x="generation", y="frequency of TEs in the population")
-plot(g_s_5)
+g_s_7<-ggplot()+ 
+  geom_line(df7_s, mapping=aes(x=gen, y=avpopfreq, group=rep), alpha =0.5)+
+  geom_line(traj, mapping=aes(x=generations, y=(freq)), color="blue", size = 1)+
+  ggtitle("x = 0.0001")+
+  labs(x="generation", y="frequency of TEs in the population")+
+  theme(plot.title = element_text(size=24),
+        axis.text.x = element_text(size=20),
+        axis.text.y = element_text(size=20),
+        axis.title.x = element_text(size=24),
+        axis.title.y = element_text(size=24),
+        strip.text = element_text(size = 24))
+
+plot(g_s_7)
 
 
-df_2<-read.table("2022_08_05_Validation_7_selection_2", fill = TRUE, sep = "\t")
-names(df_2)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed","spacer_2","phase","fwpirna","spacer_3","fwcli","avcli","fixcli","spacer_4","fwpar_yespi","fwpar_nopi",
-            "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
-df_2$sampleid <- factor(df_2$sampleid, levels=c("psel8", "psel9", "psel10", "psel11","psel12"))
-
-gt_2<-ggplot()+
-  theme(legend.position="none")+
-  geom_line(data=df_2, aes(x=gen, y=avtes , group=rep,color=phase),alpha=1,size=0.7)+
-  ylab("TE population frequency") + xlab("generation")+
-  facet_wrap(~sampleid, labeller = labeller(sampleid = 
-                                              c("psel8" = "N = 10",
-                                                "psel9" = "N = 100",
-                                                "psel10" = "N = 1000",
-                                                "psel11" = "N = 10000",
-                                                "psel12" = "N = 100000")))
-plot(gt_2)
-
-gt_2_2<-ggplot()+
-  theme(legend.position="none")+
-  geom_line(data=df_2, aes(x=gen, y=fixed , group=rep,color=phase),alpha=1,size=0.7)+
-  ylab("Fixed TEs") + xlab("generation")+
-  facet_wrap(~sampleid, labeller = labeller(sampleid = 
-                                              c("psel8" = "N = 10",
-                                                "psel9" = "N = 100",
-                                                "psel10" = "N = 1000",
-                                                "psel11" = "N = 10000",
-                                                "psel12" = "N = 100000")))
-plot(gt_2_2)
+ggarrange(g_s_3, g_s_7, g_s_6, g_s_5, g_s_4,
+          ncol = 3, nrow = 2, align = ("v"),
+          labels = c("A", "B", "C", "D", "E"), heights = c(2,2), widths = c(2,2)
+)
