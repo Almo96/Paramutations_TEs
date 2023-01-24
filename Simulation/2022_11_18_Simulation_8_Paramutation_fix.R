@@ -1,9 +1,8 @@
 library(tidyverse)
 library(ggplot2)
-library(patchwork)
 library(dplyr)
-library(stringr)
 library(plyr)
+library(ggpubr)
 theme_set(theme_bw())
 
 
@@ -38,12 +37,19 @@ df_3 <- df_2 %>%
   dplyr::count(fwpar_yespi)
 
 g_2<-ggplot(df_3, aes(x=fwpar_yespi, y=n/10, fill=factor(fwpar_yespi)))+
-  geom_col(color = "black") +
-  scale_fill_brewer(palette = "Set1") +
-  theme(legend.position = "none")+
+  geom_col(color = "black")+
+  scale_fill_brewer(palette = "Set1")+
   scale_y_continuous(limits = c(0,100), expand = c(0, 0))+
-  ylab("Populations [%]")+
-  ggtitle("1 chromosome, 1 paramutable locus per haploid genome, no clusters --u 0 -x 0")
+  ggtitle("x = 0, u = 0")+
+  ylab("populations [%]")+
+  xlab("")+
+  theme(legend.position = "none",
+      plot.title = element_text(size=24),
+      axis.text.x = element_text(size=20),
+      axis.text.y = element_text(size=20),
+      axis.title.x = element_text(size=24),
+      axis.title.y = element_text(size=24),
+      strip.text = element_text(size = 24))
 
 plot(g_2)
 
@@ -161,7 +167,7 @@ g_x4 <-ggplot(df_x3_4, aes(x="", y=n, fill=factor(fwpar_yespi)))+
 plot(g_x4)
 
 
-#--cluster kb:0 --u 0.1 -x 0.001
+#--cluster kb:0 --u 0 -x 0
 df_x1_5 <- read.table("2022_11_18_Simulation_8_6", fill = TRUE, sep = "\t")
 names(df_x1_5) <- names_vector
 df_x2_5 <- data.frame()
@@ -170,18 +176,24 @@ df_x2_5 <- subset(df_x1_5, gen == 5000)
 df_x3_5 <- df_x2_5 %>%
   dplyr::count(fwpar_yespi)
 
-df_x3_5$fwpar_yespi <- c("Fixed paramutation")
+df_x3_5$fwpar_yespi <- c("lost", "fixed")
 
 
-g_x5 <-ggplot(df_x3_5, aes(x="", y=n, fill=factor(fwpar_yespi)))+
+g_x5 <-ggplot(df_x3_5, aes(x=fwpar_yespi, y=n/10, fill=factor(fwpar_yespi)))+
   geom_col(color = "black") +
-  coord_polar(theta = "y") +
   scale_fill_brewer(palette = "Set1") +
-  theme(axis.text = element_blank(),
-        axis.ticks = element_blank(),
-        axis.title = element_blank(),
-        panel.grid = element_blank())+
-  ggtitle("--cluster kb:0 --u 0.1 -x 0.001")
+  theme(legend.position = "none")+
+  scale_y_continuous(limits = c(0,100), expand = c(0, 0))+
+  ggtitle("x = 0, u = 0")+
+  ylab("populations [%]")+
+  xlab("")+
+  theme(legend.position = "none",
+        plot.title = element_text(size=24),
+        axis.text.x = element_text(size=20),
+        axis.text.y = element_text(size=20),
+        axis.title.x = element_text(size=24),
+        axis.title.y = element_text(size=24),
+        strip.text = element_text(size = 24))
 
 plot(g_x5)
 
@@ -195,7 +207,7 @@ df_x2_6 <- subset(df_x1_6, gen == 5000)
 df_x3_6 <- df_x2_6 %>%
   dplyr::count(fwpar_yespi)
 
-df_x3_6$fwpar_yespi <- c("No piRNAs", "Fixed paramutation")
+df_x3_6$fwpar_yespi <- c("lost", "fixed")
 
 
 g_x6 <-ggplot(df_x3_6, aes(x=fwpar_yespi, y=n/10, fill=factor(fwpar_yespi)))+
@@ -203,8 +215,16 @@ g_x6 <-ggplot(df_x3_6, aes(x=fwpar_yespi, y=n/10, fill=factor(fwpar_yespi)))+
   scale_fill_brewer(palette = "Set1") +
   theme(legend.position = "none")+
   scale_y_continuous(limits = c(0,100), expand = c(0, 0))+
-  ylab("Populations [%]")+
-  ggtitle("5 chromosomes, 1 paramutable locus per haploid genome, no clusters --u 0.01 -x 0.01")
+  ggtitle("x = 0.01, u = 0.01")+
+  ylab("populations [%]")+
+  xlab("")+
+  theme(legend.position = "none",
+        plot.title = element_text(size=24),
+        axis.text.x = element_text(size=20),
+        axis.text.y = element_text(size=20),
+        axis.title.x = element_text(size=24),
+        axis.title.y = element_text(size=24),
+        strip.text = element_text(size = 24))
 
 plot(g_x6)
 
@@ -229,15 +249,23 @@ df_x2_7 <- subset(df_x1_7, gen == 5000)
 df_x3_7 <- df_x2_7 %>%
   dplyr::count(fwpar_yespi)
 
-df_x3_7$fwpar_yespi <- c("No piRNAs", "Fixed paramutation")
+df_x3_7$fwpar_yespi <- c("lost", "fixed")
 
 g_x7 <-ggplot(df_x3_7, aes(x=fwpar_yespi, y=n/10, fill=factor(fwpar_yespi)))+
   geom_col(color = "black") +
   scale_fill_brewer(palette = "Set1") +
   theme(legend.position = "none")+
   scale_y_continuous(limits = c(0,100), expand = c(0, 0))+
-  ylab("Populations [%]")+
-  ggtitle("5 chromosomes, 1 paramutable locus per haploid genome, no clusters --u 0.01 -x 0.01")
+  ggtitle("x = 0.1, u = 0.01")+
+  ylab("populations [%]")+
+  xlab("")+
+  theme(legend.position = "none",
+        plot.title = element_text(size=24),
+        axis.text.x = element_text(size=20),
+        axis.text.y = element_text(size=20),
+        axis.title.x = element_text(size=24),
+        axis.title.y = element_text(size=24),
+        strip.text = element_text(size = 24))
 
 plot(g_x7)
 
@@ -262,15 +290,23 @@ df_x2_8 <- subset(df_x1_8, gen == 5000)
 df_x3_8 <- df_x2_8 %>%
   dplyr::count(fwpar_yespi)
 
-df_x3_8$fwpar_yespi <- c("No piRNAs", "Fixed paramutation")
+df_x3_8$fwpar_yespi <- c("lost", "fixed")
 
 g_x8 <-ggplot(df_x3_8, aes(x=fwpar_yespi, y=n/10, fill=factor(fwpar_yespi)))+
   geom_col(color = "black") +
   scale_fill_brewer(palette = "Set1") +
   theme(legend.position = "none")+
   scale_y_continuous(limits = c(0,100), expand = c(0, 0))+
-  ylab("Populations [%]")+
-  ggtitle("5 chromosomes, 1 paramutable locus per haploid genome, no clusters --u 0.01 -x 0.01")
+  ggtitle("x = 0.2, u = 0.01")+
+  ylab("populations [%]")+
+  xlab("")+
+  theme(legend.position = "none",
+        plot.title = element_text(size=24),
+        axis.text.x = element_text(size=20),
+        axis.text.y = element_text(size=20),
+        axis.title.x = element_text(size=24),
+        axis.title.y = element_text(size=24),
+        strip.text = element_text(size = 24))
 
 plot(g_x8)
 
@@ -286,8 +322,16 @@ g_x8_2 <-ggplot(df_x3_8, aes(x="", y=n, fill=factor(fwpar_yespi)))+
 
 plot(g_x8_2)
 
-g_2+ggtitle("x = 0, u = 0") + g_x6+ggtitle("x = 0.01, u = 0.01") + g_x7+ggtitle("x = 0.1, u = 0.01") + g_x8+ggtitle("x = 0.2, u = 0.01")
+
+ggarrange(g_x5, g_x6, g_x7, g_x8,
+          ncol = 2, nrow = 2, align = ("v"),
+          labels = c("B", "C", "D", "E"), heights = c(2,2), widths = c(2,2)
+)
+
 
 pdf(file = "/Users/ascarpa/Paramutations_TEs/Pictures_paper/Figure_5/Figure_5.pdf", width = 10, height = 7.5)
-g_2+ggtitle("x = 0, u = 0") + g_x6+ggtitle("x = 0.01, u = 0.01") + g_x7+ggtitle("x = 0.1, u = 0.01") + g_x8+ggtitle("x = 0.2, u = 0.01")
+ggarrange(g_x5, g_x6, g_x7, g_x8,
+          ncol = 2, nrow = 2, align = ("v"),
+          labels = c("B", "C", "D", "E"), heights = c(2,2), widths = c(2,2)
+)
 dev.off()
