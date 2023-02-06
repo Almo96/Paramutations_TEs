@@ -311,5 +311,5 @@ plot(g_s_7)
 
 ggarrange(g_s_3, g_s_7, g_s_6, g_s_5, g_s_4,
           ncol = 3, nrow = 2, align = ("v"),
-          labels = c("A", "B", "C", "D", "E"), heights = c(2,2), widths = c(2,2)
+          heights = c(2,2), widths = c(2,2)
 )

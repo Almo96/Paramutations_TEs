@@ -37,6 +37,9 @@ g<-ggplot()+geom_line(data=df_total,aes(x=gen,group=rep,y=avtes*1000),alpha=0.4)
         axis.title.x = element_text(size=24),
         axis.title.y = element_text(size=24),
         strip.text = element_text(size = 24))+
-  facet_wrap(~sampleid, ncol=3)
+  facet_wrap(~sampleid, ncol=3, labeller = labeller(sampleid = 
+                                                      c("p0" = "p = 0%",
+                                                        "p50" = "p = 50%",
+                                                        "p100" = "p = 100%")))
 
 plot(g)
