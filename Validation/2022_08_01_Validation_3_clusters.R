@@ -27,6 +27,9 @@ g<-ggplot()+geom_line(data=data_new,aes(x=gen,group=rep,y=avtes),alpha=0.4)+
         axis.title.x = element_text(size=24),
         axis.title.y = element_text(size=24),
         strip.text = element_text(size = 24))+
-  facet_wrap(~sampleid, ncol=3)
+  facet_wrap(~sampleid, ncol=3, labeller = labeller(sampleid = 
+                                                      c("pc0" = "clu = 0%",
+                                                        "pc50" = "clu = 50%",
+                                                        "pc100" = "clu = 100%")))
 
 plot(g)
