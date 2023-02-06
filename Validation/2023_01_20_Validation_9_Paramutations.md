@@ -35,12 +35,12 @@ version: invadego0.2.3
 ### Commands for the simulation:
 
 ``` bash
-echo "1000 R 0;1;1" > 2023_01_19_input_50
+echo "1000 R 0;1;1" > 2023_01_19_input_0
 
 echo "500 R 1;1;1
 500 R 0;1;1" > 2023_01_19_input_50
 
-echo "1000 R 1;1;1" > 2023_01_19_input_50
+echo "1000 R 1;1;1" > 2023_01_19_input_100
 
 folder="/Users/ascarpa/Paramutations_TEs/Validation/Raw""
 tool="/Users/ascarpa/invade-invadego/invadego023"
@@ -98,7 +98,10 @@ g<-ggplot()+geom_line(data=df_total,aes(x=gen,group=rep,y=avtes*1000),alpha=0.4)
         axis.title.x = element_text(size=14),
         axis.title.y = element_text(size=14),
         strip.text = element_text(size = 14))+
-  facet_wrap(~sampleid, ncol=3)
+  facet_wrap(~sampleid, ncol=3, labeller = labeller(sampleid = 
+                                                      c("p0" = "p = 0%",
+                                                        "p50" = "p = 50%",
+                                                        "p100" = "p = 100%")))
 
 plot(g)
 ```
