@@ -62,7 +62,7 @@ library(plyr)
 theme_set(theme_bw())
 ```
 
-Visualization: comparing the simulations with the prediction
+Visualization:
 
 ``` r
 setwd("/Users/ascarpa/Paramutations_TEs/Validation/Raw")
@@ -108,7 +108,7 @@ plot(g)
 
 ![](2023_01_20_Validation_9_Paramutations_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
-### Visualization in R
+### Conclusions
 
 All the scenarioss matched the theoretical expectations: paramutable
 loci are correctly implemented.
