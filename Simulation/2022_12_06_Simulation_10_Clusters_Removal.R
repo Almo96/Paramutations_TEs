@@ -32,16 +32,16 @@ g<-ggplot()+
   scale_colour_manual(values=p)+
   scale_x_continuous(breaks = seq(0, 5000, by = 2500))+
   facet_wrap(~sampleid, ncol = 5, nrow = 2, labeller = labeller(sampleid = 
-                                                                  c("p0_0" = "p = 0%, clu -0 ",
-                                                                    "p0_1" = "p = 0%, clu -1 ",
-                                                                    "p0_2" = "p = 0%, clu -2 ",
-                                                                    "p0_3" = "p = 0%, clu -3 ",
-                                                                    "p0_4" = "p = 0%, clu -4 ",
-                                                                    "p10_0" = "p = 10%, clu -0 ",
-                                                                    "p10_1" = "p = 10%, clu -1 ",
-                                                                    "p10_2" = "p = 10%, clu -2 ",
-                                                                    "p10_3" = "p = 10%, clu -3 ",
-                                                                    "p10_4" = "p = 10%, clu -4 ")))
+                                                                  c("p0_0" = "para = 0%, clu -0 ",
+                                                                    "p0_1" = "para = 0%, clu -1 ",
+                                                                    "p0_2" = "para = 0%, clu -2 ",
+                                                                    "p0_3" = "para = 0%, clu -3 ",
+                                                                    "p0_4" = "para = 0%, clu -4 ",
+                                                                    "p10_0" = "para = 10%, clu -0 ",
+                                                                    "p10_1" = "para = 10%, clu -1 ",
+                                                                    "p10_2" = "para = 10%, clu -2 ",
+                                                                    "p10_3" = "para = 10%, clu -3 ",
+                                                                    "p10_4" = "para = 10%, clu -4 ")))
 
 
 plot(g)

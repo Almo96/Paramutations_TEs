@@ -26,16 +26,16 @@ g<-ggplot()+
   ylab("TEs insertions per diploid individual")+
   theme( axis.text = element_text(size = 24),
                axis.text.x = element_text(size = 24),
-               axis.title = element_text(size = 24, face = "bold"),
+               axis.title = element_text(size = 24),
                legend.position="none",
                strip.text = element_text(size = 24))+
   scale_colour_manual(values=p)+
   ylim(0,500)+
   facet_wrap(~sampleid, labeller = labeller(sampleid = 
-                                       c("p0" = "Paramutable loci = 0% (Trap model)",
-                                         "p1" = "Paramutable loci = 1%",
-                                         "p10" = "Paramutable loci = 10%",
-                                         "p100" = "Paramutable loci = 100%")))
+                                       c("p0" = "para = 0% (Trap model)",
+                                         "p1" = "para = 1%",
+                                         "p10" = "para = 10%",
+                                         "p100" = "para = 100%")))
                                        
 plot(g)
 
@@ -180,3 +180,9 @@ g_bar_clusters <- ggplot(df3_order, aes(x=as.factor(sampleid), y=avcli)) +
   ylab("cluster insertions per diploid individual")
 
 plot(g_bar_clusters)
+
+
+kruskal.test(avtes ~ as.factor(sampleid), data = df3)
+kruskal.test(avcli ~ sampleid, data = df3)
+
+
