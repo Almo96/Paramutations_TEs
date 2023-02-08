@@ -235,32 +235,3 @@ ab <- ggplot(dfab,aes(x = column_a_b, y = column_a_b))+scale_color_manual(values
   geom_point(alpha=0.7,size=4, color=column_c)
 
 plot(ab)
-
-#D7191C","#FDAE61","#A6D96A","#1A9641"
-#> min(df$min_w)
-#[1] 0.43
-#> max(df$min_w)
-#[1] 1
-#> color.gradient_sel(0.43)
-#[1] "#DD3428"
-#> color.gradient_sel(1)
-#[1] "#1A9641"
-#> (1-0.43)/2
-#[1] 0.285
-#> 0.285+0.43
-#[1] 0.715
-#> color.gradient_sel(0.715)
-#[1] "#CAC666"
-
-
-#> min(df_2$min_w)
-#[1] 0.1
-#> max(df_2$min_w)
-#[1] 0.96
-#  > color.gradient_clu(0.96)
-#[1] "#2FA047"
-#  > color.gradient_clu(0.1)
-#[1] "#DA2622"
-
-#color.gradient_clu(0.43)
-#[1] "#EFB462"
