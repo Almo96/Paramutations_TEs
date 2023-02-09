@@ -183,6 +183,11 @@ plot(g_bar_clusters)
 
 
 kruskal.test(avtes ~ as.factor(sampleid), data = df3)
+#Kruskal-Wallis rank sum test
+#data:  avtes by as.factor(sampleid)
+#Kruskal-Wallis chi-squared = 1589.6, df = 20, p-value < 2.2e-16
+
 kruskal.test(avcli ~ sampleid, data = df3)
-
-
+#Kruskal-Wallis rank sum test
+#data:  avcli by sampleid
+#Kruskal-Wallis chi-squared = 626.1, df = 20, p-value < 2.2e-16

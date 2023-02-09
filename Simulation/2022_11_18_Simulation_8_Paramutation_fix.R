@@ -2,6 +2,7 @@ library(tidyverse)
 library(ggplot2)
 library(dplyr)
 library(plyr)
+library(patchwork)
 library(ggpubr)
 theme_set(theme_bw())
 
@@ -323,15 +324,16 @@ g_x8_2 <-ggplot(df_x3_8, aes(x="", y=n, fill=factor(fwpar_yespi)))+
 plot(g_x8_2)
 
 
-ggarrange(g_x5, g_x6, g_x7, g_x8,
-          ncol = 2, nrow = 2, align = ("v"),
+g_final<-ggarrange(g_x5, g_x6, g_x7, g_x8,
+          ncol = 4, nrow = 1, align = ("v"),
           labels = c("B", "C", "D", "E"), heights = c(2,2), widths = c(2,2)
 )
 
+g_final/g_final
 
 pdf(file = "/Users/ascarpa/Paramutations_TEs/Pictures_paper/Figure_5/Figure_5.pdf", width = 10, height = 7.5)
 ggarrange(g_x5, g_x6, g_x7, g_x8,
-          ncol = 2, nrow = 2, align = ("v"),
+          ncol = 4, nrow = 1, align = ("v"),
           labels = c("B", "C", "D", "E"), heights = c(2,2), widths = c(2,2)
 )
 dev.off()
