@@ -65,6 +65,52 @@ $tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,30
 $tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1 --remove-cluster 2000,3 --steps 20 --sampleid p10_3 > $folder/2022_12_06_simulation_10_10_9 &
 
 $tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1 --remove-cluster 2000,4 --steps 20 --sampleid p10_4 > $folder/2022_12_06_simulation_10_10_10
+
+cat 2022_12_06_simulation_10_0_6 2022_12_06_simulation_10_0_7 2022_12_06_simulation_10_0_8 2022_12_06_simulation_10_0_9 2022_12_06_simulation_10_0_10 2022_12_06_simulation_10_10_6 2022_12_06_simulation_10_10_7 2022_12_06_simulation_10_10_8 2022_12_06_simulation_10_10_9 2022_12_06_simulation_10_10_10 |grep -v "^Invade"|grep -v "^#" > 2022_12_10_Simulation_10_Clusters_removal
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --steps 20 --sampleid p0_0 > $folder/2022_12_06_simulation_10_0_6_3000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --remove-cluster 3000,1 --steps 20 --sampleid p0_1 > $folder/2022_12_06_simulation_10_0_7_3000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --remove-cluster 3000,2 --steps 20 --sampleid p0_2 > $folder/2022_12_06_simulation_10_0_8_3000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --remove-cluster 3000,3 --steps 20 --sampleid p0_3 > $folder/2022_12_06_simulation_10_0_9_3000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --remove-cluster 3000,4 --steps 20 --sampleid p0_4 > $folder/2022_12_06_simulation_10_0_10_3000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1 --steps 20 --sampleid p10_0 > $folder/2022_12_06_simulation_10_10_6_3000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1 --remove-cluster 3000,1 --steps 20 --sampleid p10_1 > $folder/2022_12_06_simulation_10_10_7_3000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1 --remove-cluster 3000,2 --steps 20 --sampleid p10_2 > $folder/2022_12_06_simulation_10_10_8_3000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1 --remove-cluster 3000,3 --steps 20 --sampleid p10_3 > $folder/2022_12_06_simulation_10_10_9_3000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1 --remove-cluster 3000,4 --steps 20 --sampleid p10_4 > $folder/2022_12_06_simulation_10_10_10_3000
+
+cat 2022_12_06_simulation_10_0_6_3000 2022_12_06_simulation_10_0_7_3000 2022_12_06_simulation_10_0_8_3000 2022_12_06_simulation_10_0_9_3000 2022_12_06_simulation_10_0_10_3000 2022_12_06_simulation_10_10_6_3000 2022_12_06_simulation_10_10_7_3000 2022_12_06_simulation_10_10_8_3000 2022_12_06_simulation_10_10_9_3000 2022_12_06_simulation_10_10_10_3000 |grep -v "^Invade"|grep -v "^#" > 2022_12_10_Simulation_10_Clusters_removal_3000
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --steps 20 --sampleid p0_0 > $folder/2022_12_06_simulation_10_0_6_4000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --remove-cluster 4000,1 --steps 20 --sampleid p0_1 > $folder/2022_12_06_simulation_10_0_7_4000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --remove-cluster 4000,2 --steps 20 --sampleid p0_2 > $folder/2022_12_06_simulation_10_0_8_4000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --remove-cluster 4000,3 --steps 20 --sampleid p0_3 > $folder/2022_12_06_simulation_10_0_9_4000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --remove-cluster 4000,4 --steps 20 --sampleid p0_4 > $folder/2022_12_06_simulation_10_0_10_4000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1 --steps 20 --sampleid p10_0 > $folder/2022_12_06_simulation_10_10_6_4000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1 --remove-cluster 4000,1 --steps 20 --sampleid p10_1 > $folder/2022_12_06_simulation_10_10_7_4000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1 --remove-cluster 4000,2 --steps 20 --sampleid p10_2 > $folder/2022_12_06_simulation_10_10_8_4000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1 --remove-cluster 4000,3 --steps 20 --sampleid p10_3 > $folder/2022_12_06_simulation_10_10_9_4000 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1 --remove-cluster 4000,4 --steps 20 --sampleid p10_4 > $folder/2022_12_06_simulation_10_10_10_4000
+
+cat 2022_12_06_simulation_10_0_6_4000 2022_12_06_simulation_10_0_7_4000 2022_12_06_simulation_10_0_8_4000 2022_12_06_simulation_10_0_9_4000 2022_12_06_simulation_10_0_10_4000 2022_12_06_simulation_10_10_6_4000 2022_12_06_simulation_10_10_7_4000 2022_12_06_simulation_10_10_8_4000 2022_12_06_simulation_10_10_9_4000 2022_12_06_simulation_10_10_10_4000 |grep -v "^Invade"|grep -v "^#" > 2022_12_10_Simulation_10_Clusters_removal_4000
 ```
 
 ### Visualization in R
@@ -120,6 +166,77 @@ plot(g)
 ```
 
 ![](2022_12_06_Simulation_10_Cluster_Removal_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+``` r
+df2<-read.table("2022_12_10_Simulation_10_Clusters_removal_3000", fill = TRUE, sep = "\t")
+names(df2)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "min_w", "avtes", "avpopfreq",
+              "fixed","spacer_2", "phase", "fwpirna", "spacer_3", "fwcli", "avcli", "fixcli", "spacer_4",
+              "fwpar_yespi","fwpar_nopi", "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
+
+df2$phase <- factor(df2$phase, levels=c("rapi", "trig", "shot", "inac"))
+df2$sampleid <- factor(df2$sampleid, levels=c("p0_0", "p0_1", "p0_2", "p0_3", "p0_4", "p10_0", "p10_1", "p10_2", "p10_3", "p10_4"))
+
+g2<-ggplot()+
+  geom_line(data=df2,aes(x=gen,y=avtes,group=rep,color=phase), alpha = 1, linewidth = 0.7)+
+  geom_vline(xintercept = 3000, linetype="dashed", color = "black", linewidth = 0.7)+
+  xlab("generation")+
+  ylab("TEs insertions per diploid individual")+
+  theme(legend.position="none")+
+  scale_colour_manual(values=p)+
+  scale_x_continuous(breaks = seq(0, 5000, by = 2500))+
+  facet_wrap(~sampleid, ncol = 5, nrow = 2, labeller = labeller(sampleid = 
+                                                                  c("p0_0" = "para = 0, clusters -0 ",
+                                                                    "p0_1" = "para = 0, clusters -1 ",
+                                                                    "p0_2" = "para = 0, clusters -2 ",
+                                                                    "p0_3" = "para = 0, clusters -3 ",
+                                                                    "p0_4" = "para = 0, clusters -4 ",
+                                                                    "p10_0" = "para = 10, clusters -0 ",
+                                                                    "p10_1" = "para = 10, clusters -1 ",
+                                                                    "p10_2" = "para = 10, clusters -2 ",
+                                                                    "p10_3" = "para = 10, clusters -3 ",
+                                                                    "p10_4" = "para = 10, clusters -4 ")))
+
+
+plot(g2)
+```
+
+![](2022_12_06_Simulation_10_Cluster_Removal_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
+
+``` r
+df3<-read.table("2022_12_10_Simulation_10_Clusters_removal_4000", fill = TRUE, sep = "\t")
+names(df3)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "min_w", "avtes", "avpopfreq",
+              "fixed","spacer_2", "phase", "fwpirna", "spacer_3", "fwcli", "avcli", "fixcli", "spacer_4",
+              "fwpar_yespi","fwpar_nopi", "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
+
+df3$phase <- factor(df3$phase, levels=c("rapi", "trig", "shot", "inac"))
+df3$sampleid <- factor(df3$sampleid, levels=c("p0_0", "p0_1", "p0_2", "p0_3", "p0_4", "p10_0", "p10_1", "p10_2", "p10_3", "p10_4"))
+
+
+g3<-ggplot()+
+  geom_line(data=df3,aes(x=gen,y=avtes,group=rep,color=phase), alpha = 1, linewidth = 0.7)+
+  geom_vline(xintercept = 4000, linetype="dashed", color = "black", linewidth = 0.7)+
+  xlab("generation")+
+  ylab("TEs insertions per diploid individual")+
+  theme(legend.position="none")+
+  scale_colour_manual(values=p)+
+  scale_x_continuous(breaks = seq(0, 5000, by = 2500))+
+  facet_wrap(~sampleid, ncol = 5, nrow = 2, labeller = labeller(sampleid = 
+                                                                  c("p0_0" = "para = 0, clusters -0 ",
+                                                                    "p0_1" = "para = 0, clusters -1 ",
+                                                                    "p0_2" = "para = 0, clusters -2 ",
+                                                                    "p0_3" = "para = 0, clusters -3 ",
+                                                                    "p0_4" = "para = 0, clusters -4 ",
+                                                                    "p10_0" = "para = 10, clusters -0 ",
+                                                                    "p10_1" = "para = 10, clusters -1 ",
+                                                                    "p10_2" = "para = 10, clusters -2 ",
+                                                                    "p10_3" = "para = 10, clusters -3 ",
+                                                                    "p10_4" = "para = 10, clusters -4 ")))
+
+
+plot(g3)
+```
+
+![](2022_12_06_Simulation_10_Cluster_Removal_files/figure-gfm/unnamed-chunk-3-3.png)<!-- -->
 
 ## Conclusions
 

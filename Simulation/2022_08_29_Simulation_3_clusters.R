@@ -142,8 +142,7 @@ e$clusters<-c("1% piRNA clusters", "1% piRNA clusters", "3% piRNA clusters", "3%
 
 e$tag<-c("shot", "inac", "shot", "inac", "shot", "inac", "shot", "inac", "shot_para", "inac_para", "shot_para", "inac_para", "shot_para", "inac_para", "shot_para", "inac_para")
 e$tag <- factor(e$tag,levels = c("shot", "shot_para", "inac", "inac_para"))
-e$clusters <- factor(e$clusters,levels = c("1% piRNA clusters", 
-                                               "3% piRNA clusters", "10% piRNA clusters", "50% piRNA clusters"))
+e$clusters <- factor(e$clusters,levels = c("1% piRNA clusters", "3% piRNA clusters", "10% piRNA clusters", "50% piRNA clusters"))
 
 g2_3 <- ggplot(e, aes(x=tag, y=mean_avcli, fill = phase))+ 
   geom_bar(stat = "identity")+
@@ -202,6 +201,3 @@ g_3_2_2 <- ggplot(e_3, aes(x=phase, y=mean_avpar, fill = phase)) +
 g2_2 / g_3_2_2
 
 
-pdf(file = "/Users/ascarpa/Paramutations_TEs/Pictures_paper/Figure_3/Figure_3.pdf", width = 10, height = 7,25)
-g2_2 / g_3_2_2
-dev.off()

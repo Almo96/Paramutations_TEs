@@ -46,6 +46,71 @@ g<-ggplot()+
 
 plot(g)
 
-png(file = "/Users/ascarpa/Paramutations_TEs/Pictures_paper/Figure_3/Figure_3.png", width = 2112, height = 1485)
+png(file = "/Users/ascarpa/Paramutations_TEs/Pictures_paper/Figure_3/Figure_3_basic.png", width = 2112, height = 1485)
 g
 dev.off()
+
+
+df2<-read.table("2022_12_10_Simulation_10_Clusters_removal_3000", fill = TRUE, sep = "\t")
+names(df2)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "min_w", "avtes", "avpopfreq",
+              "fixed","spacer_2", "phase", "fwpirna", "spacer_3", "fwcli", "avcli", "fixcli", "spacer_4",
+              "fwpar_yespi","fwpar_nopi", "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
+
+df2$phase <- factor(df2$phase, levels=c("rapi", "trig", "shot", "inac"))
+df2$sampleid <- factor(df2$sampleid, levels=c("p0_0", "p0_1", "p0_2", "p0_3", "p0_4", "p10_0", "p10_1", "p10_2", "p10_3", "p10_4"))
+
+g2<-ggplot()+
+  geom_line(data=df2,aes(x=gen,y=avtes,group=rep,color=phase), alpha = 1, linewidth = 0.7)+
+  geom_vline(xintercept = 3000, linetype="dashed", color = "black", linewidth = 0.7)+
+  xlab("generation")+
+  ylab("TEs insertions per diploid individual")+
+  theme(legend.position="none")+
+  scale_colour_manual(values=p)+
+  scale_x_continuous(breaks = seq(0, 5000, by = 2500))+
+  facet_wrap(~sampleid, ncol = 5, nrow = 2, labeller = labeller(sampleid = 
+                                                                  c("p0_0" = "para = 0, clusters -0 ",
+                                                                    "p0_1" = "para = 0, clusters -1 ",
+                                                                    "p0_2" = "para = 0, clusters -2 ",
+                                                                    "p0_3" = "para = 0, clusters -3 ",
+                                                                    "p0_4" = "para = 0, clusters -4 ",
+                                                                    "p10_0" = "para = 10, clusters -0 ",
+                                                                    "p10_1" = "para = 10, clusters -1 ",
+                                                                    "p10_2" = "para = 10, clusters -2 ",
+                                                                    "p10_3" = "para = 10, clusters -3 ",
+                                                                    "p10_4" = "para = 10, clusters -4 ")))
+
+
+plot(g2)
+
+
+df3<-read.table("2022_12_10_Simulation_10_Clusters_removal_4000", fill = TRUE, sep = "\t")
+names(df3)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "min_w", "avtes", "avpopfreq",
+              "fixed","spacer_2", "phase", "fwpirna", "spacer_3", "fwcli", "avcli", "fixcli", "spacer_4",
+              "fwpar_yespi","fwpar_nopi", "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid")
+
+df3$phase <- factor(df3$phase, levels=c("rapi", "trig", "shot", "inac"))
+df3$sampleid <- factor(df3$sampleid, levels=c("p0_0", "p0_1", "p0_2", "p0_3", "p0_4", "p10_0", "p10_1", "p10_2", "p10_3", "p10_4"))
+
+
+g3<-ggplot()+
+  geom_line(data=df3,aes(x=gen,y=avtes,group=rep,color=phase), alpha = 1, linewidth = 0.7)+
+  geom_vline(xintercept = 4000, linetype="dashed", color = "black", linewidth = 0.7)+
+  xlab("generation")+
+  ylab("TEs insertions per diploid individual")+
+  theme(legend.position="none")+
+  scale_colour_manual(values=p)+
+  scale_x_continuous(breaks = seq(0, 5000, by = 2500))+
+  facet_wrap(~sampleid, ncol = 5, nrow = 2, labeller = labeller(sampleid = 
+                                                                  c("p0_0" = "para = 0, clusters -0 ",
+                                                                    "p0_1" = "para = 0, clusters -1 ",
+                                                                    "p0_2" = "para = 0, clusters -2 ",
+                                                                    "p0_3" = "para = 0, clusters -3 ",
+                                                                    "p0_4" = "para = 0, clusters -4 ",
+                                                                    "p10_0" = "para = 10, clusters -0 ",
+                                                                    "p10_1" = "para = 10, clusters -1 ",
+                                                                    "p10_2" = "para = 10, clusters -2 ",
+                                                                    "p10_3" = "para = 10, clusters -3 ",
+                                                                    "p10_4" = "para = 10, clusters -4 ")))
+
+
+plot(g3)
