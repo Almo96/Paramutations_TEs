@@ -199,5 +199,3 @@ g_3_2_2 <- ggplot(e_3, aes(x=phase, y=mean_avpar, fill = phase)) +
                                                        "p50_10" = "clu=50% para=10%")))
 
 g2_2 / g_3_2_2
-
-

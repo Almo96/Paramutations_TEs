@@ -17,11 +17,93 @@ We used 100 replicates for each simulation.
 
 ## Materials & Methods
 
-version: invadego0.2.1
+version: invadego0.2.2
 
 ### Commands for the simulation:
 
 ``` bash
+folder="/Users/ascarpa/Paramutations_TEs/Simulation/Raw"
+tool="/Users/ascarpa/invade-invadego/invadego022"
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --steps 1 --sampleid p0_x0 > $folder/2022_10_18_simulation_6_1 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.02 --steps 1 --sampleid p0_x0.02 > $folder/2022_10_18_simulation_6_2 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.03 --steps 1 --sampleid p0_x0.03 > $folder/2022_10_18_simulation_6_3 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.05 --steps 1 --sampleid p0_x0.05 > $folder/2022_10_18_simulation_6_4 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 100:1 --steps 1 --sampleid p1_x0 > $folder/2022_10_18_simulation_6_5 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.02 --paramutation 100:1 --steps 1 --sampleid p1_x0.02 > $folder/2022_10_18_simulation_6_6 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.03 --paramutation 100:1 --steps 1 --sampleid p1_x0.03 > $folder/2022_10_18_simulation_6_7 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.5 --basepop 100 -x 0.05 --paramutation 100:1 --steps 1 --sampleid p1_x0.05 > $folder/2022_10_18_simulation_6_8 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1 --steps 1 --sampleid p10_x0 > $folder/2022_10_18_simulation_6_9 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.02 --paramutation 10:1 --steps 1 --sampleid p10_x0.02 > $folder/2022_10_18_simulation_6_10 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.03 --paramutation 10:1 --steps 1 --sampleid p10_x0.03 > $folder/2022_10_18_simulation_6_11 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.05 --paramutation 10:1 --steps 1 --sampleid p10_x0.05 > $folder/2022_10_18_simulation_6_12 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 1:0 --steps 1 --sampleid p100_x0 > $folder/2022_10_18_simulation_6_13 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.02 --paramutation 1:0 --steps 1 --sampleid p100_x0.02 > $folder/2022_10_18_simulation_6_14 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.03 --paramutation 1:0 --steps 1 --sampleid p100_x0.03 > $folder/2022_10_18_simulation_6_15 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.05 --paramutation 1:0 --steps 1 --sampleid p100_x0.05 > $folder/2022_10_18_simulation_6_16 &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -no-x-cluins --steps 1 --sampleid p0_x0 > $folder/2022_10_18_simulation_6_1_noxclu &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.02 -no-x-cluins --steps 1 --sampleid p0_x0.02 > $folder/2022_10_18_simulation_6_2_noxclu &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.03 -no-x-cluins --steps 1 --sampleid p0_x0.03 > $folder/2022_10_18_simulation_6_3_noxclu &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.05 -no-x-cluins --steps 1 --sampleid p0_x0.05 > $folder/2022_10_18_simulation_6_4_noxclu &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 100:1 -no-x-cluins --steps 1 --sampleid p1_x0 > $folder/2022_10_18_simulation_6_5_noxclu &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.02 --paramutation 100:1 -no-x-cluins --steps 1 --sampleid p1_x0.02 > $folder/2022_10_18_simulation_6_6_noxclu &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.03 --paramutation 100:1 -no-x-cluins --steps 1 --sampleid p1_x0.03 > $folder/2022_10_18_simulation_6_7_noxclu &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.5 --basepop 100 -x 0.05 --paramutation 100:1 -no-x-cluins --steps 1 --sampleid p1_x0.05 > $folder/2022_10_18_simulation_6_8_noxclu &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 10:1 -no-x-cluins --steps 1 --sampleid p10_x0 > $folder/2022_10_18_simulation_6_9_noxclu &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.02 --paramutation 10:1 -no-x-cluins --steps 1 --sampleid p10_x0.02 > $folder/2022_10_18_simulation_6_10_noxclu &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.03 --paramutation 10:1 -no-x-cluins --steps 1 --sampleid p10_x0.03 > $folder/2022_10_18_simulation_6_11_noxclu &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.05 --paramutation 10:1 -no-x-cluins --steps 1 --sampleid p10_x0.05 > $folder/2022_10_18_simulation_6_12_noxclu &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 --paramutation 1:0 -no-x-cluins --steps 1 --sampleid p100_x0 > $folder/2022_10_18_simulation_6_13_noxclu &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.02 --paramutation 1:0 -no-x-cluins --steps 1 --sampleid p100_x0.02 > $folder/2022_10_18_simulation_6_14_noxclu &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.03 --paramutation 1:0 -no-x-cluins --steps 1 --sampleid p100_x0.03 > $folder/2022_10_18_simulation_6_15_noxclu &
+
+$tool --N 1000 --gen 5000 --genome mb:10,10,10,10,10 --cluster kb:300,300,300,300,300 --rr 4,4,4,4,4 --rep 100 --u 0.1 --basepop 100 -x 0.05 --paramutation 1:0 -no-x-cluins --steps 1 --sampleid p100_x0.05 > $folder/2022_10_18_simulation_6_16_noxclu
+
+cat 2022_10_18_simulation_6_1 2022_10_18_simulation_6_5 2022_10_18_simulation_6_9 2022_10_18_simulation_6_13 |grep -v "^Invade"|grep -v "^#" > 2022_10_18_Simulation_6_Fitness_0
+
+cat 2022_10_18_simulation_6_2 2022_10_18_simulation_6_6 2022_10_18_simulation_6_10  2022_10_18_simulation_6_14 |grep -v "^Invade"|grep -v "^#" > 2022_10_18_Simulation_6_Fitness_0.02
+
+cat 2022_10_18_simulation_6_3 2022_10_18_simulation_6_7 2022_10_18_simulation_6_11  2022_10_18_simulation_6_15 |grep -v "^Invade"|grep -v "^#" > 2022_10_18_Simulation_6_Fitness_0.03
+
+cat 2022_10_18_simulation_6_4 2022_10_18_simulation_6_8 2022_10_18_simulation_6_12  2022_10_18_simulation_6_16 |grep -v "^Invade"|grep -v "^#" > 2022_10_18_Simulation_6_Fitness_0.05
+
+cat 2022_10_18_simulation_6_1_noxclu 2022_10_18_simulation_6_5_noxclu 2022_10_18_simulation_6_9_noxclu 2022_10_18_simulation_6_13_noxclu |grep -v "^Invade"|grep -v "^#" > 2022_10_18_Simulation_6_Fitness_0_noxclu
+
+cat 2022_10_18_simulation_6_2_noxclu 2022_10_18_simulation_6_6_noxclu 2022_10_18_simulation_6_10_noxclu  2022_10_18_simulation_6_14_noxclu |grep -v "^Invade"|grep -v "^#" > 2022_10_18_Simulation_6_Fitness_0.02_noxclu
+
+cat 2022_10_18_simulation_6_3_noxclu 2022_10_18_simulation_6_7_noxclu 2022_10_18_simulation_6_11_noxclu  2022_10_18_simulation_6_15_noxclu |grep -v "^Invade"|grep -v "^#" > 2022_10_18_Simulation_6_Fitness_0.03_noxclu
+
+cat 2022_10_18_simulation_6_4_noxclu 2022_10_18_simulation_6_8_noxclu 2022_10_18_simulation_6_12_noxclu  2022_10_18_simulation_6_16_noxclu |grep -v "^Invade"|grep -v "^#" > 2022_10_18_Simulation_6_Fitness_0.05_noxclu
 ```
 
 ### Visualization in R

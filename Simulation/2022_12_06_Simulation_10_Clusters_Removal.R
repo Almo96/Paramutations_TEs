@@ -114,3 +114,35 @@ g3<-ggplot()+
 
 
 plot(g3)
+
+
+df_stat<-subset(df, sampleid == 'p0_0' | sampleid == 'p0_3')
+df_stat<-subset(df_stat, gen == 5000)
+kruskal.test(avtes ~ as.factor(sampleid), data = df_stat)
+#Kruskal-Wallis rank sum test
+#data:  avtes by as.factor(sampleid)
+#Kruskal-Wallis chi-squared = 51.92, df = 1, p-value = 5.781e-13
+
+df_stat_para<-subset(df, sampleid == 'p10_0' | sampleid == 'p10_3')
+df_stat_para<-subset(df_stat_para, gen == 5000)
+kruskal.test(avtes ~ as.factor(sampleid), data = df_stat_para)
+#Kruskal-Wallis rank sum test
+#data:  avtes by as.factor(sampleid)
+#Kruskal-Wallis chi-squared = 11.337, df = 1, p-value = 0.0007599
+
+
+
+
+p0_0<-subset(df_stat, sampleid == 'p0_0')
+p0_3<-subset(df_stat, sampleid == 'p0_3')
+result0 <- wilcox.test(p0_0$avtes, p0_3$avtes, alternative = "two.sided", correct = TRUE, conf.int = TRUE)
+result0
+
+p10_0<-subset(df_stat_para, sampleid == 'p10_0')
+p10_3<-subset(df_stat_para, sampleid == 'p10_3')
+result10 <- wilcox.test(p10_0$avtes, p10_3$avtes, alternative = "two.sided", correct = TRUE, conf.int = TRUE)
+result10
+
+
+
+

@@ -63,7 +63,7 @@ g_2_trap <- ggplot()+
   ylim(0,250)+
   xlim(0,5000)+
   annotate("rect",ymin=min_df_2_t_haplo, ymax=max_df_2_t_haplo, xmin=0, xmax=5000, fill="darkgrey",alpha=.3)+
-  ggtitle("Trap model: 0% paramutable loci")
+  ggtitle("para = 0%   clu = 3%")
 
 plot(g_2_trap)
 
@@ -77,7 +77,7 @@ g_2_para <- ggplot()+
   ylim(0,250)+
   xlim(0,5000)+
   annotate("rect",ymin=min_df_2_10p_haplo, ymax=max_df_2_10p_haplo, xmin=0, xmax=5000, fill="darkgrey",alpha=.3)+
-  ggtitle("Extend trap model: 10% paramutable loci")
+  ggtitle("para = 10%   clu = 3%")
 
 plot(g_2_para)
 
