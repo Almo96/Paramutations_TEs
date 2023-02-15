@@ -20,7 +20,7 @@ We used 1000 replicates for each simulation.
 
 version: invadego0.23
 
--   seed p_1: 1669034593025997575
+-   seed p_0: 1669034593025997575
 
 -   seed p_10: 1669034593026170439
 
