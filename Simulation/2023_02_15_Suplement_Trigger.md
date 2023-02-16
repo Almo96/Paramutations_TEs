@@ -385,5 +385,5 @@ ggarrange(g_2_trap, g_2_trigger2, g_2_trigger, g_tes_trap, g_tes_trigger2, g_tes
 
 ## Conclusions
 
-The trigger loci allow to better recapitulate the real data on insertion
+The trigger loci allow to better recapitulate the real insertions data
 than the trap model.
