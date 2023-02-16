@@ -247,12 +247,11 @@ g<-ggplot()+
   xlab("generation")+
   ylab("TEs insertions per diploid individual")+
   theme(legend.position="none")+
-  theme_bw()+
   scale_colour_manual(values=p)+
   ylim(0,500)+
   facet_wrap(~sampleid, labeller = labeller(sampleid = 
                                               c("p0" = "para = 0% trigger = 0% clu = 3%",
-                                                "p3_10" = "para = 10% trigger = 3% clu = 0%")))
+                                                "p3_10" = "para = 10% trigger = 30% clu = 0%")))
 
 plot(g)
 ```

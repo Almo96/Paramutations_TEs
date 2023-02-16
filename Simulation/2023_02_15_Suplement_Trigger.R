@@ -177,7 +177,6 @@ g<-ggplot()+
   xlab("generation")+
   ylab("TEs insertions per diploid individual")+
   theme(legend.position="none")+
-  theme_bw()+
   scale_colour_manual(values=p)+
   ylim(0,500)+
   facet_wrap(~sampleid, labeller = labeller(sampleid = 
