@@ -61,7 +61,8 @@ Prerequisites
 Authors
 -------
     Robert Kofler
-    Filip Wierzbicki 
+    Filip Wierzbicki
+    Almorò Scarpa
 """)
 
 
