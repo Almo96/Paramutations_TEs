@@ -143,7 +143,7 @@ df_summary <- df_0.03_noxclu %>%
   dplyr::group_by(sampleid, rep) %>%
   dplyr::summarize(min_fitness = min(avw))
 
-df_summary$sampleid[df_summary$sampleid == "p0_x0.03"] <- "0 (Trap model)"
+df_summary$sampleid[df_summary$sampleid == "p0_x0.03"] <- "0"
 df_summary$sampleid[df_summary$sampleid == "p1_x0.03"] <- "1"
 df_summary$sampleid[df_summary$sampleid == "p10_x0.03"] <- "10"
 df_summary$sampleid[df_summary$sampleid == "p100_x0.03"] <- "100"
@@ -157,6 +157,51 @@ boxplot_g_B_0.03<-ggplot(df_summary, aes(x=sampleid, y=1-min_fitness)) +
   ylab("Fitness cost")
 
 plot(boxplot_g_B_0.03)
+
+df_summary <- df_0.03_noxclu %>% 
+  dplyr::group_by(sampleid, rep) %>%
+  dplyr::summarize(min_fitness = min(avw))
+
+df_summary$sampleid[df_summary$sampleid == "p0_x0.03"] <- "0"
+df_summary$sampleid[df_summary$sampleid == "p1_x0.03"] <- "1"
+df_summary$sampleid[df_summary$sampleid == "p10_x0.03"] <- "10"
+df_summary$sampleid[df_summary$sampleid == "p100_x0.03"] <- "100"
+
+
+boxplot_g_B_0.03x <- ggplot(df_summary, aes(x = sampleid, y = 1-min_fitness))+
+  geom_boxplot()+
+  geom_signif(comparisons = list(c("0", "1"),
+                                 c("0", "10"),
+                                 c("0", "100")),
+              map_signif_level = TRUE, y_position = c(0.28, 0.29, 0.30))+
+  ggtitle("x = 0.03   clu = 3%   u = 0.1")+
+  xlab("para [%]") +
+  ylab("fitness cost")
+
+plot(boxplot_g_B_0.03x)
+
+
+df_sum_0 <- subset(df_summary, sampleid == "0")
+df_sum_1 <- subset(df_summary, sampleid == "1")
+df_sum_10 <- subset(df_summary, sampleid == "10")
+df_sum_100 <- subset(df_summary, sampleid == "100")
+
+wilcox.test(df_sum_0$min_fitness, df_sum_1$min_fitness)
+#Wilcoxon rank sum test with continuity correction
+#data:  df_sum_0$min_fitness and df_sum_1$min_fitness
+#W = 4881.5, p-value = 0.7717
+#alternative hypothesis: true location shift is not equal to 0
+
+wilcox.test(df_sum_0$min_fitness, df_sum_10$min_fitness)
+#Wilcoxon rank sum test with continuity correction
+#data:  df_sum_0$min_fitness and df_sum_10$min_fitness
+#W = 1925, p-value = 4.344e-14
+
+wilcox.test(df_sum_0$min_fitness, df_sum_100$min_fitness)
+#Wilcoxon rank sum test with continuity correction
+#data:  df_sum_0$min_fitness and df_sum_100$min_fitness
+#W = 4.5, p-value < 2.2e-16
+
 
 (g_B_0.03_noxclu | boxplot_g_B_0.03)
 

@@ -82,23 +82,14 @@ color.gradient <- function(x, colors=c("#D7191C","#FDAE61","#A6D96A","#1A9641"),
 color.gradient_2 <- function(x, colors=c("#D7191C","#FDAE61","#A6D96A","#1A9641"), colsteps=100) {
   return( colorRampPalette(colors) (colsteps) [ findInterval(x, seq(min(df_2$min_w),1.0, length.out=colsteps)) ] )
 }
-```
 
-Visualization:
-
-``` r
 df$col<-color.gradient(df$min_w)
 df[df$popstat=="fail-0",]$col<-"grey"
 df$col<-as.factor(df$col)
-```
 
-Visualization:
-
-``` r
 df_2$col<-color.gradient_2(df_2$min_w)
 df_2[df_2$popstat=="fail-0",]$col<-"grey"
 df_2$col<-as.factor(df_2$col)
-
 
 g_para_selection<-ggplot(df,aes(x=sampleid_para/10,y=sampleid_x,color=col))+scale_color_manual(values=levels(df$col))+
   geom_point(alpha=0.7,size=0.8)+scale_y_log10()+
@@ -110,7 +101,7 @@ g_para_selection<-ggplot(df,aes(x=sampleid_para/10,y=sampleid_x,color=col))+scal
 plot(g_para_selection)
 ```
 
-![](2022_11_07_Simulation_7_Storm_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](2022_11_07_Simulation_7_Storm_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 ``` r
 g_para_cluster<-ggplot(df_2,aes(x=sampleid_para/10,y=sampleid_clu/100000,color=col))+scale_color_manual(values=levels(df_2$col))+
@@ -122,13 +113,13 @@ g_para_cluster<-ggplot(df_2,aes(x=sampleid_para/10,y=sampleid_clu/100000,color=c
 plot(g_para_cluster)
 ```
 
-![](2022_11_07_Simulation_7_Storm_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
+![](2022_11_07_Simulation_7_Storm_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
 
 ``` r
 g_para_selection +g_para_cluster
 ```
 
-![](2022_11_07_Simulation_7_Storm_files/figure-gfm/unnamed-chunk-4-3.png)<!-- -->
+![](2022_11_07_Simulation_7_Storm_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->
 
 ## Conclusions
 

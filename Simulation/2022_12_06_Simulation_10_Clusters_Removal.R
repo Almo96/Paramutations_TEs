@@ -118,17 +118,23 @@ g3<-ggplot()+
 plot(g3)
 
 
-df_stat<-subset(df2, sampleid == 'p0_0' | sampleid == 'p0_3')
-df_stat<-subset(df_stat, gen == 5000)
-kruskal.test(avtes ~ as.factor(sampleid), data = df_stat)
-#Kruskal-Wallis rank sum test
-#data:  avtes by as.factor(sampleid)
-#Kruskal-Wallis chi-squared = 30.117, df = 1, p-value = 4.068e-08
+dfro<-subset(df2, gen == 5000)
+s1<-subset(dfro, sampleid == 'p0_0')
+s2<-subset(dfro, sampleid == 'p0_4')
+wilcox.test(s1$avtes,s2$avtes)
+#Wilcoxon rank sum test with continuity correction
+#data:  s1$avtes and s2$avtes
+#W = 1388, p-value < 2.2e-16
+#alternative hypothesis: true location shift is not equal to 0
 
 
-df_stat_para<-subset(df2, sampleid == 'p10_0' | sampleid == 'p10_3')
-df_stat_para<-subset(df_stat_para, gen == 5000)
-kruskal.test(avtes ~ as.factor(sampleid), data = df_stat_para)
-#Kruskal-Wallis rank sum test
-#data:  avtes by as.factor(sampleid)
-#Kruskal-Wallis chi-squared = 0.37016, df = 1, p-value = 0.5429
+
+dfro<-subset(df2, gen == 5000)
+s1<-subset(dfro, sampleid == 'p10_0')
+s2<-subset(dfro, sampleid == 'p10_4')
+wilcox.test(s1$avtes,s2$avtes)
+#Wilcoxon rank sum test with continuity correction
+#data:  s1$avtes and s2$avtes
+#W = 4739, p-value = 0.5244
+#alternative hypothesis: true location shift is not equal to 0
+

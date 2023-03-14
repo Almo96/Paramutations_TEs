@@ -146,3 +146,7 @@ ggarrange(g_2_trap, g_2_para, g_tes_trap, g_tes_para,
           labels = c("A", "", "B", ""), heights = c(2,2), widths = c(2,2)
 )
 dev.off()
+
+nrow(te_germ[te_germ$sum >= min_df_2_t_haplo & te_germ$sum <= max_df_2_t_haplo, ])
+nrow(te_germ[te_germ$sum >= min_df_2_10p_haplo & te_germ$sum <= max_df_2_10p_haplo, ])
+nrow(te_germ)

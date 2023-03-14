@@ -172,3 +172,57 @@ g_noxclu_5 <- ggplot(e_noxclu, aes(x=phase, y=mean_avpar, fill = phase)) +
   facet_wrap(~sampleid, ncol=4)
 
 plot(g_noxclu_5)
+
+
+
+df_ori<-read.table("2023_03_05_Simulation_supp_ori", fill = TRUE, sep = "\t")
+names(df_ori)<-c("rep", "gen", "popstat", "fmale", "spacer_1", "fwte", "avw", "avtes", "avpopfreq", "fixed",
+             "spacer_2", "phase", "fwpirna", "spacer_3", "fwcli", "avcli", "fixcli", "spacer_4", "fwpar_yespi",
+             "fwpar_nopi", "avpar","fixpar","spacer_5","piori","orifreq","spacer 6", "sampleid", "extra")
+
+df_ori$phase <- factor(df_ori$phase, levels=c("rapi", "trig", "shot", "inac"))
+df_ori2 <- data.frame()
+
+
+#new dataframe with only the first shotgun & the first inactive phase of each replicate
+repcheck = 1
+x = 1
+y = 1
+while (x<nrow(df_ori)) {
+  if (repcheck != df_ori[x, 1]){
+    y = 1
+  }
+  if (y == 1){
+    if(df_ori[x, 12]  == "shot"){
+      df_ori2<-rbind(df_ori2,df_ori[x,])
+      y = 2
+      repcheck = df_ori[x, 1]
+    }
+  }
+  if (y == 2){
+    if(df_ori[x, 12] == "inac"){
+      df_ori2<-rbind(df_ori2,df_ori[x,])
+      y = 1
+    }
+  }
+  x = x+1
+}
+
+df_ori2_shot <- subset(df_ori2, phase == "shot")
+df_ori2_inac <- subset(df_ori2, phase == "inac")
+
+
+
+ori_shot <- ggplot(df_ori2_shot, aes(x = sampleid, y = gen))+
+  geom_boxplot()+
+  xlab("selection coefficient") +
+  ylab("number of origins")
+
+plot(ori_shot)
+
+ori_inac <- ggplot(df_ori2_inac, aes(x = sampleid, y = piori))+
+  geom_boxplot()+
+  xlab("selection coefficient") +
+  ylab("number of origins")
+
+plot(ori_inac)

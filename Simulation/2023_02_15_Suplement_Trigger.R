@@ -289,12 +289,12 @@ ggarrange(g_2_trap, g_2_trigger2, g_tes_trap, g_tes_trigger2,
 
 ggarrange(g_2_trap, g_2_trigger2, g_2_trigger, g_tes_trap, g_tes_trigger2, g_tes_trigger,
           ncol = 3, nrow = 2, align = ("v"),
-          labels = c("A", "", "B", ""), heights = c(2,2), widths = c(2,2)
+          labels = c("A", "", "", "B", "", ""), heights = c(2,2), widths = c(2,2)
 )
 
 png(file = "/Users/ascarpa/Paramutations_TEs/Pictures_paper/Supplementary/Trigger_real_data.png", width = 1500, height = 1125)
 ggarrange(g_2_trap, g_2_trigger2, g_2_trigger, g_tes_trap, g_tes_trigger2, g_tes_trigger,
           ncol = 3, nrow = 2, align = ("v"),
-          labels = c("A", "", "B", ""), heights = c(2,2), widths = c(2,2)
+          labels = c("A", "", "", "B", "", ""), heights = c(2,2), widths = c(2,2)
 )
 dev.off()

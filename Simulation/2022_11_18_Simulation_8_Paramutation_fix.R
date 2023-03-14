@@ -311,6 +311,7 @@ g_x8 <-ggplot(df_x3_8, aes(x=fwpar_yespi, y=n/10, fill=factor(fwpar_yespi)))+
 
 plot(g_x8)
 
+
 g_x8_2 <-ggplot(df_x3_8, aes(x="", y=n, fill=factor(fwpar_yespi)))+
   geom_col(color = "black") +
   coord_polar(theta = "y") +
@@ -337,3 +338,40 @@ ggarrange(g_x5, g_x6, g_x7, g_x8,
           labels = c("B", "C", "D", "E"), heights = c(2,2), widths = c(2,2)
 )
 dev.off()
+
+
+#g_x5 x = 0
+yespi <- sum(df_x2_5$fwpar_yespi == 1)
+nopi <- sum(df_x2_5$fwpar_nopi == 1)
+m = matrix(c(yespi, nopi,500, 500),nrow=2,byrow=T)
+chisq.test(m)
+#Pearson's Chi-squared test with Yates' continuity correction
+#data:  m
+#X-squared = 0.072004, df = 1, p-value = 0.7884
+
+#g_x6 x = 0.01
+yespi <- sum(df_x2_6$fwpar_yespi == 1)
+nopi <- sum(df_x2_6$fwpar_nopi == 1)
+m = matrix(c(yespi, nopi,500, 500),nrow=2,byrow=T)
+chisq.test(m)
+#Pearson's Chi-squared test with Yates' continuity correction
+#data:  m
+#X-squared = 5.6344, df = 1, p-value = 0.01761
+
+#g_x6 x = 0.1
+yespi <- sum(df_x2_7$fwpar_yespi == 1)
+nopi <- sum(df_x2_7$fwpar_nopi == 1)
+m = matrix(c(yespi, nopi,500, 500),nrow=2,byrow=T)
+chisq.test(m)
+#Pearson's Chi-squared test with Yates' continuity correction
+#data:  m
+#X-squared = 125.57, df = 1, p-value < 2.2e-16
+
+#g_x6 x = 0.2
+yespi <- sum(df_x2_8$fwpar_yespi == 1)
+nopi <- sum(df_x2_8$fwpar_nopi == 1)
+m = matrix(c(yespi, nopi,500, 500),nrow=2,byrow=T)
+chisq.test(m)
+#Pearson's Chi-squared test with Yates' continuity correction
+#data:  m
+#X-squared = 431.29, df = 1, p-value < 2.2e-16
