@@ -81,10 +81,10 @@ g2_2 <- ggplot(e, aes(x=phase, y=mean_avcli, fill = phase)) +
   scale_y_continuous(limits = c(-0.5, 12.5))+
   scale_fill_manual(values = c("#ffd700", "#d73027"))+
   facet_wrap(~sampleid, ncol=8,labeller = labeller(sampleid = 
-                                                    c("p1" = "clu=1%",
-                                                      "p3" = "clu=3%",
-                                                      "p10" = "clu=10%",
-                                                      "p50" = "clu=50%",
+                                                    c("p1" = "clu=1% para=0",
+                                                      "p3" = "clu=3 para=0%",
+                                                      "p10" = "clu=10 para=0%",
+                                                      "p50" = "clu=50 para=0%",
                                                       "p1_10" = "clu=1% para=10%",
                                                       "p3_10" = "clu=3% para=10%",
                                                       "p10_10" = "clu=10% para=10%",

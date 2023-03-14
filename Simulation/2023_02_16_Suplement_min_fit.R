@@ -64,3 +64,28 @@ g2 <- ggplot(df2_minw, aes(x = sampleid, y = 1-(min_w)))+
 
 
 plot(g2)
+
+
+s1<-subset(df2_minw, sampleid == 'c0.05_p0')
+s2<-subset(df2_minw, sampleid == 'c0.05_p10')
+wilcox.test(s1$min_w, s2$min_w)
+#Wilcoxon rank sum test with continuity correction
+#data:  s1$min_w and s2$min_w
+#W = 330.5, p-value < 2.2e-16
+#alternative hypothesis: true location shift is not equal to 0
+
+s1<-subset(df2_minw, sampleid == 'c0.5_p0')
+s2<-subset(df2_minw, sampleid == 'c0.5_p10')
+wilcox.test(s1$min_w, s2$min_w)
+#Wilcoxon rank sum test with continuity correction
+#data:  s1$min_w and s2$min_w
+#W = 0, p-value < 2.2e-16
+#alternative hypothesis: true location shift is not equal to 0
+
+s1<-subset(df2_minw, sampleid == 'c5_p0')
+s2<-subset(df2_minw, sampleid == 'c5_p10')
+wilcox.test(s1$min_w, s2$min_w)
+#Wilcoxon rank sum test with continuity correction
+#data:  s1$min_w and s2$min_w
+#W = 0, p-value < 2.2e-16
+#alternative hypothesis: true location shift is not equal to 0
