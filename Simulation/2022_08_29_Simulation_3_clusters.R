@@ -77,14 +77,18 @@ g2_2 <- ggplot(e, aes(x=phase, y=mean_avcli, fill = phase)) +
   geom_errorbar( aes(x=phase, ymin=mean_avcli-sd_avcli, ymax=mean_avcli+sd_avcli), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("Cluster insertions per diploid individual")+
   xlab("Phase")+
-  theme(legend.position="none")+
+  theme(legend.position="none",
+        axis.text.x = element_text(size = 18),
+        axis.text = element_text(size = 18),
+        axis.title = element_text(size = 18),
+        strip.text = element_text(size = 18))+
   scale_y_continuous(limits = c(-0.5, 12.5))+
   scale_fill_manual(values = c("#ffd700", "#d73027"))+
   facet_wrap(~sampleid, ncol=8,labeller = labeller(sampleid = 
                                                     c("p1" = "clu=1% para=0",
-                                                      "p3" = "clu=3 para=0%",
-                                                      "p10" = "clu=10 para=0%",
-                                                      "p50" = "clu=50 para=0%",
+                                                      "p3" = "clu=3% para=0%",
+                                                      "p10" = "clu=10% para=0%",
+                                                      "p50" = "clu=50% para=0%",
                                                       "p1_10" = "clu=1% para=10%",
                                                       "p3_10" = "clu=3% para=10%",
                                                       "p10_10" = "clu=10% para=10%",
@@ -118,7 +122,6 @@ g3_2 <- ggplot(e_2, aes(x=phase, y=mean_avpar, fill = phase)) +
   geom_errorbar( aes(x=phase, ymin=mean_avpar-sd_avpar, ymax=mean_avpar+sd_avpar), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("Paramutable loci insertions")+
   xlab("Phase")+
-  theme(legend.position="none")+
   scale_y_continuous(limits = c(-0.5, 12.5))+
   scale_fill_manual(values = c("#ffd700", "#d73027"))+
   facet_wrap(~sampleid, ncol=4,labeller = labeller(sampleid =
@@ -185,7 +188,10 @@ g_3_2_2 <- ggplot(e_3, aes(x=phase, y=mean_avpar, fill = phase)) +
   geom_errorbar( aes(x=phase, ymin=mean_avpar-sd_avpar, ymax=mean_avpar+sd_avpar), width=0.2, colour="black", alpha=0.9, size=0.8)+
   ylab("Paramutable loci insertions")+
   xlab("Phase")+
-  theme(legend.position="none")+
+  theme(legend.position="none",
+        axis.text = element_text(size = 18),
+        axis.title = element_text(size = 18),
+        strip.text = element_text(size = 18))+
   scale_y_continuous(limits = c(-0.5, 12.5))+
   scale_fill_manual(values = c("#ffd700", "#d73027"))+
   facet_wrap(~sampleid, ncol=8,labeller = labeller(sampleid = 

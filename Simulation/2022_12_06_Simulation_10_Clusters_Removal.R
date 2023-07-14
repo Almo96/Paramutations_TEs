@@ -157,7 +157,13 @@ g_new<-ggplot()+
   geom_vline(xintercept = 3000, linetype="dashed", color = "black", linewidth = 0.7)+
   xlab("generation")+
   ylab("TEs insertions per diploid individual")+
-  theme(legend.position="none")+
+  theme(plot.title = element_text(size=24),
+        axis.text.x = element_text(size=14),
+        axis.text.y = element_text(size=20),
+        axis.title.x = element_text(size=24),
+        axis.title.y = element_text(size=24),
+        strip.text = element_text(size = 24),
+        legend.position="none")+
   scale_colour_manual(values=p)+
   scale_x_continuous(breaks = seq(0, 5000, by = 2500))+
   facet_wrap(~sampleid, ncol = 6, nrow = 2, labeller = labeller(sampleid = 
