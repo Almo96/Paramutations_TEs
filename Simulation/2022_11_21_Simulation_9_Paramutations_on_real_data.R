@@ -20,7 +20,7 @@ df$sampleid <- factor(df$sampleid, levels=c("p0", "p10"))
 g<-ggplot()+
   geom_line(data=df,aes(x=gen,y=avtes,group=rep,color=phase),alpha=1,size=0.7)+
   xlab("generation")+
-  ylab("TEs insertions per diploid individual")+
+  ylab("TEs insertions per haploid genome")+
   theme(legend.position="none")+
   theme_bw()+
   scale_colour_manual(values=p)+
@@ -56,13 +56,13 @@ df_para <- subset(df, sampleid == "p10")
 g_2_trap <- ggplot()+
   geom_line(data=df_trap,aes(x=gen,y=avtes/2,group=rep,color=phase),alpha=1,size=0.7)+
   xlab("generation")+
-  ylab("TEs insertions per haploid individual")+
+  ylab("TEs insertions per haploid genome")+
   theme(legend.position="none")+
   scale_colour_manual(values=p)+
   ylim(0,250)+
   xlim(0,5000)+
   annotate("rect",ymin=min_df_2_t_haplo, ymax=max_df_2_t_haplo, xmin=0, xmax=5000, fill="darkgrey",alpha=.3)+
-  ggtitle("para = 0%   clu = 3%")
+  ggtitle("trap model (para = 0%   clu = 3%)")
 
 plot(g_2_trap)
 
@@ -70,13 +70,13 @@ plot(g_2_trap)
 g_2_para <- ggplot()+
   geom_line(data=df_para,aes(x=gen,y=avtes/2,group=rep,color=phase),alpha=1,size=0.7)+
   xlab("generation")+
-  ylab("TEs insertions per haploid individual")+
+  ylab("TEs insertions per haploid genome")+
   theme(legend.position="none")+
   scale_colour_manual(values=p)+
   ylim(0,250)+
   xlim(0,5000)+
   annotate("rect",ymin=min_df_2_10p_haplo, ymax=max_df_2_10p_haplo, xmin=0, xmax=5000, fill="darkgrey",alpha=.3)+
-  ggtitle("para = 10%   clu = 3%")
+  ggtitle("trap model + paramutations (para = 10%   clu = 3%)")
 
 plot(g_2_para)
 
@@ -115,8 +115,6 @@ g_tes_trap<-ggplot(data=te_germ, aes(x=family, y=sum,fill=avpopfreq)) +ylab("ins
   theme(legend.position="none",panel.grid.major.x=element_blank() , axis.text.x = element_text(angle = 90, size=5,hjust=1),axis.title.x=element_blank())+
   annotate("rect",ymin=min_df_2_t_haplo, ymax=max_df_2_t_haplo, xmin=1, xmax=nrow(te_germ), fill="darkgrey",alpha=.3)
   
-  
-
 plot(g_tes_trap)
 
 
@@ -140,7 +138,7 @@ ggarrange(g_2_trap, g_2_para, g_tes_trap, g_tes_para,
           )
 dev.off()
 
-png(file = "/Users/ascarpa/Paramutations_TEs/Pictures_paper/Figure_6/Figure_6.png", width = 1000, height = 750)
+png(file = "/Users/ascarpa/Paramutations_TEs/Pictures_paper/Figure_6/Figure_6.png", width = 1080, height = 720)
 ggarrange(g_2_trap, g_2_para, g_tes_trap, g_tes_para,
           ncol = 2, nrow = 2, align = ("v"),
           labels = c("A", "", "B", ""), heights = c(2,2), widths = c(2,2)
